@@ -1,0 +1,35 @@
+# macOS system files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*  # includes .env.local, .env.development, etc.
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Build and deployment
+.vercel/
+coverage/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+
+# Upload API
+/uploads
