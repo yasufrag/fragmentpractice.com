@@ -4,20 +4,20 @@ Thumbs.db
 
 # Logs
 logs/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+*.log
 
 # Environment variables
 .env
-.env.*  # includes .env.local, .env.development, etc.
+.env.*
 
-# Node / Next.js
+# Node / build (不要なら削除可)
 node_modules/
 .next/
 out/
+dist/
+build/
 
-# Build and deployment
+# Vercel / Deployment
 .vercel/
 coverage/
 
@@ -31,5 +31,5 @@ coverage/
 *.swp
 *.swo
 
-# Upload API
-/uploads
+# Uploads (将来のAPI拡張用)
+uploads/
