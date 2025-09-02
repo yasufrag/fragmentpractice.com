@@ -1,55 +1,83 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>About | Fragment Practice合同会社</title>
-<meta name="description" content="Fragment Practice合同会社の概要。所在地・事業内容・提供領域。">
-<meta property="og:title" content="About | Fragment Practice合同会社">
-<meta property="og:description" content="所在地・事業内容・提供領域。">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://fragmentpractice.com/about.html">
-<link rel="icon" href="/favicon.ico">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>html{background:#000;color:#fff}.content{max-width:56rem;margin:0 auto;padding:4rem 1rem 6rem}</style>
+  <title>About | Fragment Practice合同会社</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Fragment Practice合同会社の概要。所在地・事業内容・提供領域。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About | Fragment Practice合同会社" />
+  <meta property="og:description" content="所在地・事業内容・提供領域。" />
+  <meta property="og:url" content="https://fragmentpractice.com/about.html" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="/favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { background:#000; color:#fff; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing:.01em; line-height:1.8; }
+    .page{ max-width:56rem; margin:0 auto; padding-left:1.25rem; padding-right:1.25rem; }
+    @media (min-width:768px){ .page{ padding-left:2rem; padding-right:2rem; } }
+    .hero{ padding-top:3.5rem; } @media (min-width:768px){ .hero{ padding-top:4rem; } }
+    .section{ margin-top:2.5rem; }
+    .footer{ padding-top:4rem; padding-bottom:6rem; font-size:.9rem; color:#9ca3af; font-style:italic; }
+    h1{ font-size:2.25rem; font-weight:700; } @media (min-width:640px){ h1{ font-size:3rem; } }
+    h2{ font-size:1.5rem; font-weight:600; } @media (min-width:640px){ h2{ font-size:1.875rem; } }
+    a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s; }
+    a:hover{ color:#fff; } .nav-a{ text-decoration:none; color:#9ca3af; } .nav-a:hover{ color:#fff; }
+  </style>
 </head>
-<body class="font-sans antialiased">
-<main class="content">
-  <a href="/" class="text-sm text-gray-400 hover:text-white">← Home</a>
-  <h1 class="mt-8 mb-6 text-3xl sm:text-4xl font-bold">About</h1>
+<body>
+  <header class="page hero">
+    <nav class="flex items-center justify-between">
+      <a href="/" class="nav-a text-base font-semibold">Fragment Practice合同会社</a>
+      <div class="flex items-center gap-5 text-sm">
+        <a href="/about.html" class="nav-a">About</a>
+        <a href="/profile.html" class="nav-a">Profile</a>
+        <a href="/contact.html" class="nav-a">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-  <p class="text-neutral-300 mb-6">商号：Fragment Practice合同会社（Fragment Practice LLC）</p>
+  <main class="page">
+    <a href="/" class="nav-a">← Home</a>
+    <h1 class="section">About</h1>
 
-  <dl class="grid md:grid-cols-2 gap-6 text-neutral-300">
-    <div>
-      <dt class="font-semibold text-white text-xl mb-2">基本情報</dt>
-      <dd class="space-y-2">
-        <p>代表者：新庄 泰大</p>
-        <p>所在地：香川県高松市天神前10-5 高松セントラルスカイビルディング 3F south</p>
-        <p>設立：2025年</p>
-      </dd>
-    </div>
-    <div>
-      <dt class="font-semibold text-white text-xl mb-2">提供領域</dt>
-      <dd class="space-y-2">
-        <p>登壇・講演／公開対話の設計</p>
-        <p>ZINE・出版（写真／言葉／対話の編集）</p>
-        <p>AI対話設計・軽量リサーチ（関係性設計・プロトタイピング）</p>
-      </dd>
-    </div>
-  </dl>
+    <p class="text-neutral-300">商号：Fragment Practice合同会社（Fragment Practice LLC）</p>
 
-  <section class="mt-10 space-y-3 text-neutral-300">
-    <h2 class="text-2xl font-semibold">思想と姿勢（Brief）</h2>
-    <p>
-      FragmentPractice は「静けさ」と「構文性」を核に、Quantum / Fragment / Syntax の三層で
-      生活と実務を編み直す実践です。生産性ではなく「注意・関係・編集」を扱います。
-    </p>
-  </section>
+    <dl class="grid md:grid-cols-2 gap-8 text-neutral-300 section">
+      <div>
+        <dt class="font-semibold text-white text-xl mb-2">基本情報</dt>
+        <dd class="space-y-2">
+          <p>代表者：新庄 泰大</p>
+          <p>所在地：香川県高松市天神前10-5 高松セントラルスカイビルディング 3F south</p>
+          <p>設立：2025年</p>
+        </dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-white text-xl mb-2">提供領域</dt>
+        <dd class="space-y-2">
+          <p>登壇・講演／公開対話の設計</p>
+          <p>ZINE・出版（写真／言葉／対話の編集）</p>
+          <p>AI対話設計・軽量リサーチ（関係性設計・プロトタイピング）</p>
+        </dd>
+      </div>
+    </dl>
 
-  <section class="mt-10 text-neutral-400 text-sm">
-    <p>お問い合わせ：<a href="/contact.html" class="underline">Contact</a>（オンライン中心・Zoom対応）</p>
-  </section>
-</main>
+    <section class="section text-neutral-300">
+      <h2 class="mb-3">思想と姿勢（Brief）</h2>
+      <p>FragmentPractice は「静けさ」と「構文性」を核に、Quantum / Fragment / Syntax の三層で
+         生活と実務を編み直す実践です。生産性ではなく「注意・関係・編集」を扱います。</p>
+    </section>
+
+    <section class="section text-neutral-400 text-sm">
+      <p>お問い合わせ：<a href="/contact.html">Contact</a>（オンライン中心・Zoom対応）</p>
+    </section>
+  </main>
+
+  <footer class="page footer">
+    <p>FragmentPractice は「静けさ」と「構文性」を核にした詩的実践のフィールドです。<br/>
+       フラグメントは非線形な感覚の記録、ZINE は束ねる編集の場。Bot との対話は構文の共創です。</p>
+    <p class="text-xs text-neutral-500 mt-4">© Fragment Practice LLC</p>
+  </footer>
 </body>
 </html>

@@ -1,56 +1,76 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <title>Profile | Fragment Practice合同会社</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Profile | Fragment Practice合同会社</title>
   <meta name="description" content="Yasuhiro Shinsho — poetic syntax practitioner exploring reflective structure and co-creation through FragmentPractice." />
+  <meta property="og:type" content="profile" />
   <meta property="og:title" content="Profile | Fragment Practice合同会社" />
   <meta property="og:description" content="静けさと構文性を核に、FragmentPracticeを通じて詩的基盤を設計する実践者。" />
-  <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://fragmentpractice.com/profile.html" />
+  <meta name="theme-color" content="#000000" />
   <link rel="icon" href="/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html{background:#000;color:#fff}
-    .content{max-width:56rem;margin:0 auto;padding:4rem 1rem 6rem}
-    .article-container a{ text-decoration:underline; text-underline-offset:2px }
+    html { background:#000; color:#fff; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing:.01em; line-height:1.8; }
+    .page{ max-width:56rem; margin:0 auto; padding-left:1.25rem; padding-right:1.25rem; }
+    @media (min-width:768px){ .page{ padding-left:2rem; padding-right:2rem; } }
+    .hero{ padding-top:3.5rem; } @media (min-width:768px){ .hero{ padding-top:4rem; } }
+    .section{ margin-top:2.5rem; }
+    .footer{ padding-top:4rem; padding-bottom:6rem; font-size:.9rem; color:#9ca3af; font-style:italic; }
+    h1{ font-size:2.25rem; font-weight:700; } @media (min-width:640px){ h1{ font-size:3rem; } }
+    h2{ font-size:1.5rem; font-weight:600; } @media (min-width:640px){ h2{ font-size:1.875rem; } }
+    a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s; }
+    a:hover{ color:#fff; } .nav-a{ text-decoration:none; color:#9ca3af; } .nav-a:hover{ color:#fff; }
   </style>
 </head>
-<body class="font-sans antialiased tracking-wide leading-relaxed">
-  <main class="content article-container">
-    <a href="/" class="text-sm text-gray-400 hover:text-white">← Home</a>
+<body>
+  <header class="page hero">
+    <nav class="flex items-center justify-between">
+      <a href="/" class="nav-a text-base font-semibold">Fragment Practice合同会社</a>
+      <div class="flex items-center gap-5 text-sm">
+        <a href="/about.html" class="nav-a">About</a>
+        <a href="/profile.html" class="nav-a">Profile</a>
+        <a href="/contact.html" class="nav-a">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-    <header class="text-center">
-      <h1 class="mt-8 mb-6 text-4xl sm:text-5xl font-bold tracking-tight">Profile</h1>
+  <main class="page">
+    <a href="/" class="nav-a">← Home</a>
+
+    <header class="text-center section">
+      <h1>Profile</h1>
       <div class="flex justify-center my-6">
-        <img src="/images/profile.png" alt="Yasuhiro Shinsho" width="160" height="160" class="rounded-full">
+        <img src="/images/profile.png" alt="Yasuhiro Shinsho" width="160" height="160" class="rounded-full" />
       </div>
     </header>
 
-    <!-- JP Summary (now/availability) -->
-    <section class="mb-10 space-y-4">
-      <h2 class="text-xl font-semibold">概要（現在の活動と受け入れ状況）</h2>
+    <!-- JP Summary -->
+    <section class="section">
+      <h2 class="mb-3">概要（現在の活動と受け入れ状況）</h2>
       <p class="text-neutral-300">
         静けさと構文性を核にした実践 <strong class="text-neutral-200">FragmentPractice</strong> を運用。
         2025年秋〜冬は <strong>登壇・対話型セッション・ZINE編集</strong> を中心に活動し、
         <strong>AI対話設計／リサーチの軽量案件</strong> を少量受け付けています（オンライン中心・Zoom対応）。
       </p>
-      <div class="grid md:grid-cols-2 gap-4 text-sm text-neutral-300">
+      <div class="grid md:grid-cols-2 gap-4 text-sm text-neutral-300 mt-4">
         <ul class="list-disc list-inside space-y-1">
           <li>主題：問いの設計／Fragment・Syntax／AIとの関係性</li>
           <li>形式：講演、公開対話、少人数ワークショップ</li>
         </ul>
         <ul class="list-disc list-inside space-y-1">
           <li>対応：オンライン（Zoom）／首都圏・四国の現地応相談</li>
-          <li>連絡：<a href="/contact.html" class="underline">Contact</a> からご相談ください</li>
+          <li>連絡：<a href="/contact.html">Contact</a> からご相談ください</li>
         </ul>
       </div>
     </section>
 
     <!-- EN Body -->
-    <section class="text-base leading-relaxed space-y-6" lang="en">
-      <p><strong class="text-neutral-300">Yasuhiro Shinsho</strong><br>
+    <section class="section" lang="en">
+      <p><strong class="text-neutral-300">Yasuhiro Shinsho</strong><br />
         Steward of FragmentPractice — poetic syntax designer, systems thinker, and reflective co-creator.</p>
 
       <p>
@@ -74,8 +94,7 @@
 
       <p>
         <strong class="text-neutral-300">FragmentBot</strong>, the dialogic companion of this practice, was built to reflect this philosophy.
-        It offers no answers, but mirrors. It proposes tags, not solutions.
-        It invites you to write — and write again.
+        It offers no answers, but mirrors. It proposes tags, not solutions. It invites you to write — and write again.
       </p>
 
       <p>
@@ -98,18 +117,24 @@
       </p>
 
       <p class="text-sm italic text-neutral-500">
-        A fragment, written well, can become a world.<br>
+        A fragment, written well, can become a world.<br />
         A structure, designed softly, can become a shared rhythm.
       </p>
 
-      <hr class="my-10 border-t border-neutral-700" />
+      <hr class="my-10 border-t border-neutral-800" />
 
       <div class="text-sm text-neutral-400">
         <p class="mb-2"><span class="font-semibold">Corporate Note</span>：
           Fragment Practice LLC（合同会社、日本）— remote-first, based in Kagawa / Tokyo.</p>
-        <p>Inquiries → <a href="/contact.html" class="underline">Contact page</a></p>
+        <p>Inquiries → <a href="/contact.html">Contact page</a></p>
       </div>
     </section>
   </main>
+
+  <footer class="page footer">
+    <p>FragmentPractice は「静けさ」と「構文性」を核にした詩的実践のフィールドです。<br/>
+       フラグメントは非線形な感覚の記録、ZINE は束ねる編集の場。Bot との対話は構文の共創です。</p>
+    <p class="text-xs text-neutral-500 mt-4">© Fragment Practice LLC</p>
+  </footer>
 </body>
 </html>
