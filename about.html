@@ -1,84 +1,76 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>About | Fragment Practice合同会社</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Fragment Practice合同会社の概要。所在地・事業内容・提供領域。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="About | Fragment Practice合同会社" />
-  <meta property="og:description" content="所在地・事業内容・提供領域。" />
-  <meta property="og:url" content="https://fragmentpractice.com/about.html" />
-  <meta name="theme-color" content="#000000" />
-  <link rel="icon" href="/favicon.ico" />
+  <meta name="description" content="Fragment Practice合同会社の概要。所在地・事業内容・提供領域。">
+  <meta property="og:title" content="About | Fragment Practice合同会社">
+  <meta property="og:description" content="所在地・事業内容・提供領域。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fragmentpractice.com/about.html">
+  <link rel="icon" href="/favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root{ --page-w:60rem; --pad-x:1.25rem; --pad-x-md:2rem; --hero-top:3.25rem; --hero-top-md:4rem; --section:2.25rem; }
-    html{ background:#000; color:#fff }
-    body{ font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; letter-spacing:.01em; line-height:1.8; }
-    .page{ max-width:var(--page-w); margin:0 auto; padding-left:var(--pad-x); padding-right:var(--pad-x) }
-    @media (min-width:768px){ .page{ padding-left:var(--pad-x-md); padding-right:var(--pad-x-md) } }
-    .hero{ padding-top:var(--hero-top) } @media (min-width:768px){ .hero{ padding-top:var(--hero-top-md) } }
-    .section{ margin-top:var(--section) }
-    .footer{ padding-top:3.5rem; padding-bottom:5.5rem; font-size:.92rem; color:#9ca3af; font-style:italic }
-    h1{ font-size:2.25rem; font-weight:700 } @media (min-width:640px){ h1{ font-size:3rem } }
-    h2{ font-size:1.5rem; font-weight:600 } @media (min-width:640px){ h2{ font-size:1.875rem } }
-    a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s } a:hover{ color:#fff }
-    .nav-a{ text-decoration:none; color:#9ca3af } .nav-a:hover{ color:#fff }
+    html{background:#000;color:#fff}
+    .content{max-width:56rem;margin:0 auto;padding:4.5rem 1rem 6.5rem}
+    .flow-4 > * + * { margin-top: 1rem; }
+    .flow-6 > * + * { margin-top: 1.5rem; }
+    .section { border-top: 1px solid rgb(64 64 64 / 0.6); padding-top: 2rem; margin-top: 2.25rem; }
+    @media (min-width:640px){
+      .content{padding-top:5rem}
+      .section{padding-top:2.25rem;margin-top:2.75rem}
+    }
+    .article a{ text-decoration: underline; text-underline-offset: 2px; }
   </style>
 </head>
-<body>
-  <header class="page hero">
-    <nav class="flex items-center justify-between py-2">
-      <a href="/" class="nav-a text-base font-semibold">Fragment Practice</a>
-      <div class="flex items-center gap-6 text-sm">
-        <a class="nav-a" href="/about.html">About</a>
-        <a class="nav-a" href="/profile.html">Profile</a>
-        <a class="nav-a" href="/contact.html">Contact</a>
-      </div>
-    </nav>
+<body class="font-sans antialiased">
+<main class="content article">
+  <a href="/" class="text-sm text-gray-400 hover:text-white">← Home</a>
+
+  <!-- Title -->
+  <header class="flow-4 mt-8 mb-2">
+    <h1 class="text-3xl sm:text-4xl font-bold">About</h1>
+    <p class="text-neutral-300">商号：Fragment Practice合同会社（Fragment Practice LLC）</p>
   </header>
 
-  <main class="page">
-    <a href="/" class="nav-a">← Home</a>
-    <h1 class="section">About</h1>
-
-    <p class="text-neutral-300">商号：Fragment Practice合同会社（Fragment Practice LLC）</p>
-
-    <dl class="grid md:grid-cols-2 gap-10 text-neutral-300 section">
-      <div>
-        <dt class="font-semibold text-white text-xl mb-2">基本情報</dt>
-        <dd class="space-y-2">
+  <!-- Basic / Offering -->
+  <section class="section">
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="flow-4">
+        <h2 class="text-white text-xl font-semibold">基本情報</h2>
+        <div class="text-neutral-300 flow-4">
           <p>代表者：新庄 泰大</p>
           <p>所在地：香川県高松市天神前10-5 高松セントラルスカイビルディング 3F south</p>
           <p>設立：2025年</p>
-        </dd>
+        </div>
       </div>
-      <div>
-        <dt class="font-semibold text-white text-xl mb-2">提供領域</dt>
-        <dd class="space-y-2">
-          <p>登壇・講演／公開対話の設計</p>
-          <p>ZINE・出版（写真／言葉／対話の編集）</p>
-          <p>AI対話設計・軽量リサーチ（関係性設計・プロトタイピング）</p>
-        </dd>
+      <div class="flow-4">
+        <h2 class="text-white text-xl font-semibold">提供領域</h2>
+        <div class="text-neutral-300">
+          <ul class="list-disc list-inside space-y-1">
+            <li>登壇・講演／公開対話の設計</li>
+            <li>ZINE・出版（写真／言葉／対話の編集）</li>
+            <li>AI対話設計・軽量リサーチ（関係性設計・プロトタイピング）</li>
+          </ul>
+        </div>
       </div>
-    </dl>
+    </div>
+  </section>
 
-    <section class="section text-neutral-300">
-      <h2 class="mb-3">思想と姿勢（Brief）</h2>
-      <p>FragmentPractice は「静けさ」と「構文性」を核に、Quantum / Fragment / Syntax の三層で
-         生活と実務を編み直す実践です。生産性ではなく「注意・関係・編集」を扱います。</p>
-    </section>
+  <!-- Brief -->
+  <section class="section flow-4">
+    <h2 class="text-2xl font-semibold">思想と姿勢（Brief）</h2>
+    <p class="text-neutral-300">
+      FragmentPractice は「静けさ」と「構文性」を核に、Quantum / Fragment / Syntax の三層で
+      生活と実務を編み直す実践です。生産性ではなく「注意・関係・編集」を扱います。
+    </p>
+  </section>
 
-    <section class="section text-neutral-400 text-sm">
-      <p>お問い合わせ：<a href="/contact.html">Contact</a>（オンライン中心・Zoom対応）</p>
-    </section>
-  </main>
-
-  <footer class="page footer">
-    <p>FragmentPractice は「静けさ」と「構文性」を核にした詩的実践のフィールドです。<br/>
-       フラグメントは非線形な感覚の記録、ZINE は束ねる編集の場。Bot との対話は構文の共創です。</p>
-    <p class="text-xs text-neutral-500 mt-4">© Fragment Practice LLC</p>
-  </footer>
+  <!-- Contact -->
+  <section class="section flow-4 text-neutral-300">
+    <p>お問い合わせ：<a href="/contact.html">Contact</a>（オンライン中心・Zoom対応）</p>
+  </section>
+</main>
 </body>
 </html>

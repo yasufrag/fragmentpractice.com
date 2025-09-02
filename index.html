@@ -1,73 +1,71 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <title>Fragment Practice合同会社</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fragment Practice合同会社</title>
   <meta name="description" content="AIとの対話を通じて、生活と構文を再設計する実践。Fragments, ZINEs, and a layered syntax for living." />
-  <meta property="og:type" content="website" />
   <meta property="og:title" content="Fragment Practice合同会社" />
   <meta property="og:description" content="AIとの対話を通じて、生活と構文を再設計する実践。" />
+  <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fragmentpractice.com" />
-  <meta name="theme-color" content="#000000" />
   <link rel="icon" href="/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root{ --page-w:60rem; --pad-x:1.25rem; --pad-x-md:2rem; --hero-top:3.25rem; --hero-top-md:4rem; --section:2.25rem; }
-    html{ background:#000; color:#fff }
-    body{
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      letter-spacing:.01em; line-height:1.8;
+    html{background:#000;color:#fff}
+    .content{max-width:56rem;margin:0 auto;padding:4.5rem 1rem 6.5rem}
+    /* vertical rhythm */
+    .flow-4 > * + * { margin-top: 1rem; }
+    .flow-6 > * + * { margin-top: 1.5rem; }
+    .flow-8 > * + * { margin-top: 2rem; }
+    /* section divider */
+    .section { border-top: 1px solid rgb(64 64 64 / 0.6); padding-top: 2rem; margin-top: 2.25rem; }
+    @media (min-width:640px){
+      .content{padding-top:5rem}
+      .section{padding-top:2.25rem;margin-top:2.75rem}
     }
-    .page{ max-width:var(--page-w); margin:0 auto; padding-left:var(--pad-x); padding-right:var(--pad-x); }
-    @media (min-width:768px){ .page{ padding-left:var(--pad-x-md); padding-right:var(--pad-x-md); } }
-    .hero{ padding-top:var(--hero-top); } @media (min-width:768px){ .hero{ padding-top:var(--hero-top-md); } }
-    .section{ margin-top:var(--section); }
-    .footer{ padding-top:3.5rem; padding-bottom:5.5rem; font-size:.92rem; color:#9ca3af; font-style:italic; }
-    h1{ font-size:2.25rem; font-weight:700; letter-spacing:-.01em; } @media (min-width:640px){ h1{ font-size:3rem; } }
-    h2{ font-size:1.5rem; font-weight:600; } @media (min-width:640px){ h2{ font-size:1.875rem; } }
-    a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s; }
-    a:hover{ color:#fff }
-    .nav-a{ text-decoration:none; color:#9ca3af } .nav-a:hover{ color:#fff }
+    .article a{ text-decoration: underline; text-underline-offset: 2px; }
+    .link-nav{ text-decoration: none; }
+    .link-nav:hover, .link-nav-active{ text-decoration: underline; text-underline-offset: 2px; }
   </style>
 </head>
-<body>
-  <header class="page hero">
-    <nav class="flex items-center justify-between py-2">
-      <a href="/" class="nav-a text-base font-semibold">Fragment Practice</a>
-      <div class="flex items-center gap-6 text-sm">
-        <a class="nav-a" href="/about.html">About</a>
-        <a class="nav-a" href="/profile.html">Profile</a>
-        <a class="nav-a" href="/contact.html">Contact</a>
-      </div>
+<body class="font-sans antialiased tracking-wide leading-relaxed">
+  <main class="content article">
+
+    <!-- Hero -->
+    <header class="flow-6">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Fragment Practice合同会社</h1>
+      <section class="text-sm text-neutral-400 leading-relaxed flow-4">
+        <p>
+          <strong class="text-neutral-300">FragmentPractice</strong> is a poietic framework for symbolic journaling,
+          asynchronous reflection, and bot companionship. It supports fragments, poetic ZINEs, and a layered syntax for living.
+        </p>
+        <p>Not a platform — a trace.<br/>Not stored — just passed.</p>
+      </section>
+      <p class="text-lg text-neutral-300">
+        言葉にならない問いを Fragment として綴る、静かな構文の場。
+      </p>
+    </header>
+
+    <!-- Nav -->
+    <nav class="section flow-4 text-base">
+      <p><a href="/about.html" class="link-nav text-gray-400 hover:text-white">About：会社概要と思想</a></p>
+      <p><a href="/profile.html" class="link-nav text-gray-400 hover:text-white">Profile：実践者プロフィール</a></p>
+      <p><a href="/contact.html" class="link-nav text-gray-400 hover:text-white">Contact：業務依頼・コラボレーション</a></p>
     </nav>
-  </header>
 
-  <main class="page">
-    <h1>Fragment Practice合同会社</h1>
-
-    <section class="section text-sm text-neutral-400">
-      <p><strong class="text-neutral-300">FragmentPractice</strong> is a poietic framework for symbolic journaling,
-      asynchronous reflection, and bot companionship. It supports fragments, poetic ZINEs, and a layered syntax for living.</p>
-      <p class="mt-2">Not a platform — a trace.<br/>Not stored — just passed.</p>
-    </section>
-
-    <p class="section text-lg text-neutral-300">
-      言葉にならない問いを Fragment として綴る、静かな構文の場。
-    </p>
-
-    <nav class="section text-base space-y-3">
-      <p><a class="nav-a" href="/about.html">About：会社概要と思想</a></p>
-      <p><a class="nav-a" href="/profile.html">Profile：実践者プロフィール</a></p>
-      <p><a class="nav-a" href="/contact.html">Contact：業務依頼・コラボレーション</a></p>
-    </nav>
+    <!-- Site note -->
+    <footer class="section text-sm text-gray-400 italic flow-4">
+      <p class="text-gray-500">
+        FragmentPractice は「静けさ」と「構文性」を核にした詩的実践のフィールドです。<br/>
+        フラグメントは日々の非線形な感覚と気づきを記録し、ZINE はそれらを束ねる編集の場。<br/>
+        Bot との対話は構文構築の共創として位置づけられます。
+      </p>
+      <p class="text-gray-500">
+        このサイトはプロダクトではありません。トレース、注意、共に編む構文によって成る詩的な場です。
+      </p>
+      <p class="text-xs text-neutral-600">© Fragment Practice LLC</p>
+    </footer>
   </main>
-
-  <footer class="page footer">
-    <p>FragmentPractice は「静けさ」と「構文性」を核にした詩的実践のフィールドです。<br/>
-       フラグメントは非線形な感覚の記録、ZINE は束ねる編集の場。Bot との対話は構文の共創です。</p>
-    <p class="text-xs text-neutral-500 mt-4">© Fragment Practice LLC</p>
-  </footer>
 </body>
 </html>
