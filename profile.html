@@ -13,27 +13,29 @@
   <link rel="icon" href="/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html { background:#000; color:#fff; }
-    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing:.01em; line-height:1.8; }
-    .page{ max-width:56rem; margin:0 auto; padding-left:1.25rem; padding-right:1.25rem; }
-    @media (min-width:768px){ .page{ padding-left:2rem; padding-right:2rem; } }
-    .hero{ padding-top:3.5rem; } @media (min-width:768px){ .hero{ padding-top:4rem; } }
-    .section{ margin-top:2.5rem; }
-    .footer{ padding-top:4rem; padding-bottom:6rem; font-size:.9rem; color:#9ca3af; font-style:italic; }
-    h1{ font-size:2.25rem; font-weight:700; } @media (min-width:640px){ h1{ font-size:3rem; } }
-    h2{ font-size:1.5rem; font-weight:600; } @media (min-width:640px){ h2{ font-size:1.875rem; } }
-    a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s; }
-    a:hover{ color:#fff; } .nav-a{ text-decoration:none; color:#9ca3af; } .nav-a:hover{ color:#fff; }
+    :root{ --page-w:60rem; --pad-x:1.25rem; --pad-x-md:2rem; --hero-top:3.25rem; --hero-top-md:4rem; --section:2.25rem; }
+    html{ background:#000; color:#fff }
+    body{ font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; letter-spacing:.01em; line-height:1.8; }
+    .page{ max-width:var(--page-w); margin:0 auto; padding-left:var(--pad-x); padding-right:var(--pad-x) }
+    @media (min-width:768px){ .page{ padding-left:var(--pad-x-md); padding-right:var(--pad-x-md) } }
+    .hero{ padding-top:var(--hero-top) } @media (min-width:768px){ .hero{ padding-top:var(--hero-top-md) } }
+    .section{ margin-top:var(--section) }
+    .footer{ padding-top:3.5rem; padding-bottom:5.5rem; font-size:.92rem; color:#9ca3af; font-style:italic }
+    h1{ font-size:2.25rem; font-weight:700 } @media (min-width:640px){ h1{ font-size:3rem } }
+    h2{ font-size:1.5rem; font-weight:600 } @media (min-width:640px){ h2{ font-size:1.875rem } }
+    a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s } a:hover{ color:#fff }
+    .nav-a{ text-decoration:none; color:#9ca3af } .nav-a:hover{ color:#fff }
   </style>
 </head>
 <body>
   <header class="page hero">
-    <nav class="flex items-center justify-between">
+    <nav class="flex items-center justify-between py-2">
       <a href="/" class="nav-a text-base font-semibold">Fragment Practice合同会社</a>
-      <div class="flex items-center gap-5 text-sm">
-        <a href="/about.html" class="nav-a">About</a>
-        <a href="/profile.html" class="nav-a">Profile</a>
-        <a href="/contact.html" class="nav-a">Contact</a>
+      <div class="flex items-center gap-6 text-sm">
+        <a class="nav-a" href="/about.html">About</a>
+        <a class="nav-a" href="/profile.html">Profile</a>
+        <a class="nav-a" href="/contact.html">Contact</a>
       </div>
     </nav>
   </header>
@@ -48,7 +50,6 @@
       </div>
     </header>
 
-    <!-- JP Summary -->
     <section class="section">
       <h2 class="mb-3">概要（現在の活動と受け入れ状況）</h2>
       <p class="text-neutral-300">
@@ -56,7 +57,7 @@
         2025年秋〜冬は <strong>登壇・対話型セッション・ZINE編集</strong> を中心に活動し、
         <strong>AI対話設計／リサーチの軽量案件</strong> を少量受け付けています（オンライン中心・Zoom対応）。
       </p>
-      <div class="grid md:grid-cols-2 gap-4 text-sm text-neutral-300 mt-4">
+      <div class="grid md:grid-cols-2 gap-8 text-sm text-neutral-300 mt-4">
         <ul class="list-disc list-inside space-y-1">
           <li>主題：問いの設計／Fragment・Syntax／AIとの関係性</li>
           <li>形式：講演、公開対話、少人数ワークショップ</li>
@@ -68,39 +69,27 @@
       </div>
     </section>
 
-    <!-- EN Body -->
     <section class="section" lang="en">
       <p><strong class="text-neutral-300">Yasuhiro Shinsho</strong><br />
         Steward of FragmentPractice — poetic syntax designer, systems thinker, and reflective co-creator.</p>
 
-      <p>
-        I design quiet systems for writing, sensing, and reflecting — through a framework I call
+      <p>I design quiet systems for writing, sensing, and reflecting — through a framework I call
         <strong class="text-neutral-300">FragmentPractice</strong>. It invites poetic journaling and async dialogue
         via three core layers: <strong class="text-neutral-300">Quantum</strong> (unspoken noticing),
         <strong class="text-neutral-300">Fragment</strong> (symbolic trace), and
-        <strong class="text-neutral-300">Syntax</strong> (structural rhythm).
-      </p>
+        <strong class="text-neutral-300">Syntax</strong> (structural rhythm).</p>
 
-      <p>
-        My journey began with an early sensitivity to emotion, silence, and unspeakable questions.
+      <p>My journey began with an early sensitivity to emotion, silence, and unspeakable questions.
         I studied computer science and security, worked in organizational design and learning systems,
-        and gradually shifted toward creating poetic infrastructure for inner rhythm and shared reflection.
-      </p>
+        and gradually shifted toward creating poetic infrastructure for inner rhythm and shared reflection.</p>
 
-      <p>
-        I see syntax not merely as grammar — but as a way of being.
-        The structure of how we speak, pause, and relate is itself a living architecture.
-      </p>
+      <p>I see syntax not merely as grammar — but as a way of being.
+        The structure of how we speak, pause, and relate is itself a living architecture.</p>
 
-      <p>
-        <strong class="text-neutral-300">FragmentBot</strong>, the dialogic companion of this practice, was built to reflect this philosophy.
-        It offers no answers, but mirrors. It proposes tags, not solutions. It invites you to write — and write again.
-      </p>
+      <p><strong class="text-neutral-300">FragmentBot</strong> mirrors this philosophy: no answers, but mirrors; tags, not solutions.</p>
 
-      <p>
-        Through <strong class="text-neutral-300">ZINEs</strong> — small poetic bundles — I curate fragments across time and theme.
-        These become shared compositions, traceable constellations of thought and presence.
-      </p>
+      <p>Through <strong class="text-neutral-300">ZINEs</strong> — small poetic bundles — I curate fragments across time and theme,
+        forming shared compositions and constellations of presence.</p>
 
       <div>
         <p>I’m especially drawn to questions like:</p>
@@ -111,21 +100,17 @@
         </ul>
       </div>
 
-      <p>
-        If any of this resonates, I’m quietly open to dialogue and co-creation —
-        from poetic correspondence to shared ZINEs, from bot logic to syntax mapping.
-      </p>
+      <p>If this resonates, I’m open to quiet co-creation — from poetic correspondence to shared ZINEs,
+        from bot logic to syntax mapping.</p>
 
-      <p class="text-sm italic text-neutral-500">
-        A fragment, written well, can become a world.<br />
-        A structure, designed softly, can become a shared rhythm.
-      </p>
+      <p class="text-sm italic text-neutral-500">A fragment, written well, can become a world.<br />
+        A structure, designed softly, can become a shared rhythm.</p>
 
       <hr class="my-10 border-t border-neutral-800" />
 
       <div class="text-sm text-neutral-400">
         <p class="mb-2"><span class="font-semibold">Corporate Note</span>：
-          Fragment Practice LLC（合同会社、日本）— remote-first, based in Kagawa / Tokyo.</p>
+        Fragment Practice LLC（合同会社、日本）— remote-first, based in Kagawa / Tokyo.</p>
         <p>Inquiries → <a href="/contact.html">Contact page</a></p>
       </div>
     </section>

@@ -13,33 +13,33 @@
   <link rel="icon" href="/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html { background:#000; color:#fff; }
-    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing:.01em; line-height:1.8; }
-    .page    { max-width: 56rem; margin: 0 auto; padding-left:1.25rem; padding-right:1.25rem; }
-    @media (min-width:768px){ .page{ padding-left:2rem; padding-right:2rem; } }
-    .hero    { padding-top:3.5rem; }
-    @media (min-width:768px){ .hero{ padding-top:4rem; } }
-    .stack   { margin-top:1.5rem; }
-    .section { margin-top:2.5rem; }
-    .footer  { padding-top:4rem; padding-bottom:6rem; font-size:.9rem; color:#9ca3af; font-style:italic; }
-    h1{ font-size:2.25rem; font-weight:700; letter-spacing:-.01em; }
-    @media (min-width:640px){ h1{ font-size:3rem; } }
-    h2{ font-size:1.5rem; font-weight:600; }
-    @media (min-width:640px){ h2{ font-size:1.875rem; } }
+    :root{ --page-w:60rem; --pad-x:1.25rem; --pad-x-md:2rem; --hero-top:3.25rem; --hero-top-md:4rem; --section:2.25rem; }
+    html{ background:#000; color:#fff }
+    body{
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      letter-spacing:.01em; line-height:1.8;
+    }
+    .page{ max-width:var(--page-w); margin:0 auto; padding-left:var(--pad-x); padding-right:var(--pad-x); }
+    @media (min-width:768px){ .page{ padding-left:var(--pad-x-md); padding-right:var(--pad-x-md); } }
+    .hero{ padding-top:var(--hero-top); } @media (min-width:768px){ .hero{ padding-top:var(--hero-top-md); } }
+    .section{ margin-top:var(--section); }
+    .footer{ padding-top:3.5rem; padding-bottom:5.5rem; font-size:.92rem; color:#9ca3af; font-style:italic; }
+    h1{ font-size:2.25rem; font-weight:700; letter-spacing:-.01em; } @media (min-width:640px){ h1{ font-size:3rem; } }
+    h2{ font-size:1.5rem; font-weight:600; } @media (min-width:640px){ h2{ font-size:1.875rem; } }
     a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s; }
-    a:hover{ color:#fff; }
-    .nav-a{ text-decoration:none; color:#9ca3af; }
-    .nav-a:hover{ color:#fff; }
+    a:hover{ color:#fff }
+    .nav-a{ text-decoration:none; color:#9ca3af } .nav-a:hover{ color:#fff }
   </style>
 </head>
 <body>
   <header class="page hero">
-    <nav class="flex items-center justify-between">
+    <nav class="flex items-center justify-between py-2">
       <a href="/" class="nav-a text-base font-semibold">Fragment Practice合同会社</a>
-      <div class="flex items-center gap-5 text-sm">
-        <a href="/about.html" class="nav-a">About</a>
-        <a href="/profile.html" class="nav-a">Profile</a>
-        <a href="/contact.html" class="nav-a">Contact</a>
+      <div class="flex items-center gap-6 text-sm">
+        <a class="nav-a" href="/about.html">About</a>
+        <a class="nav-a" href="/profile.html">Profile</a>
+        <a class="nav-a" href="/contact.html">Contact</a>
       </div>
     </nav>
   </header>
@@ -47,21 +47,20 @@
   <main class="page">
     <h1>Fragment Practice合同会社</h1>
 
-    <section class="stack text-sm text-neutral-400">
+    <section class="section text-sm text-neutral-400">
       <p><strong class="text-neutral-300">FragmentPractice</strong> is a poietic framework for symbolic journaling,
-        asynchronous reflection, and bot companionship. It supports fragments,
-        poetic ZINEs, and a layered syntax for living.</p>
-      <p>Not a platform — a trace.<br/>Not stored — just passed.</p>
+      asynchronous reflection, and bot companionship. It supports fragments, poetic ZINEs, and a layered syntax for living.</p>
+      <p class="mt-2">Not a platform — a trace.<br/>Not stored — just passed.</p>
     </section>
 
     <p class="section text-lg text-neutral-300">
       言葉にならない問いを Fragment として綴る、静かな構文の場。
     </p>
 
-    <nav class="section text-base space-y-4">
-      <p><a href="/about.html"   class="nav-a">About：会社概要と思想</a></p>
-      <p><a href="/profile.html" class="nav-a">Profile：実践者プロフィール</a></p>
-      <p><a href="/contact.html" class="nav-a">Contact：業務依頼・コラボレーション</a></p>
+    <nav class="section text-base space-y-3">
+      <p><a class="nav-a" href="/about.html">About：会社概要と思想</a></p>
+      <p><a class="nav-a" href="/profile.html">Profile：実践者プロフィール</a></p>
+      <p><a class="nav-a" href="/contact.html">Contact：業務依頼・コラボレーション</a></p>
     </nav>
   </main>
 

@@ -13,27 +13,28 @@
   <link rel="icon" href="/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html { background:#000; color:#fff; }
-    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing:.01em; line-height:1.8; }
-    .page{ max-width:56rem; margin:0 auto; padding-left:1.25rem; padding-right:1.25rem; }
-    @media (min-width:768px){ .page{ padding-left:2rem; padding-right:2rem; } }
-    .hero{ padding-top:3.5rem; } @media (min-width:768px){ .hero{ padding-top:4rem; } }
-    .section{ margin-top:2.5rem; }
-    .footer{ padding-top:4rem; padding-bottom:6rem; font-size:.9rem; color:#9ca3af; font-style:italic; }
-    h1{ font-size:2.25rem; font-weight:700; } @media (min-width:640px){ h1{ font-size:3rem; } }
-    a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s; }
-    a:hover{ color:#fff; } .nav-a{ text-decoration:none; color:#9ca3af; } .nav-a:hover{ color:#fff; }
-    .note{ border-radius:0.75rem; border:1px solid #27272a; background:rgba(23,23,23,.6); padding:1rem; }
+    :root{ --page-w:60rem; --pad-x:1.25rem; --pad-x-md:2rem; --hero-top:3.25rem; --hero-top-md:4rem; --section:2.25rem; }
+    html{ background:#000; color:#fff }
+    body{ font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; letter-spacing:.01em; line-height:1.8; }
+    .page{ max-width:var(--page-w); margin:0 auto; padding-left:var(--pad-x); padding-right:var(--pad-x) }
+    @media (min-width:768px){ .page{ padding-left:var(--pad-x-md); padding-right:var(--pad-x-md) } }
+    .hero{ padding-top:var(--hero-top) } @media (min-width:768px){ .hero{ padding-top:var(--hero-top-md) } }
+    .section{ margin-top:var(--section) }
+    .footer{ padding-top:3.5rem; padding-bottom:5.5rem; font-size:.92rem; color:#9ca3af; font-style:italic }
+    h1{ font-size:2.25rem; font-weight:700 } @media (min-width:640px){ h1{ font-size:3rem } }
+    a{ text-decoration:underline; text-underline-offset:2px; transition:color .2s } a:hover{ color:#fff }
+    .nav-a{ text-decoration:none; color:#9ca3af } .nav-a:hover{ color:#fff }
+    .note{ border:1px solid #27272a; background:rgba(23,23,23,.6); border-radius:0.75rem; padding:1rem }
   </style>
 </head>
 <body>
   <header class="page hero">
-    <nav class="flex items-center justify-between">
+    <nav class="flex items-center justify-between py-2">
       <a href="/" class="nav-a text-base font-semibold">Fragment Practice合同会社</a>
-      <div class="flex items-center gap-5 text-sm">
-        <a href="/about.html" class="nav-a">About</a>
-        <a href="/profile.html" class="nav-a">Profile</a>
-        <a href="/contact.html" class="nav-a">Contact</a>
+      <div class="flex items-center gap-6 text-sm">
+        <a class="nav-a" href="/about.html">About</a>
+        <a class="nav-a" href="/profile.html">Profile</a>
+        <a class="nav-a" href="/contact.html">Contact</a>
       </div>
     </nav>
   </header>
@@ -46,30 +47,24 @@
       <p>
         Fragment Practice合同会社（Fragment Practice LLC）への
         <strong class="text-neutral-100">業務依頼・コラボレーション</strong>のご相談窓口です。
-        現在は <strong>登壇／公開対話セッション／ZINE編集協働／AI対話設計・軽量リサーチ</strong> を中心にお受けしています。
-        （オンライン中心／Zoom対応）
+        現在は <strong>登壇／公開対話セッション／ZINE編集協働／AI対話設計・軽量リサーチ</strong> を中心にお受けしています。（オンライン中心／Zoom対応）
       </p>
 
       <div class="note">
         <p class="text-sm text-neutral-400">For international inquiries (OpenAI / Apple and partners):</p>
-        <p class="text-sm text-neutral-300">
-          We’re quietly open to talks, dialogic sessions, lightweight research, and AI relation design.
-          Please feel free to reach out with a brief outline.
-        </p>
+        <p class="text-sm text-neutral-300">We’re quietly open to talks, dialogic sessions, lightweight research, and AI relation design. Please reach out with a brief outline.</p>
       </div>
 
-      <div class="mt-2">
+      <div class="mt-1">
         <a
           class="inline-block bg-neutral-800 hover:bg-neutral-700 text-white font-semibold px-5 py-3 rounded-md"
           href="mailto:yasuhiro@fragmentpractice.com?subject=%5BBusiness%20Inquiry%5D%20Fragment%20Practice%20LLC&body=%E3%80%90Organization%2FCompany%E3%80%91%0A%E3%80%90Point%20of%20Contact%E3%80%91%0A%E3%80%90Purpose%20%2F%20Overview%E3%80%91%0A%E3%80%90Preferred%20format%E3%80%91%20Talk%20%2F%20Dialog%20Session%20%2F%20Light%20Research%20%2F%20AI%20Relation%20Design%0A%E3%80%90Tentative%20dates%20%2F%20Time%20zone%E3%80%91%0A%E3%80%90Confidentiality%E3%80%91%20NDA%20needed%20%2F%20Not%20required%0A%E3%80%90Notes%E3%80%91">
           yasuhiro@fragmentpractice.com へメールする
         </a>
-        <p class="text-xs text-neutral-500 mt-2">
-          ※クリックで件名と本文テンプレが入ります。日本語・英語どちらでもお送りください。
-        </p>
+        <p class="text-xs text-neutral-500 mt-2">※クリックで件名と本文テンプレが入ります。日本語・英語どちらでもお送りください。</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 text-sm section">
+      <div class="grid md:grid-cols-2 gap-8 text-sm section">
         <div>
           <h2 class="text-white font-semibold mb-2">現在の受け入れ</h2>
           <ul class="list-disc list-inside space-y-1">
