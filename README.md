@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Fragment Practice 企業サイト（リポジトリ用 README）
 
-## Getting Started
+このリポジトリは Fragment Practice 合同会社 の公式サイトのソースコードを管理するためのものです。
+通常の閲覧は 公開サイト をご利用ください。本READMEは主に GitHubでの開発・運用管理用 です。
 
-First, run the development server:
+⸻
 
-```bash
+プロジェクト情報
+	•	フレームワーク: Next.js (App Router)
+	•	言語: TypeScript
+	•	デプロイ: Vercel
+	•	フォント: next/font (Geist)
+
+⸻
+
+開発環境
+
+要件
+	•	Node.js 20+
+	•	パッケージマネージャー（npm / yarn / pnpm / bun）
+
+セットアップ
+
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# http://localhost:3000 で起動
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+本番ビルド
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npm run build
+npm run start
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+⸻
 
-To learn more about Next.js, take a look at the following resources:
+ディレクトリ構成（例）
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+app/
+  layout.tsx
+  page.tsx           # トップページ
+  company/page.tsx   # 会社概要
+  works/page.tsx     # プロジェクト・ZINE
+  talks/page.tsx     # 登壇・イベント
+  contact/page.tsx   # お問い合わせ
+components/
+lib/
+public/
+styles/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+⸻
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+運用メモ
+	•	デプロイは Vercel で自動（main ブランチをProduction）
+	•	プレビューURLは PR ごとに発行
+	•	コンテンツ更新は PRベースで進める
+	•	依存関係のセキュリティ更新は月1回を目安
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+⸻
+
+会社情報（参考）
+	•	社名: Fragment Practice合同会社
+	•	法人番号: 7470003002956
+	•	所在地: 〒760-0018 香川県高松市天神前10-5 高松セントラルスカイビルディング 3F south
+	•	代表: 新庄 泰大 (Yasuhiro Shinsho)
+	•	連絡先: yasuhiro@fragmentpractice.com
+
+⸻
+
+ライセンス
+
+Copyright © Fragment Practice 合同会社. All rights reserved.
