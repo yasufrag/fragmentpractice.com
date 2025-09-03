@@ -1,26 +1,23 @@
-import Image from "next/image";
+import Link from "next/link";
 import Section from "@/components/Section";
+import Image from "next/image";
 
-export const metadata = {
-  title: "Profile | Fragment Practice合同会社",
-  description:
-    "Yasuhiro Shinsho — poetic syntax practitioner exploring reflective structure and co-creation through FragmentPractice.",
-};
+export const metadata = { title: "Profile" };
 
-export default function Profile() {
+export default function ProfilePage() {
   return (
-    <main className="content article">
-      <a href="/" className="text-sm text-gray-400 hover:text-white">← Home</a>
+    <main className="content">
+      <Link href="/" className="text-sm text-gray-400 hover:text-white">← Home</Link>
 
-      <header className="text-center flow-6 mt-8 mb-8 sm:mb-10">
+      <header className="text-center mt-8 flow-6">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Profile</h1>
         <div className="flex justify-center">
           <Image src="/images/profile.png" alt="Yasuhiro Shinsho" width={160} height={160} className="rounded-full" />
         </div>
       </header>
 
-      {/* JP summary */}
-      <Section className="flow-4">
+      {/* JP summary / availability */}
+      <Section className="flow-6">
         <h2 className="text-xl font-semibold">概要（現在の活動と受け入れ状況）</h2>
         <p className="text-neutral-300">
           静けさと構文性を核にした実践 <strong className="text-neutral-200">FragmentPractice</strong> を運用。
@@ -34,16 +31,15 @@ export default function Profile() {
           </ul>
           <ul className="list-disc list-inside space-y-1">
             <li>対応：オンライン（Zoom）／首都圏・四国の現地応相談</li>
-            <li>連絡：<a href="/contact">Contact</a> からご相談ください</li>
+            <li>連絡：<Link href="/contact" className="underline">Contact</Link> からご相談ください</li>
           </ul>
         </div>
       </Section>
 
       {/* EN body */}
-      <Section className="flow-6" /* lang="en" は SSR 警告避けるなら省略可 */>
-        {/* 以下、本文は元HTMLを踏襲 */}
+      <section className="flow-6 text-base" lang="en">
         <p><strong className="text-neutral-300">Yasuhiro Shinsho</strong><br/>
-          Steward of FragmentPractice — poetic syntax designer, systems thinker, and reflective co-creator.</p>
+        Steward of FragmentPractice — poetic syntax designer, systems thinker, and reflective co-creator.</p>
 
         <p>
           I design quiet systems for writing, sensing, and reflecting — through a framework I call
@@ -54,20 +50,20 @@ export default function Profile() {
         </p>
 
         <p>
-          My journey began with an early sensitivity to emotion, silence, and unspeakable questions…
+          My journey began with an early sensitivity to emotion, silence, and unspeakable questions. I studied computer
+          science and security, worked in organizational design and learning systems, and gradually shifted toward
+          creating poetic infrastructure for inner rhythm and shared reflection.
         </p>
 
-        <p>
-          <strong className="text-neutral-300">FragmentBot</strong> mirrors this philosophy…
-        </p>
+        <p>I see syntax not merely as grammar — but as a way of being. The structure of how we speak, pause, and relate is itself a living architecture.</p>
 
-        <p>
-          Through <strong className="text-neutral-300">ZINEs</strong> — small poetic bundles — …
-        </p>
+        <p><strong className="text-neutral-300">FragmentBot</strong> mirrors this philosophy: no answers, but mirrors; tags, not solutions; an invitation to write — and write again.</p>
 
-        <div className="flow-4">
+        <p>Through <strong className="text-neutral-300">ZINEs</strong> — small poetic bundles — I curate fragments across time and theme, forming shared compositions and constellations of presence.</p>
+
+        <div>
           <p>I’m especially drawn to questions like:</p>
-          <ul className="list-disc list-inside ml-4 space-y-1">
+          <ul className="list-disc list-inside mt-2 ml-4 space-y-1">
             <li>How can syntax support attention and care?</li>
             <li>What kinds of co-authorship emerge through fragments?</li>
             <li>How can AI become a symbolic infrastructure, not a productivity tool?</li>
@@ -75,27 +71,20 @@ export default function Profile() {
         </div>
 
         <p>
-          If this resonates, I’m open to quiet co-creation — from poetic correspondence to shared ZINEs,
-          from bot logic to syntax mapping.
+          If this resonates, I’m quietly open to co-creation — from poetic correspondence to shared ZINEs, from bot logic to syntax mapping.
         </p>
 
         <p className="text-sm italic text-neutral-500">
           A fragment, written well, can become a world.<br/>A structure, designed softly, can become a shared rhythm.
         </p>
 
-        <hr className="my-8 border-t border-neutral-700" />
+        <hr className="my-10 border-t border-neutral-700" />
 
-        <div className="text-sm text-neutral-400 flow-4">
-          <p><span className="font-semibold">Corporate Note</span>：
-            Fragment Practice LLC（合同会社、日本）— remote-first, based in Kagawa / Tokyo.</p>
-          <p>Inquiries → <a href="/contact">Contact page</a></p>
+        <div className="text-sm text-neutral-400">
+          <p className="mb-2"><span className="font-semibold">Corporate Note</span>：Fragment Practice LLC（合同会社、日本）— remote-first, based in Kagawa / Tokyo.</p>
+          <p>Inquiries → <Link href="/contact" className="underline">Contact page</Link></p>
         </div>
-      </Section>
-
-      <Section className="text-sm text-neutral-500 italic">
-        <p>FragmentPractice は「静けさ」と「構文性」を核にした詩的実践のフィールドです…</p>
-        <p className="text-xs text-neutral-600 mt-4">© Fragment Practice LLC</p>
-      </Section>
+      </section>
     </main>
   );
 }
