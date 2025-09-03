@@ -1,51 +1,36 @@
-# Fragment Practice 合同会社 (Fragment Practice LLC)
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-> **AI との対話を通じて、生活と構文を再設計する実践**  
-> A poietic framework for symbolic journaling, asynchronous reflection, and bot companionship.  
-> Supporting fragments, poetic ZINEs, and a layered syntax for living.
+## Getting Started
 
----
+First, run the development server:
 
-## About
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-**Fragment Practice** は「静けさ」と「構文性」を核にした詩的実践のフィールドです。
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- Fragments：日々の非線形な感覚と気づきを記録する単位
-- ZINE：Fragments を束ねる編集の場
-- Bot：構文構築の共創として寄り添う対話のパートナー
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-**会社概要**
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- 商号：Fragment Practice 合同会社（Fragment Practice LLC）
-- 所在地：香川県高松市天神前 10-5 高松セントラルスカイビルディング 3F south
-- 代表者：新庄 泰大
-- 設立：2025 年
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-## Website
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-🌐 [fragmentpractice.com](https://fragmentpractice.com)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-- [About](https://fragmentpractice.com/about.html) — 会社概要と思想
-- [Profile](https://fragmentpractice.com/profile.html) — 実践者プロフィール
-- [Contact](https://fragmentpractice.com/contact.html) — 業務依頼・コラボレーションのご相談窓口
+## Deploy on Vercel
 
----
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Current Focus
-
-2025 年秋〜冬の重点領域：
-
-- 登壇・講演（対話型セッション含む）
-- ZINE 編集と出版
-- AI 対話設計・軽量リサーチ
-
----
-
-## Philosophy
-
-This site is **not a product**.  
-It is a **trace, a rhythm, and a poetic infrastructure** for reflective presence.
-
----
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
