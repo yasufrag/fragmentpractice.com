@@ -18,7 +18,10 @@
       property="og:url"
       content="https://fragmentpractice.com/contact.html"
     />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="robots" content="index,follow" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href="https://fragmentpractice.com/contact.html" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html {
@@ -55,6 +58,15 @@
         text-underline-offset: 2px;
       }
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Fragment Practice合同会社",
+        "url": "https://fragmentpractice.com",
+        "email": "yasuhiro@fragmentpractice.com"
+      }
+    </script>
   </head>
   <body class="font-sans antialiased">
     <main class="content article">
@@ -84,21 +96,28 @@
             For international inquiries (research partners and collaborators):
           </p>
           <p class="text-sm text-neutral-300">
-            We’re quietly open to talks, dialogic sessions, lightweight
-            research, and AI relation design. Please feel free to reach out with
-            a brief outline.
+            We are quietly open to talks, dialogic sessions, lightweight
+            research, and AI relation design. A brief outline is appreciated.
           </p>
         </div>
       </section>
 
       <!-- Mail -->
       <section class="section flow-4">
+        <!-- JSで難読化して表示 -->
         <a
-          class="inline-block bg-neutral-800 hover:bg-neutral-700 text-white font-semibold px-5 py-3 rounded-md underline underline-offset-2"
-          href="mailto:yasuhiro@fragmentpractice.com?subject=%5BBusiness%20Inquiry%5D%20Fragment%20Practice%20LLC&body=%E3%80%90Organization%2FCompany%E3%80%91%0A%E3%80%90Point%20of%20Contact%E3%80%91%0A%E3%80%90Purpose%20%2F%20Overview%E3%80%91%0A%E3%80%90Preferred%20format%E3%80%91%20Talk%20%2F%20Dialog%20Session%20%2F%20Light%20Research%20%2F%20AI%20Relation%20Design%0A%E3%80%90Tentative%20dates%20%2F%20Time%20zone%E3%80%91%0A%E3%80%90Confidentiality%E3%80%91%20NDA%20needed%20%2F%20Not%20required%0A%E3%80%90Notes%E3%80%91"
-        >
-          yasuhiro@fragmentpractice.com へメールする
-        </a>
+          id="contactMail"
+          class="inline-block w-full sm:w-auto text-center bg-neutral-800 hover:bg-neutral-700 text-white font-semibold px-5 py-3 rounded-md underline underline-offset-2"
+          aria-label="Email to Fragment Practice for business inquiries"
+        ></a>
+        <noscript>
+          <a
+            href="mailto:yasuhiro@fragmentpractice.com"
+            class="underline underline-offset-2"
+          >
+            yasuhiro@fragmentpractice.com
+          </a>
+        </noscript>
         <p class="text-xs text-neutral-500">
           ※クリックで件名と本文テンプレが入ります。日本語・英語どちらでもお送りください。
         </p>
@@ -143,5 +162,15 @@
         <p class="text-xs text-neutral-600 mt-4">© Fragment Practice LLC</p>
       </footer>
     </main>
+
+    <!-- JS: メールアドレス難読化 -->
+    <script>
+      const u = "yasuhiro",
+        d = "fragmentpractice.com";
+      const a = `${u}@${d}`;
+      const mail = document.getElementById("contactMail");
+      mail.href = `mailto:${a}?subject=%5BBusiness%20Inquiry%5D%20Fragment%20Practice%20LLC&body=%E3%80%90Organization%2FCompany%E3%80%91%0A%E3%80%90Point%20of%20Contact%E3%80%91%0A%E3%80%90Purpose%20%2F%20Overview%E3%80%91%0A%E3%80%90Preferred%20format%E3%80%91%20Talk%20%2F%20Dialog%20Session%20%2F%20Light%20Research%20%2F%20AI%20Relation%20Design%0A%E3%80%90Tentative%20dates%20%2F%20Time%20zone%E3%80%91%0A%E3%80%90Confidentiality%E3%80%91%20NDA%20needed%20%2F%20Not%20required%0A%E3%80%90Notes%E3%80%91`;
+      mail.textContent = a;
+    </script>
   </body>
 </html>
