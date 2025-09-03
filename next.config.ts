@@ -5,8 +5,6 @@ const nextConfig: NextConfig = {
   experimental: {
     typedRoutes: true
   },
-  // Vercel: Edge/Node 自動判定。必要なら以下を追加
-  // output: "standalone",
 };
 
 export default nextConfig;

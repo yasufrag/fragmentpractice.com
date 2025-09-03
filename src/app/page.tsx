@@ -1,5 +1,5 @@
 import Section from "@/components/Section";
-import { LinkNav } from "@/components/LinkNav";
+import LinkNav from "@/components/LinkNav";
 
 export const metadata = {
   title: "Fragment Practice合同会社",
