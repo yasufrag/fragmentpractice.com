@@ -3,12 +3,13 @@ export const metadata = { title: "Privacy Policy" };
 
 function ObfuscatedEmail() {
   const user = "yasuhiro";
+  const at = "@";
   const domain = "fragmentpractice.com";
-  const email = `${user}@${domain}`;
+  const email = `${user}${at}${domain}`;
   return (
     <a href={`mailto:${email}`}>
       {user}
-      [at]
+      {at}
       {domain}
     </a>
   );
