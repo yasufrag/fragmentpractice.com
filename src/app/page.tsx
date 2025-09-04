@@ -11,7 +11,7 @@ export default function Company() {
             ['設立','2025年8月12日'],
             ['代表','新庄 泰大'],
             ['事業','リフレクション設計 / AI×言語実験 / 出版 / コンサルティング'],
-            ['連絡先','TEL 087-810-3037 / Mail yasuhiro@fragmentpractice.com'],
+            ['連絡先','TEL 087-810-3037'],
             ['法人番号','7470003002956']
           ].map(([k,v])=>(
             <tr key={k}>
