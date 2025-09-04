@@ -1,26 +1,40 @@
-// app/company/page.tsx
-export default function Company() {
+export default function Home() {
   return (
     <div className="container section">
-      <h1 className="h2">会社概要</h1>
-      <table style={{ width:'100%', borderCollapse:'collapse', marginTop:16 }}>
-        <tbody>
-          {[
-            ['商号','Fragment Practice合同会社'],
-            ['所在地','〒760-0018 香川県高松市天神前10番5号 高松セントラルスカイビルディング3F south'],
-            ['設立','2025年8月12日'],
-            ['代表','新庄 泰大'],
-            ['事業','リフレクション設計 / AI×言語実験 / 出版 / コンサルティング'],
-            ['連絡先','TEL 087-810-3037'],
-            ['法人番号','7470003002956']
-          ].map(([k,v])=>(
-            <tr key={k}>
-              <th style={{textAlign:'left', padding:'10px 8px', borderBottom:'1px solid var(--line)', width:'180px', color:'var(--muted)'}}>{k}</th>
-              <td style={{padding:'10px 8px', borderBottom:'1px solid var(--line)'}}>{v}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* Hero */}
+      <section className="hero" style={{ textAlign: "center" }}>
+        <h1 className="h1">言葉と仕組みを整えるスタジオ</h1>
+        <p className="lead" style={{ marginTop: 12 }}>
+          Fragment Practice は、リフレクション設計・AI×言語実験・出版/講座を通じて、
+          共創と実験のための足場を軽やかに整えます。
+        </p>
+        <div style={{ marginTop: 20, display: "flex", gap: 12, justifyContent: "center" }}>
+          <a className="cta primary" href="/contact">お問い合わせ</a>
+          <a className="cta" href="/work">提供領域を見る</a>
+        </div>
+      </section>
+
+      {/* 提供領域 */}
+      <section className="section">
+        <h2 className="h2" style={{ textAlign: "center", marginBottom: 20 }}>提供領域</h2>
+        <div className="grid">
+          <article className="card">
+            <div className="title">リフレクション設計</div>
+            <div className="meta">記録・内省・編集</div>
+            <p>日々の断片を扱う「器」を設計し、記録から共有までの流れを共創します。</p>
+          </article>
+          <article className="card">
+            <div className="title">AI×言語実験</div>
+            <div className="meta">LLM/エージェント</div>
+            <p>プロンプト設計から評価・運用まで。AIを「表現と実務」の両輪で活かします。</p>
+          </article>
+          <article className="card">
+            <div className="title">出版・講座</div>
+            <div className="meta">ZINE／学びの場</div>
+            <p>断片を束ねる編集術を軸に、ZINE制作や対話型の講座を企画・実施します。</p>
+          </article>
+        </div>
+      </section>
     </div>
   );
 }
