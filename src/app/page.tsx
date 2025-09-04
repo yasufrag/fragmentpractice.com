@@ -10,7 +10,7 @@ export default function Home() {
         </p>
         <div style={{ marginTop: 20, display: "flex", gap: 12, justifyContent: "center" }}>
           <a className="cta primary" href="/contact">お問い合わせ</a>
-          <a className="cta" href="/work">提供領域を見る</a>
+          <a className="cta" href="/work">サービスを見る</a>
         </div>
       </section>
 
