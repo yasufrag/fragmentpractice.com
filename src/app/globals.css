@@ -29,7 +29,7 @@ body {
 }
 
 /* =====================
-   Skip link（フォーカス時だけ表示）
+   Skip link（フォーカス時のみ表示）
 ===================== */
 .skip-link {
   position: absolute;
@@ -161,12 +161,50 @@ a:hover {
 .footercol h4 { margin: 0 0 8px; color: var(--fg); }
 
 /* =====================
+   会社概要テーブル＋地図チップ
+===================== */
+.orgtable .orgkey {
+  text-align: left;
+  padding: 12px 10px;
+  width: 200px;
+  color: var(--muted);
+  background: rgba(0,0,0,0.02);
+  border-bottom: 1px solid var(--line);
+}
+.orgtable .orgval {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  word-break: break-word;
+}
+.addr { font-style: normal; line-height: 1.7; }
+
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--fg);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+}
+.chip:hover { background: #f6f6f6; text-decoration: none; }
+
+/* =====================
    レスポンシブ調整
 ===================== */
 @media (max-width: 900px) {
   .card { grid-column: span 12; }
   .footercol { grid-column: span 12; }
-  .navlinks { display:none; }
+  .navlinks { display: none; }
 }
 
 /* =====================
@@ -186,10 +224,7 @@ a:hover {
     padding-right: calc(20px + var(--safe-right));
   }
 
-  .section {
-    padding-top: 56px;
-    padding-bottom: 56px;
-  }
+  .section { padding-top: 56px; padding-bottom: 56px; }
 
   .hero {
     padding-top: calc(72px + var(--safe-top));
@@ -219,6 +254,24 @@ a:hover {
   }
   .footergrid { gap: 14px; }
   .footercol { grid-column: 1 / -1; }
+
+  /* テーブルはキー/値を縦積みに */
+  .orgtable .orgkey,
+  .orgtable .orgval {
+    display: block;
+    width: 100%;
+  }
+  .orgtable .orgkey {
+    border-bottom: none;
+    padding-bottom: 6px;
+    border-radius: 12px 12px 0 0;
+    background: #f7f7f7;
+  }
+  .orgtable .orgval {
+    padding-top: 0;
+    border-top: 1px dashed var(--line);
+    border-radius: 0 0 12px 12px;
+  }
 }
 
 /* =====================
