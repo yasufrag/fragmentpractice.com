@@ -22,7 +22,7 @@ export default function BrandLogo({
       role="img"
       aria-label="Fragment Practice"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 200 60"
+      viewBox="0 0 150 60"
       preserveAspectRatio="xMinYMid meet"
       style={{
         height: height ?? (isHeader ? 50 : 40),
