@@ -2,10 +2,16 @@
 import { useForm, ValidationError } from "@formspree/react";
 
 export default function ContactForm() {
-  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT!);
+  const [state, handleSubmit] = useForm(
+    process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID!
+  );
 
   if (state.succeeded) {
-    return <p className="lead">✅ 送信が完了しました。ありがとうございます。</p>;
+    return (
+      <p className="lead" role="status">
+        ✅ 送信が完了しました。ありがとうございます。
+      </p>
+    );
   }
 
   return (
@@ -16,6 +22,7 @@ export default function ContactForm() {
           type="text"
           name="name"
           required
+          autoComplete="name"
           style={{
             width: "100%",
             padding: "12px",
@@ -33,6 +40,7 @@ export default function ContactForm() {
           type="email"
           name="email"
           required
+          autoComplete="email"
           style={{
             width: "100%",
             padding: "12px",
@@ -72,6 +80,7 @@ export default function ContactForm() {
       >
         {state.submitting ? "送信中…" : "送信"}
       </button>
+
       <ValidationError errors={state.errors} />
     </form>
   );
