@@ -13,9 +13,9 @@ export default function BrandLogo({
 }: BrandLogoProps) {
   const isHeader = size === "header";
   const fontSize = isHeader ? 22 : 16;   // 文字サイズ
-  const lineHeight = isHeader ? 26 : 20; // 行間
-  const circleSize = isHeader ? 34 : 26; // 円の大きさ
-  const textOffset = isHeader ? 8 : 6;   // 円と文字の間隔
+  const lineHeight = isHeader ? 22 : 20; // 行間
+  const circleSize = isHeader ? 40 : 30; // 円の大きさ
+  const textOffset = isHeader ? 12 : 6;   // 円と文字の間隔
 
   return (
     <svg
@@ -35,13 +35,13 @@ export default function BrandLogo({
       {/* 円 */}
       <circle
         cx={circleSize / 2}
-        cy={30 + offset}
+        cy={31}
         r={circleSize / 2}
         fill={color}
       />
       <circle
         cx={circleSize / 2}
-        cy={30 + offset}
+        cy={31}
         r={circleSize / 4}
         fill="white"
       />
@@ -60,7 +60,7 @@ export default function BrandLogo({
       </text>
       <text
         x={circleSize + textOffset}
-        y={28 + lineHeight + offset}
+        y={28 + lineHeight}
         fontFamily='-apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Segoe UI",
           "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif'
         fontWeight="700"

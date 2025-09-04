@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 aria-label="Fragment Practice ホーム"
                 className="brand-link"
               >
-                <BrandLogo size="header" offset={-3} />
+                <BrandLogo size="header"/>
               </Link>
             </div>
             <nav className="navlinks" aria-label="主要ナビゲーション">
