@@ -1,8 +1,22 @@
+// app/privacy/page.tsx
 export const metadata = { title: "Privacy Policy" };
+
+function ObfuscatedEmail() {
+  const user = "yasuhiro";
+  const domain = "fragmentpractice.com";
+  const email = `${user}@${domain}`;
+  return (
+    <a href={`mailto:${email}`}>
+      {user}
+      [at]
+      {domain}
+    </a>
+  );
+}
 
 export default function PrivacyPolicy() {
   return (
-    <div className="container section">
+    <div className="container section prose">
       <h1 className="h1">プライバシーポリシー</h1>
       <p className="lead" style={{ marginTop: 8 }}>
         Fragment Practice合同会社（以下「当社」）は、個人情報の適正な取扱いを重要な責務とし、
@@ -94,7 +108,7 @@ export default function PrivacyPolicy() {
       <p>
         Fragment Practice合同会社（Fragment Practice LLC）<br />
         〒760-0018 香川県高松市天神前10番5号 高松セントラルスカイビルディング 3F south<br />
-        Mail: <a href="mailto:yasuhiro@fragmentpractice.com">yasuhiro@fragmentpractice.com</a><br />
+        Mail: <ObfuscatedEmail /><br />
         Tel: 087-810-3037
       </p>
 

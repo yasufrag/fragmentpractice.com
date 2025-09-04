@@ -11,19 +11,22 @@ export default function CompanyPage() {
         </p>
       </section>
 
-      {/* 基本情報 / 提供領域（2カラム） */}
-      <section className="section">
+      {/* 会社概要 / 提供領域 */}
+      <section className="section" aria-labelledby="overview">
         <div className="grid">
           <article className="card" style={{ gridColumn: "span 6" }}>
-            <h2 className="h3" style={{ margin: 0, marginBottom: 8 }}>基本情報</h2>
+            <h2 id="overview" className="h3" style={{ margin: 0, marginBottom: 8 }}>会社概要</h2>
             <div className="meta">Overview</div>
             <ul style={{ marginTop: 12, paddingLeft: 18 }}>
               <li>代表者：新庄 泰大</li>
               <li>所在地：香川県高松市天神前10番5号 高松セントラルスカイビルディング 3F south</li>
               <li>設立：2025年</li>
-              <li>連絡先：TEL 087-810-3037</li>
+              <li>電話番号：087-810-3037</li>
               <li>法人番号：7470003002956</li>
             </ul>
+            <p style={{ marginTop: 12 }}>
+              <a className="cta" href="https://maps.apple.com/?q=高松セントラルスカイビルディング" target="_blank" rel="noreferrer">地図で見る</a>
+            </p>
           </article>
 
           <article className="card" style={{ gridColumn: "span 6" }}>
@@ -38,15 +41,16 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* 思想と姿勢 */}
-      <section className="section">
-        <h2 className="h2" style={{ marginBottom: 8 }}>思想と姿勢（Brief）</h2>
+      {/* ミッション / スタンス */}
+      <section className="section" aria-labelledby="mission">
+        <h2 id="mission" className="h2" style={{ marginBottom: 8 }}>思想と姿勢（Brief）</h2>
         <p style={{ color: "var(--muted)", maxWidth: 840 }}>
-          Fragment Practice は「静けさ」と「構文性」を核に、Quantum / Fragment / Syntax の三層で
-          生活と実務を編み直す実践です。生産性ではなく「注意・関係・編集」を扱います。
+          Fragment Practice は「静けさ」と「構文性」を核に、<em>Quantum / Fragment / Syntax</em> の三層で
+          生活と実務を編み直す実践です。生産性ではなく「注意・関係・編集」を扱い、対話・記述・設計を
+          ひと続きの編集としてとらえます。
         </p>
         <p className="lead" style={{ marginTop: 8 }}>
-          お問い合わせは <a className="cta" href="/contact">Contact</a> へ。
+          ご相談は <a className="cta" href="/contact">Contact</a> へ。
         </p>
       </section>
     </div>
