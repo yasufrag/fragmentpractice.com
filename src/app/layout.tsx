@@ -42,8 +42,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="site-header" role="banner">
           <div className="container nav">
             <div className="brand">
-              <Link href="/" aria-label="Fragment Practice ホーム">
-                <BrandLogo size="header" offset={17} />
+              <Link
+                href="/"
+                aria-label="Fragment Practice ホーム"
+                className="brand-link"
+              >
+                <BrandLogo size="header" offset={-6} />
               </Link>
             </div>
             <nav className="navlinks" aria-label="主要ナビゲーション">
