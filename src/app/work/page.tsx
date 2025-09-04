@@ -4,7 +4,7 @@ export default function Work() {
     <div className="container">
       {/* Hero */}
       <section className="hero" style={{ textAlign: 'left' }}>
-        <h1 className="h1">Work</h1>
+        <h1 className="h1">提供領域</h1>
         <p className="lead" style={{ marginTop: 8 }}>
           軽やかな仕組みで、共創の足場を整えます。<br />
           リフレクション設計／AI×言語実験／出版・講座／コンサルティング。

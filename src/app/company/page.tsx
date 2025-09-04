@@ -2,14 +2,15 @@
 export const metadata = { title: "Company" };
 
 export default function CompanyPage() {
-  // 地図用の1行住所（検索しやすい表記）
+  const buildingName = "高松セントラルスカイビルディング";
   const addressLine =
     "香川県高松市天神前10番5号 高松セントラルスカイビルディング 3F south";
-  const encoded = encodeURIComponent(addressLine);
+
+  // マップ検索はビル名を先頭、住所を補助に
+  const q = encodeURIComponent(`${buildingName} ${addressLine}`);
 
   return (
     <div className="container">
-      {/* Hero */}
       <section className="hero" style={{ textAlign: "left" }}>
         <h1 className="h1" style={{ marginTop: 16 }}>Company</h1>
         <p className="lead" style={{ marginTop: 8, maxWidth: 720 }}>
@@ -17,39 +18,29 @@ export default function CompanyPage() {
         </p>
       </section>
 
-      {/* 会社概要 */}
       <section className="section" aria-labelledby="overview">
         <h2 id="overview" className="h2" style={{ marginBottom: 12 }}>会社概要</h2>
 
-        <table className="orgtable" style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          borderTop: "1px solid var(--line)",
-          borderLeft: "1px solid var(--line)",
-          borderRight: "1px solid var(--line)",
-          overflow: "hidden",
-          borderRadius: "var(--radius)",
-        }}>
+        <table className="orgtable">
           <tbody>
             <tr>
               <th className="orgkey" scope="row">代表者</th>
               <td className="orgval">新庄 泰大</td>
             </tr>
 
-            {/* 所在地（住所＋地図チップ） */}
             <tr>
               <th className="orgkey" scope="row">所在地</th>
               <td className="orgval">
                 <address className="addr">
                   〒760-0018<br />
                   香川県高松市天神前10番5号<br />
-                  高松セントラルスカイビルディング 3F south
+                  {buildingName} 3F south
                 </address>
 
                 <div className="chips" aria-label="地図リンク">
                   <a
                     className="chip"
-                    href={`https://maps.apple.com/?q=${encoded}`}
+                    href={`https://maps.apple.com/?q=${q}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -57,7 +48,7 @@ export default function CompanyPage() {
                   </a>
                   <a
                     className="chip"
-                    href={`https://www.google.com/maps/search/?api=1&query=${encoded}`}
+                    href={`https://www.google.com/maps/search/?api=1&query=${q}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -87,7 +78,6 @@ export default function CompanyPage() {
         </table>
       </section>
 
-      {/* 提供領域 */}
       <section className="section" aria-labelledby="domains">
         <h2 id="domains" className="h2" style={{ marginBottom: 12 }}>提供領域</h2>
         <ul style={{ marginTop: 12, paddingLeft: 18, maxWidth: 720 }}>
@@ -97,7 +87,6 @@ export default function CompanyPage() {
         </ul>
       </section>
 
-      {/* ミッション / スタンス */}
       <section className="section" aria-labelledby="mission">
         <h2 id="mission" className="h2" style={{ marginBottom: 12 }}>思想と姿勢（Brief）</h2>
         <p style={{ color: "var(--muted)", maxWidth: 840, marginBottom: 16 }}>
