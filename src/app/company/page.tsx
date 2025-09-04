@@ -5,7 +5,6 @@ export default function CompanyPage() {
     <div className="container">
       {/* Hero */}
       <section className="hero" style={{ textAlign: "left" }}>
-        <a href="/" className="cta" aria-label="Homeへ戻る">← Home</a>
         <h1 className="h1" style={{ marginTop: 16 }}>Company</h1>
         <p className="lead" style={{ marginTop: 8 }}>
           商号：Fragment Practice合同会社（Fragment Practice LLC）

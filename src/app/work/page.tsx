@@ -88,7 +88,7 @@ export default function Work() {
 
       {/* CTA */}
       <section className="section" style={{ textAlign: 'center' }}>
-        <h3 className="h3">まずは軽く相談から。</h3>
+        <h3 className="h3">まずは軽くご相談から。</h3>
         <p className="lead">要件が固まっていなくても大丈夫です。現在地を一緒に言語化します。</p>
         <div style={{ marginTop: 16, display: 'flex', gap: 12, justifyContent: 'center' }}>
           <a className="cta primary" href="/contact">お問い合わせ</a>
