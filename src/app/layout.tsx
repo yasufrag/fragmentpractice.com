@@ -52,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <nav className="navlinks" aria-label="主要ナビゲーション">
               <Link href="/work">Work</Link>
+              <Link href="/zine">ZINE</Link>
               <Link href="/contact">Contact</Link>
             </nav>
           </div>
