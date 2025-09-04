@@ -20,9 +20,9 @@ export default function CompanyPage() {
             <div className="meta">Overview</div>
             <ul style={{ marginTop: 12, paddingLeft: 18 }}>
               <li>代表者：新庄 泰大</li>
-              <li>所在地：香川県高松市天神前10-5 高松セントラルスカイビルディング 3F south</li>
+              <li>所在地：香川県高松市天神前10番5号 高松セントラルスカイビルディング 3F south</li>
               <li>設立：2025年</li>
-              <li>連絡先：TEL 087-810-3037 / Mail yasuhiro@fragmentpractice.com</li>
+              <li>連絡先：TEL 087-810-3037</li>
               <li>法人番号：7470003002956</li>
             </ul>
           </article>

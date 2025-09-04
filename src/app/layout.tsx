@@ -39,8 +39,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="container footergrid">
             <div className="footercol">
               <h4>Fragment Practice合同会社</h4>
-              <div>〒760-0018 香川県高松市天神前10-5<br/>高松セントラルスカイビルディング3F south</div>
-              <div>TEL 087-810-3037 / Mail yasuhiro@fragmentpractice.com</div>
+              <div>〒760-0018 香川県高松市天神前10番5号<br/>高松セントラルスカイビルディング 3F south</div>
+              <div>TEL 087-810-3037</div>
               <div>法人番号 7470003002956</div>
             </div>
             <div className="footercol">

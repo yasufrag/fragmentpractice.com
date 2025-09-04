@@ -1,14 +1,21 @@
 // app/contact/page.tsx
-export default function Contact() {
+import ContactForm from "@/components/ContactForm";
+
+export const metadata = { title: "Contact" };
+
+export default function ContactPage() {
   return (
     <div className="container section">
-      <h1 className="h2">お問い合わせ</h1>
-      <p className="lead">案件・共創のご相談はメールまたはフォームからお送りください。</p>
-      <ul>
-        <li>メール: <a href="mailto:yasuhiro@fragmentpractice.com">yasuhiro@fragmentpractice.com</a></li>
-        <li>電話: 087-810-3037（受付: 平日10:00-17:00）</li>
-      </ul>
-      <p style={{marginTop:12, color:'var(--muted)'}}>※ フォーム導入前はメールでの一次連絡にて承ります。</p>
+      <h1 className="h1">お問い合わせ</h1>
+      <p className="lead" style={{ marginTop: 8 }}>
+        共創・講演・ZINE制作など、ご相談は以下からどうぞ。
+      </p>
+
+      <ContactForm />
+
+      <p style={{ marginTop: 24, fontSize: 14, color: "var(--muted)" }}>
+        送信内容は当社の <a href="/privacy">プライバシーポリシー</a> に基づき扱います。
+      </p>
     </div>
   );
 }
