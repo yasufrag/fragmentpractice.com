@@ -1,49 +1,73 @@
-// src/components/BrandLogo.tsx
 type BrandLogoProps = {
   size?: "header" | "compact";
-  offset?: number; // Yオフセット（見た目調整用）
-  variant?: "light" | "dark";
+  color?: string;
+  height?: number;
+  offset?: number;
 };
 
 export default function BrandLogo({
   size = "header",
+  color = "currentColor",
+  height,
   offset = 0,
-  variant = "dark",
 }: BrandLogoProps) {
-  const fontSize = size === "header" ? 28 : 22;
-  const vbW = 400;
-  const vbH = 80;
+  const isHeader = size === "header";
+  const fontSize = isHeader ? 22 : 16;   // 文字サイズ
+  const lineHeight = isHeader ? 26 : 20; // 行間
+  const circleSize = isHeader ? 34 : 26; // 円の大きさ
+  const textOffset = isHeader ? 8 : 6;   // 円と文字の間隔
 
   return (
     <svg
-      viewBox={`0 0 ${vbW} ${vbH}`}
       role="img"
       aria-label="Fragment Practice"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 60"
       preserveAspectRatio="xMinYMid meet"
       style={{
-        height: size === "header" ? "clamp(28px, 6vw, 56px)" : "clamp(22px, 5vw, 40px)",
+        height: height ?? (isHeader ? 50 : 40),
         width: "auto",
         display: "block",
       }}
     >
       <title>Fragment Practice</title>
-      {/* 円 */}
-      <circle cx="30" cy="40" r="24" fill={variant === "light" ? "#fff" : "#000"} />
-      <circle cx="30" cy="40" r="10" fill={variant === "light" ? "#000" : "#fff"} />
 
-      {/* テキスト */}
+      {/* 円 */}
+      <circle
+        cx={circleSize / 2}
+        cy={30 + offset}
+        r={circleSize / 2}
+        fill={color}
+      />
+      <circle
+        cx={circleSize / 2}
+        cy={30 + offset}
+        r={circleSize / 4}
+        fill="white"
+      />
+
+      {/* 二行テキスト */}
       <text
-        x="70"
-        y={48 + offset}
+        x={circleSize + textOffset}
+        y={28 + offset}
         fontFamily='-apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Segoe UI",
           "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif'
-        fontWeight="900"
+        fontWeight="700"
         fontSize={fontSize}
-        letterSpacing="-0.01em"
-        fill={variant === "light" ? "#fff" : "#000"}
-        dominantBaseline="middle"
+        fill={color}
       >
-        Fragment Practice
+        Fragment
+      </text>
+      <text
+        x={circleSize + textOffset}
+        y={28 + lineHeight + offset}
+        fontFamily='-apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Segoe UI",
+          "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif'
+        fontWeight="700"
+        fontSize={fontSize}
+        fill={color}
+      >
+        Practice
       </text>
     </svg>
   );

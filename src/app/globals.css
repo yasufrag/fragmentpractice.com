@@ -75,6 +75,10 @@ a:hover {
   color: var(--fg);
 }
 
+.brand a {
+  color: inherit !important;
+}
+
 /* =====================
    コンテナ/レイアウト
 ===================== */
