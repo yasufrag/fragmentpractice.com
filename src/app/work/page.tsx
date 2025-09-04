@@ -1,4 +1,6 @@
 // app/work/page.tsx
+export const metadata = { title: "Work" };
+
 export default function Work() {
   return (
     <div className="container">

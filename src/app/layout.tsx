@@ -42,14 +42,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="site-header" role="banner">
           <div className="container nav">
             <div className="brand">
-              <Link
-                href="/"
-                aria-label="Fragment Practice ホーム"
-                className="brand-link"
-              >
+              <Link href="/" aria-label="Fragment Practice ホーム" className="brand-link">
                 <BrandLogo size="header"/>
               </Link>
             </div>
+
             <nav className="navlinks" aria-label="主要ナビゲーション">
               <Link href="/work">Work</Link>
               <Link href="/zine">ZINE</Link>
@@ -76,12 +73,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div>TEL 087-810-3037</div>
               <div>法人番号 7470003002956</div>
             </div>
+
             <div className="footercol" aria-label="関連リンク">
               <h4>Links</h4>
               <div><Link href="/company">会社概要</Link></div>
               <div><Link href="/privacy">プライバシー</Link></div>
               <div><Link href="/terms">利用規約</Link></div>
             </div>
+
             <div className="footercol" aria-label="著作権情報">
               <h4>© {year} Fragment Practice</h4>
               <div className="muted">All rights reserved.</div>

@@ -1,3 +1,4 @@
+// app/page.tsx
 export default function Home() {
   return (
     <div className="container section">
@@ -8,6 +9,7 @@ export default function Home() {
           Fragment Practice は、リフレクション設計・AI×言語実験・出版/講座を通じて、
           共創と実験のための足場を軽やかに整えます。小さく置いて、回して、学ぶ。
         </p>
+
         <div
           style={{
             marginTop: 20,
@@ -22,6 +24,9 @@ export default function Home() {
           </a>
           <a className="cta" href="/work" aria-label="サービスの詳細を見る">
             サービスを見る
+          </a>
+          <a className="cta" href="/zine" aria-label="刊行物を見る">
+            刊行物を見る
           </a>
           <a className="cta" href="/company" aria-label="会社情報を見る">
             会社情報
