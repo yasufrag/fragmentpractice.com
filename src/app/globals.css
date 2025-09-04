@@ -29,6 +29,36 @@ body {
 }
 
 /* =====================
+   Skip link（フォーカス時だけ表示）
+===================== */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed;
+  left: 16px;
+  top: calc(12px + env(safe-area-inset-top));
+  width: auto;
+  height: auto;
+  clip: auto;
+  padding: 10px 14px;
+  background: #111;
+  color: #fff;
+  border-radius: 10px;
+  z-index: 1000;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}
+
+/* =====================
    タイポスケール
 ===================== */
 .h1 { font-size: clamp(32px, 5vw, 56px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
