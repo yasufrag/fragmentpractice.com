@@ -7,10 +7,8 @@ import importPlugin from "eslint-plugin-import";
 export default [
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
-
-  // core-web-vitals を配列要素として追加
+  // NOTE: Flat Config ではスプレッド不可。要素として追加
   next.configs["core-web-vitals"],
-
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
     languageOptions: {

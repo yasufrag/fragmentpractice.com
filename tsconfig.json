@@ -15,11 +15,9 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [{ "name": "next" }],
-
-    // ★ 追加
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
+    "baseUrl": "./src",              // ★ 追加
+    "paths": {                       // ★ 追加
+      "@/*": ["*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],

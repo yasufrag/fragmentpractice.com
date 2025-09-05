@@ -1,18 +1,17 @@
 // src/app/news/[slug]/page.tsx
-import { updates } from "@/data/updates";
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { updates } from "@/data/updates";
 
 type Params = { slug: string };
 
-// --- SEO metadata ---
-export async function generateMetadata(
-  { params }: { params: Promise<Params> }
-): Promise<Metadata> {
-  const { slug } = await params;
-  const u = updates.find((x) => x.slug === slug);
-  if (!u) return { title: "News" };
+export function generateStaticParams() {
+  return updates.map((u) => ({ slug: u.slug }));
+}
 
+export function generateMetadata({ params }: { params: Params }): Metadata {
+  const u = updates.find((x) => x.slug === params.slug);
+  if (!u) return { title: "News" };
   return {
     title: u.title,
     description: u.description,
@@ -23,29 +22,23 @@ export async function generateMetadata(
   };
 }
 
-// --- Page ---
-export default async function NewsDetailPage(
-  { params }: { params: Promise<Params> }
-) {
-  const { slug } = await params;
-  const u = updates.find((x) => x.slug === slug);
-  if (!u) return notFound();
-
-  const formattedDate = new Date(u.date).toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+export default function NewsDetailPage({ params }: { params: Params }) {
+  const u = updates.find((x) => x.slug === params.slug);
+  if (!u) notFound();
 
   return (
-    <div className="container">
-      <section className="section" style={{ maxWidth: 720 }}>
-        <h1 className="h1" style={{ marginBottom: 12 }}>{u.title}</h1>
-        <p className="text-sm text-neutral-500" style={{ marginBottom: 24 }}>
-          {formattedDate}
+    <article className="container section" style={{ maxWidth: 840 }}>
+      <header style={{ marginBottom: 16 }}>
+        <h1 className="h2" style={{ marginBottom: 6 }}>{u.title}</h1>
+        <p className="muted" aria-label="date">
+          {new Date(u.date).toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
         </p>
-        <p style={{ fontSize: "18px", lineHeight: 1.7 }}>{u.description}</p>
-      </section>
-    </div>
+      </header>
+      <p style={{ fontSize: 18, lineHeight: 1.8 }}>{u.description}</p>
+    </article>
   );
 }
