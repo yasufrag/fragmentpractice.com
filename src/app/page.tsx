@@ -4,10 +4,10 @@ export default function Home() {
     <div className="container section">
       {/* Hero */}
       <section className="hero" style={{ textAlign: "center" }}>
-        <h1 className="h1">言葉と仕組みを整えるスタジオ</h1>
+        <h1 className="h1">言葉と仕組みをデザインするスタジオ</h1>
         <p className="lead" style={{ marginTop: 12, maxWidth: 820, marginInline: "auto" }}>
-          Fragment Practice は、リフレクション設計・AI×言語実験・出版/講座を通じて、
-          共創と実験のための足場を軽やかに整えます。小さく置いて、回して、学ぶ。
+          Fragment Practice は、リフレクション設計・AI×言語実験・出版や講座を通じて、
+          共創と実験の足場をつくります。小さく始め、回し、学び合う。
         </p>
 
         <div
