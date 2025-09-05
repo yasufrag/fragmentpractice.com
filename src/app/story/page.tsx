@@ -1,7 +1,22 @@
 export const metadata = {
   title: "Story",
   description: "Fragment Practice のストーリー",
-  robots: { index: false, follow: false },
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,            // 一部クローラ向け（無視されても害なし）
+    noimageindex: true,       // 画像インデックス抑制
+    nosnippet: true,          // 検索結果の抜粋抑制
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      nosnippet: true,
+      maxSnippet: -1,
+      maxImagePreview: "none",
+      maxVideoPreview: -1,
+    },
+  },
 };
 
 export default function StoryPage() {
