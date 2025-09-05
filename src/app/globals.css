@@ -74,9 +74,7 @@ a:hover {
   text-underline-offset: 2px;
   color: var(--fg);
 }
-.brand a {
-  color: inherit !important;
-}
+.brand a { color: inherit !important; }
 
 /* =====================
    コンテナ/レイアウト
@@ -86,7 +84,7 @@ a:hover {
 .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
 /* =====================
-   ナビゲーション
+   ナビゲーション（デスクトップ）
 ===================== */
 .site-header {
   position: sticky; top: 0; z-index: 50;
@@ -99,19 +97,73 @@ a:hover {
   height: 64px;
 }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-
-/* ロゴクリック領域を円＋文字だけに */
-.brand-link {
-  display: inline-block;
-  line-height: 1;
-  padding: 4px 6px;
-  cursor: pointer;
-}
+.brand-link { display: inline-block; line-height: 1; padding: 4px 6px; cursor: pointer; }
 .brand-link svg { display: block; height: 100%; width: auto; }
 
 .navlinks { display: flex; gap: 20px; }
 .navlinks a { text-decoration: none; color: var(--fg); opacity: .86; font-weight: 600; }
 .navlinks a:hover { opacity: 1; }
+
+/* =====================
+   ハンバーガー & モバイルメニュー
+===================== */
+.hamburger {
+  display: none;
+  position: relative;
+  width: 40px; height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.hamburger .bar {
+  position: absolute; left: 9px; right: 9px;
+  height: 2px; background: var(--fg);
+  transition: transform .25s ease, opacity .2s ease, top .2s ease, bottom .2s ease;
+}
+.hamburger .bar:nth-child(1) { top: 12px; }
+.hamburger .bar:nth-child(2) { top: 19px; }
+.hamburger .bar:nth-child(3) { top: 26px; }
+.bar-1-open { transform: translateY(7px) rotate(45deg); }
+.bar-2-open { opacity: 0; }
+.bar-3-open { transform: translateY(-7px) rotate(-45deg); }
+
+.backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.35);
+  border: none; padding: 0; margin: 0;
+  z-index: 60;
+}
+
+.mobile-menu {
+  position: fixed; top: 0; right: 0;
+  width: min(84vw, 360px); height: 100dvh;
+  background: var(--bg);
+  border-left: 1px solid var(--line);
+  box-shadow: -12px 0 24px rgba(0,0,0,.08);
+  transform: translateX(100%);
+  transition: transform .28s ease;
+  z-index: 70;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: calc(12px + env(safe-area-inset-top)) 20px 20px;
+}
+.mobile-menu.open { transform: translateX(0); }
+
+.mobile-nav {
+  display: flex; flex-direction: column; gap: 16px;
+  margin-top: 8px;
+}
+.mobile-nav a {
+  font-weight: 700; color: var(--fg);
+  text-decoration: none;
+  padding: 12px 6px; border-radius: 10px;
+  border: 1px solid transparent;
+}
+.mobile-nav a:hover {
+  background: #f6f6f6; border-color: var(--line);
+}
+.mobile-meta { padding: 8px 6px; }
 
 /* =====================
    ヒーロー
@@ -174,7 +226,6 @@ a:hover {
 
 .addr { font-style: normal; line-height: 1.7; }
 
-/* 地図チップ */
 .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
 .chip {
   display: inline-flex; align-items: center;
@@ -186,19 +237,13 @@ a:hover {
 .chip:hover { background: #f6f6f6; text-decoration: none; }
 
 /* =====================
-   ZINE Coming Soon（遊び）
+   ZINE Coming Soon
 ===================== */
 .coming {
   position: relative;
   overflow: hidden;
   background:
-    repeating-linear-gradient(
-      135deg,
-      #fafafa 0,
-      #fafafa 12px,
-      #f3f4f6 12px,
-      #f3f4f6 24px
-    );
+    repeating-linear-gradient(135deg, #fafafa 0, #fafafa 12px, #f3f4f6 12px, #f3f4f6 24px);
   border-color: #e8eaee;
 }
 .coming::before {
@@ -224,10 +269,8 @@ a:hover {
   position: absolute;
   top: 14px; right: -44px;
   transform: rotate(25deg);
-  background: #111;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 800;
+  background: #111; color: #fff;
+  font-size: 12px; font-weight: 800;
   letter-spacing: .14em;
   padding: 6px 56px;
   border-radius: 999px;
@@ -238,7 +281,6 @@ a:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,.08);
   border-color: #dfe3ea;
 }
-/* 動きが苦手な方へ */
 @media (prefers-reduced-motion: reduce) {
   .coming::before { animation: none; }
 }
@@ -250,6 +292,10 @@ a:hover {
   .card { grid-column: span 12; }
   .footercol { grid-column: span 12; }
   .navlinks { display: none; }
+  .hamburger { display: inline-flex; }
+}
+@media (min-width: 901px) {
+  .mobile-menu, .backdrop, .hamburger { display: none !important; }
 }
 
 /* =====================
@@ -262,38 +308,19 @@ a:hover {
     --safe-bottom: max(env(safe-area-inset-bottom), 0px);
     --safe-left: max(env(safe-area-inset-left), 0px);
   }
-
   .container { padding-left: calc(20px + var(--safe-left)); padding-right: calc(20px + var(--safe-right)); }
   .section { padding-top: 56px; padding-bottom: 56px; }
   .hero { padding-top: calc(72px + var(--safe-top)); padding-bottom: 56px; }
-
   .h1 { line-height: 1.2; }
   .h2 { line-height: 1.25; }
-
   .grid { gap: 14px; }
   .card { grid-column: 1 / -1; padding: 20px; border-radius: 18px; box-shadow: 0 6px 18px rgba(0,0,0,.05); }
-
-  .site-header .nav {
-    height: 60px;
-    padding-left: calc(16px + var(--safe-left));
-    padding-right: calc(16px + var(--safe-right));
-  }
-
+  .site-header .nav { height: 60px; padding-left: calc(16px + var(--safe-left)); padding-right: calc(16px + var(--safe-right)); }
   .site-footer { padding-top: 28px; padding-bottom: calc(32px + var(--safe-bottom)); }
   .footergrid { gap: 14px; }
   .footercol { grid-column: 1 / -1; }
-
-  .orgtable .orgkey,
-  .orgtable .orgval {
-    display: block;
-    width: 100%;
-    padding: 12px;
-  }
-  .orgtable .orgkey {
-    background: #f7f7f7;
-    color: var(--muted);
-    border-bottom: 1px dashed var(--line);
-  }
+  .orgtable .orgkey, .orgtable .orgval { display: block; width: 100%; padding: 12px; }
+  .orgtable .orgkey { background: #f7f7f7; color: var(--muted); border-bottom: 1px dashed var(--line); }
   .orgtable tr { border-top: 1px solid var(--line); }
   .orgtable tr:first-child { border-top: 0; }
 }
