@@ -17,7 +17,7 @@ export const updates: Update[] = [
     slug: "soft-launch-2025-08",
     title: "Fragment Practice 合同会社を設立しました",
     date: "2025-08-12",
-    description: "past",
+    description: "Fragment Practice 合同会社を設立しました。",
   },
 ];
 

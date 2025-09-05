@@ -9,8 +9,12 @@ export function generateStaticParams() {
   return updates.map((u) => ({ slug: u.slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const u = updates.find((x) => x.slug === params.slug);
+// ★ Promise 版（async）に修正
+export async function generateMetadata(
+  { params }: { params: Promise<Params> }
+): Promise<Metadata> {
+  const { slug } = await params;
+  const u = updates.find((x) => x.slug === slug);
   if (!u) return { title: "News" };
   return {
     title: u.title,
@@ -22,8 +26,12 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function NewsDetailPage({ params }: { params: Params }) {
-  const u = updates.find((x) => x.slug === params.slug);
+// ★ page 本体も Promise 版（async）に修正
+export default async function NewsDetailPage(
+  { params }: { params: Promise<Params> }
+) {
+  const { slug } = await params;
+  const u = updates.find((x) => x.slug === slug);
   if (!u) notFound();
 
   return (
