@@ -36,22 +36,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a href="#main" className="skip-link">本文へスキップ</a>
 
-        {/* 置き換え：Headerコンポーネント */}
         <Header />
 
         <main id="main" role="main">
           {children}
         </main>
 
-        {/* フッター（既存のまま） */}
+        {/* フッター */}
         <footer className="site-footer" role="contentinfo">
-          {/* ...既存... */}
-          <div className="container footergrid">
-            {/* ...既存... */}
-            <div className="footercol" aria-label="著作権情報">
-              <h4>© {year} Fragment Practice</h4>
-              <div className="muted">All rights reserved.</div>
-            </div>
+          <div className="container footerbar" aria-label="著作権と法的リンク">
+            <div className="copy">© {year} Fragment Practice</div>
+
+            <nav className="legal" aria-label="法的リンク">
+              <a href="/terms">利用規約</a>
+              <span aria-hidden>・</span>
+              <a href="/privacy">プライバシーポリシー</a>
+            </nav>
           </div>
         </footer>
       </body>
