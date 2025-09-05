@@ -1,42 +1,46 @@
-// /app/news/[slug]/page.tsx
-import { updates } from "@/data/updates";
-import type { Metadata } from "next";
+// src/app/news/[slug]/page.tsx
+import { updates } from "@/data/updates"
+import { Metadata } from "next"
 
-type Params = { slug: string };
+type Params = { slug: string }
 
-export async function generateStaticParams() {
-  return updates.map((u) => ({ slug: u.slug }));
-}
-
-export async function generateMetadata(
-  { params }: { params: Promise<Params> }
-): Promise<Metadata> {
-  const { slug } = await params;
-  const u = updates.find((x) => x.slug === slug);
-
-  if (!u) {
-    return { title: "News" };
-  }
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = params
+  const u = updates.find((x) => x.slug === slug)
+  if (!u) return { title: "News" }
 
   return {
     title: u.title,
-    description: u.summary || u.title,
-    openGraph: { title: u.title, description: u.summary || u.title },
-  };
+    description: u.description,
+    openGraph: {
+      title: u.title,
+      description: u.description,
+    },
+  }
 }
 
-export default async function NewsDetailPage({ params }: { params: Promise<Params> }) {
-  const { slug } = await params;
-  const u = updates.find((x) => x.slug === slug);
+export default function NewsDetailPage({ params }: { params: Params }) {
+  const u = updates.find((x) => x.slug === params.slug)
+  if (!u) return <div>Not Found</div>
 
-  if (!u) return <div className="container section">Not found.</div>;
+  // 日付を整形（例: 2025年9月5日）
+  const formattedDate = new Date(u.date).toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
 
   return (
     <div className="container">
-      <section className="section" aria-labelledby="headline">
-        <h1 id="headline" className="h2">{u.title}</h1>
-        <p>{u.summary}</p>
+      <section className="section" style={{ maxWidth: 720 }}>
+        <h1 className="h1" style={{ marginBottom: 12 }}>
+          {u.title}
+        </h1>
+        <p className="text-sm text-neutral-500" style={{ marginBottom: 24 }}>
+          {formattedDate}
+        </p>
+        <p style={{ fontSize: "18px", lineHeight: 1.7 }}>{u.description}</p>
       </section>
     </div>
-  );
+  )
 }
