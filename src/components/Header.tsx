@@ -40,6 +40,7 @@ export default function Header() {
 
         {/* デスクトップの横並びナビ */}
         <nav className="navlinks" aria-label="主要ナビゲーション">
+          <Link href="/company">Company</Link>
           <Link href="/work">Work</Link>
           <Link href="/zine">ZINE</Link>
           <Link href="/contact">Contact</Link>
@@ -89,6 +90,7 @@ export default function Header() {
           </button>
 
           <nav className="mobile-nav" onClick={closeAndFocus}>
+            <Link href="/company">Company</Link>
             <Link href="/work">Work</Link>
             <Link href="/zine">ZINE</Link>
             <Link href="/contact">Contact</Link>
