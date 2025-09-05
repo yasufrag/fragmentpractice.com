@@ -23,10 +23,9 @@ export default function Header() {
     };
   }, [open]);
 
-  // メニュー内クリックで閉じる（遷移時のチラつき防止）
+  // メニュー内リンククリック時に閉じてフォーカス返却
   const closeAndFocus = () => {
     setOpen(false);
-    // ボタンへフォーカス返却（アクセシビリティ）
     btnRef.current?.focus();
   };
 
@@ -79,11 +78,22 @@ export default function Header() {
           aria-modal="true"
           aria-label="モバイルメニュー"
         >
+          {/* 右上クローズボタン（元に戻す） */}
+          <button
+            className="panel-close"
+            aria-label="メニューを閉じる"
+            onClick={closeAndFocus}
+          >
+            <span aria-hidden className="x-1" />
+            <span aria-hidden className="x-2" />
+          </button>
+
           <nav className="mobile-nav" onClick={closeAndFocus}>
             <Link href="/work">Work</Link>
             <Link href="/zine">ZINE</Link>
             <Link href="/contact">Contact</Link>
           </nav>
+
           <div className="mobile-meta">
             <span className="muted">© {new Date().getFullYear()} Fragment Practice</span>
           </div>

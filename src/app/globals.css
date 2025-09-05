@@ -165,6 +165,33 @@ a:hover {
 }
 .mobile-meta { padding: 8px 6px; }
 
+/* モバイルメニュー 右上クローズボタン */
+.panel-close {
+  position: absolute;
+  top: calc(10px + env(safe-area-inset-top));
+  right: 12px;
+  width: 40px; height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
+.panel-close .x-1,
+.panel-close .x-2 {
+  position: absolute;
+  width: 20px; height: 2px; background: var(--fg);
+  border-radius: 1px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.panel-close .x-1 { transform: rotate(45deg); }
+.panel-close .x-2 { transform: rotate(-45deg); }
+
+@media (min-width: 901px) {
+  .panel-close { display: none; }
+}
+
 /* =====================
    ヒーロー
 ===================== */
