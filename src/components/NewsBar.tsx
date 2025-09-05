@@ -17,7 +17,7 @@ export default function NewsBar() {
               </a>
             </li>
           ))}
-          <li className="more"><a href="/news">More →</a></li>
+          <li className="more"><a href="/news">More</a></li>
         </ul>
       </div>
     </div>
