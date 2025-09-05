@@ -1,13 +1,9 @@
-/* =====================
-   Reset（最小限）
-===================== */
+/* ===================== Reset（最小限） ===================== */
 * { box-sizing: border-box; }
 html, body { padding: 0; margin: 0; }
 img, svg { display: block; max-width: 100%; height: auto; }
 
-/* =====================
-   デザイントークン
-===================== */
+/* ===================== デザイントークン ===================== */
 :root {
   --bg: #ffffff;
   --fg: #0a0a0a;
@@ -28,9 +24,7 @@ body {
   line-height: 1.6;
 }
 
-/* =====================
-   Skip link（フォーカス時のみ表示）
-===================== */
+/* ===================== Skip link ===================== */
 .skip-link {
   position: absolute;
   left: -9999px; top: auto;
@@ -52,17 +46,13 @@ body {
   box-shadow: 0 6px 18px rgba(0,0,0,.2);
 }
 
-/* =====================
-   タイポスケール
-===================== */
+/* ===================== タイポスケール ===================== */
 .h1 { font-size: clamp(32px, 5vw, 56px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
 .h2 { font-size: clamp(24px, 4vw, 36px); line-height: 1.2; font-weight: 700; }
 .h3 { font-size: clamp(18px, 2.5vw, 22px); line-height: 1.3; font-weight: 600; }
 .lead { font-size: clamp(16px, 2.5vw, 18px); color: var(--muted); }
 
-/* =====================
-   リンク
-===================== */
+/* ===================== リンク ===================== */
 a {
   color: var(--accent);
   text-decoration: none;
@@ -76,18 +66,14 @@ a:hover {
 }
 .brand a { color: inherit !important; }
 
-/* =====================
-   コンテナ/レイアウト
-===================== */
+/* ===================== コンテナ/レイアウト ===================== */
 .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
 .section { padding: 72px 0; }
 .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
-/* =====================
-   ナビゲーション（デスクトップ）
-===================== */
+/* ===================== ナビゲーション（デスクトップ） ===================== */
 .site-header {
-  position: sticky; top: 0; z-index: 50;
+  position: sticky; top: 0; z-index: 80;        /* ← 50→80 にアップ：backdropより前面 */
   background: rgba(255,255,255,0.8);
   backdrop-filter: saturate(180%) blur(16px);
   border-bottom: 1px solid var(--line);
@@ -104,9 +90,7 @@ a:hover {
 .navlinks a { text-decoration: none; color: var(--fg); opacity: .86; font-weight: 600; }
 .navlinks a:hover { opacity: 1; }
 
-/* =====================
-   ハンバーガー & モバイルメニュー
-===================== */
+/* ===================== ハンバーガー & モバイルメニュー ===================== */
 .hamburger {
   display: none;
   position: relative;
@@ -133,7 +117,7 @@ a:hover {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.35);
   border: none; padding: 0; margin: 0;
-  z-index: 60;
+  z-index: 70;                                  /* ← 60→70：ヘッダー(80)の背面へ */
 }
 
 .mobile-menu {
@@ -144,7 +128,7 @@ a:hover {
   box-shadow: -12px 0 24px rgba(0,0,0,.08);
   transform: translateX(100%);
   transition: transform .28s ease;
-  z-index: 70;
+  z-index: 90;                                  /* ← 70→90：ヘッダーより前面 */
   display: flex; flex-direction: column; justify-content: space-between;
   padding: calc(12px + env(safe-area-inset-top)) 20px 20px;
 }
@@ -177,6 +161,7 @@ a:hover {
   display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  z-index: 95;                                   /* 最前面で操作しやすく */
 }
 .panel-close .x-1,
 .panel-close .x-2 {
@@ -192,9 +177,7 @@ a:hover {
   .panel-close { display: none; }
 }
 
-/* =====================
-   ヒーロー
-===================== */
+/* ===================== ヒーロー ===================== */
 .hero { padding: 96px 0 72px; text-align: center; }
 .hero .cta {
   display: inline-flex; align-items: center; gap: 10px;
@@ -205,9 +188,7 @@ a:hover {
 .hero .cta.primary { background: var(--fg); color: #fff; border-color: var(--fg); }
 .hero .cta:hover { transform: translateY(-1px); }
 
-/* =====================
-   カードグリッド
-===================== */
+/* ===================== カードグリッド ===================== */
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
 .card {
   grid-column: span 6;
@@ -220,17 +201,33 @@ a:hover {
 .card .title { font-weight: 700; font-size: 20px; margin: 0 0 6px; }
 .card .meta { color: var(--muted); font-size: 14px; }
 
-/* =====================
-   フッタ
-===================== */
-.site-footer { border-top: 1px solid var(--line); padding: 40px 0; color: var(--muted); }
-.footergrid { display: grid; gap: 20px; grid-template-columns: repeat(12, 1fr); }
-.footercol { grid-column: span 4; }
-.footercol h4 { margin: 0 0 8px; color: var(--fg); }
+/* ===================== フッタ（Apple風・コンパクト） ===================== */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  padding: 16px 0;
+  color: var(--muted);
+}
+.footerbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+}
+.footerbar .copy { font-weight: 600; color: var(--fg); opacity: .9; }
+.footerbar .legal {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 14px; white-space: nowrap;
+}
+.footerbar .legal a { color: var(--muted); text-decoration: none; }
+.footerbar .legal a:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 640px) {
+  .footerbar { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .footerbar .legal { font-size: 13px; gap: 8px; }
+}
 
-/* =====================
-   会社概要テーブル＋地図チップ
-===================== */
+/* ===================== 会社概要テーブル＋地図チップ ===================== */
 .orgtable {
   width: 100%;
   border-collapse: separate;
@@ -263,61 +260,32 @@ a:hover {
 }
 .chip:hover { background: #f6f6f6; text-decoration: none; }
 
-/* =====================
-   ZINE Coming Soon
-===================== */
+/* ===================== ZINE Coming Soon ===================== */
 .coming {
-  position: relative;
-  overflow: hidden;
-  background:
-    repeating-linear-gradient(135deg, #fafafa 0, #fafafa 12px, #f3f4f6 12px, #f3f4f6 24px);
+  position: relative; overflow: hidden;
+  background: repeating-linear-gradient(135deg, #fafafa 0, #fafafa 12px, #f3f4f6 12px, #f3f4f6 24px);
   border-color: #e8eaee;
 }
 .coming::before {
-  content: "";
-  position: absolute; inset: -40%;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      rgba(0,0,0,0.035) 0,
-      rgba(0,0,0,0.035) 10px,
-      transparent 10px,
-      transparent 22px
-    );
+  content: ""; position: absolute; inset: -40%;
+  background: repeating-linear-gradient(135deg, rgba(0,0,0,0.035) 0, rgba(0,0,0,0.035) 10px, transparent 10px, transparent 22px);
   transform: translate3d(0,0,0);
-  animation: drift 12s linear infinite;
-  pointer-events: none;
+  animation: drift 12s linear infinite; pointer-events: none;
 }
-@keyframes drift {
-  from { transform: translate3d(0,0,0) rotate(0.001deg); }
-  to   { transform: translate3d(40px,0,0) rotate(0.001deg); }
-}
+@keyframes drift { from { transform: translate3d(0,0,0) rotate(0.001deg); } to { transform: translate3d(40px,0,0) rotate(0.001deg); } }
 .coming-ribbon {
-  position: absolute;
-  top: 14px; right: -44px;
+  position: absolute; top: 14px; right: -44px;
   transform: rotate(25deg);
-  background: #111; color: #fff;
-  font-size: 12px; font-weight: 800;
-  letter-spacing: .14em;
-  padding: 6px 56px;
-  border-radius: 999px;
-  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  background: #111; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  padding: 6px 56px; border-radius: 999px; box-shadow: 0 8px 20px rgba(0,0,0,.12);
 }
 .coming .coming-note { color: #475569; margin-top: 8px; }
-.coming:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,.08);
-  border-color: #dfe3ea;
-}
-@media (prefers-reduced-motion: reduce) {
-  .coming::before { animation: none; }
-}
+.coming:hover { box-shadow: 0 14px 28px rgba(0,0,0,.08); border-color: #dfe3ea; }
+@media (prefers-reduced-motion: reduce) { .coming::before { animation: none; } }
 
-/* =====================
-   レスポンシブ調整
-===================== */
+/* ===================== レスポンシブ調整 ===================== */
 @media (max-width: 900px) {
   .card { grid-column: span 12; }
-  .footercol { grid-column: span 12; }
   .navlinks { display: none; }
   .hamburger { display: inline-flex; }
 }
@@ -325,9 +293,7 @@ a:hover {
   .mobile-menu, .backdrop, .hamburger { display: none !important; }
 }
 
-/* =====================
-   モバイル余白強化
-===================== */
+/* ===================== モバイル余白強化 ===================== */
 @media (max-width: 640px) {
   :root {
     --safe-top: max(env(safe-area-inset-top), 0px);
@@ -344,17 +310,9 @@ a:hover {
   .card { grid-column: 1 / -1; padding: 20px; border-radius: 18px; box-shadow: 0 6px 18px rgba(0,0,0,.05); }
   .site-header .nav { height: 60px; padding-left: calc(16px + var(--safe-left)); padding-right: calc(16px + var(--safe-right)); }
   .site-footer { padding-top: 28px; padding-bottom: calc(32px + var(--safe-bottom)); }
-  .footergrid { gap: 14px; }
-  .footercol { grid-column: 1 / -1; }
-  .orgtable .orgkey, .orgtable .orgval { display: block; width: 100%; padding: 12px; }
-  .orgtable .orgkey { background: #f7f7f7; color: var(--muted); border-bottom: 1px dashed var(--line); }
-  .orgtable tr { border-top: 1px solid var(--line); }
-  .orgtable tr:first-child { border-top: 0; }
 }
 
-/* =====================
-   タブレット調整
-===================== */
+/* ===================== タブレット調整 ===================== */
 @media (min-width: 641px) and (max-width: 900px) {
   .container { padding: 0 28px; }
   .section { padding: 64px 0; }
@@ -365,119 +323,26 @@ a:hover {
 /* ===== Not Found / Error ===== */
 .nf-wrap {
   min-height: calc(100dvh - 64px);
-  display: grid;
-  place-items: center;
+  display: grid; place-items: center;
   padding: 40px 20px;
   background:
     radial-gradient(1200px 600px at 10% -20%, rgba(10,10,10,.03), transparent 60%),
     radial-gradient(800px 400px at 110% 120%, rgba(10,10,10,.03), transparent 60%);
 }
-
 .nf-card {
   width: min(720px, 100%);
   border: 1px solid var(--line);
-  background: #fff;
-  border-radius: 20px;
-  padding: 28px;
-  text-align: center;
-  box-shadow: 0 12px 30px rgba(0,0,0,.06);
+  background: #fff; border-radius: 20px; padding: 28px;
+  text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,.06);
 }
-
 .nf-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px; height: 64px;
-  margin: 4px auto 8px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  font-weight: 800;
-  letter-spacing: .06em;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; margin: 4px auto 8px;
+  border-radius: 50%; border: 1px solid var(--line);
+  font-weight: 800; letter-spacing: .06em;
 }
-
-.nf-title {
-  font-size: clamp(22px, 3.2vw, 28px);
-  margin: 10px 0 6px;
-  letter-spacing: -0.01em;
-}
-
-.nf-desc {
-  color: var(--muted);
-  margin: 0 auto 18px;
-  max-width: 54ch;
-}
-
-.nf-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.nf-meta {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-/* Safe-area & mobile tuning */
-@media (max-width: 640px) {
-  .nf-card { border-radius: 18px; padding: 24px; }
-}
-
-/* =====================
-   Footer Links (Apple風)
-===================== */
-/* --- Footer compact bar (Apple風) --- */
-.site-footer {
-  border-top: 1px solid var(--line);
-  background: var(--bg);
-  padding: 16px 0;                 /* 高さを抑える */
-  color: var(--muted);
-}
-
-.footerbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;  /* 左:コピーライト / 右:法的リンク */
-  gap: 12px;
-  min-height: 40px;
-}
-
-.footerbar .copy {
-  font-weight: 600;
-  color: var(--fg);
-  opacity: .9;
-}
-
-.footerbar .legal {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;                       /* 「・」の前後も余白 */
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.footerbar .legal a {
-  color: var(--muted);
-  text-decoration: none;
-}
-.footerbar .legal a:hover {
-  color: var(--fg);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-/* モバイルは縦積み＆中央寄せ */
-@media (max-width: 640px) {
-  .footerbar {
-    flex-direction: column;
-    align-items: flex-start;       /* Appleは左寄せ。中央にしたければ center */
-    gap: 6px;
-  }
-  .footerbar .legal {
-    font-size: 13px;
-    gap: 8px;
-  }
-}
+.nf-title { font-size: clamp(22px, 3.2vw, 28px); margin: 10px 0 6px; letter-spacing: -0.01em; }
+.nf-desc { color: var(--muted); margin: 0 auto 18px; max-width: 54ch; }
+.nf-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 10px; }
+.nf-meta { margin-top: 8px; color: var(--muted); font-size: 12px; }
+@media (max-width: 640px) { .nf-card { border-radius: 18px; padding: 24px; } }
