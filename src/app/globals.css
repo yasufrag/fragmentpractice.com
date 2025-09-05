@@ -1,48 +1,43 @@
-/* ===================== Reset（最小限） ===================== */
+/* ===================== Reset ===================== */
 * { box-sizing: border-box; }
-html, body { padding: 0; margin: 0; }
+html, body { margin: 0; padding: 0; }
 img, svg { display: block; max-width: 100%; height: auto; }
 
-/* ===================== デザイントークン ===================== */
+/* ===================== Tokens / Base ===================== */
 :root{
-  --bg:#ffffff; --fg:#0a0a0a; --muted:#6b7280; --line:#e5e7eb; --accent:#0a84ff;
+  --bg:#fff; --fg:#0a0a0a; --muted:#6b7280; --line:#e5e7eb; --accent:#0a84ff;
   --radius:14px; --container:1200px;
   --font-sans: ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
 }
-html {
-  color-scheme: light;
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
-}
-
+html{ color-scheme: light; overflow-y: scroll; scrollbar-gutter: stable; }
 body{ background:var(--bg); color:var(--fg); font-family:var(--font-sans); -webkit-font-smoothing:antialiased; line-height:1.6; }
 
-/* ===================== Skip link ===================== */
+/* ===================== A11y: Skip link ===================== */
 .skip-link{
   position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
 }
 .skip-link:focus,.skip-link:focus-visible{
   position:fixed; left:16px; top:calc(12px + env(safe-area-inset-top));
-  width:auto; height:auto; clip:auto; padding:10px 14px; background:#111; color:#fff; border-radius:10px; z-index:1000; text-decoration:none; box-shadow:0 6px 18px rgba(0,0,0,.2);
+  padding:10px 14px; background:#111; color:#fff; border-radius:10px; z-index:1000; text-decoration:none; box-shadow:0 6px 18px rgba(0,0,0,.2);
 }
 
-/* ===================== タイポスケール ===================== */
+/* ===================== Type scale ===================== */
 .h1{ font-size:clamp(32px,5vw,56px); line-height:1.15; letter-spacing:-.02em; font-weight:700; }
 .h2{ font-size:clamp(24px,4vw,36px); line-height:1.2; font-weight:700; }
 .h3{ font-size:clamp(18px,2.5vw,22px); line-height:1.3; font-weight:600; }
 .lead{ font-size:clamp(16px,2.5vw,18px); color:var(--muted); }
 
-/* ===================== リンク ===================== */
+/* ===================== Links ===================== */
 a{ color:var(--accent); text-decoration:none; transition:color .2s ease, text-decoration-color .2s ease; }
-a:hover{ text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:2px; color:var(--fg); }
+a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); }
 .brand a{ color:inherit !important; }
 
-/* ===================== レイアウト ===================== */
+/* ===================== Layout ===================== */
 .container{ max-width:var(--container); margin:0 auto; padding:0 24px; }
 .section{ padding:72px 0; }
 .kbd{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
 
-/* ===================== ヘッダー / ナビ ===================== */
+/* ===================== Header / Nav ===================== */
 .site-header{
   position:sticky; top:0; z-index:80;
   background:rgba(255,255,255,.8);
@@ -55,60 +50,48 @@ a:hover{ text-decoration:underline; text-decoration-thickness:1px; text-underlin
 .brand-link svg{ display:block; height:100%; width:auto; }
 
 .navlinks{ display:flex; gap:20px; }
-.navlinks a{ text-decoration:none; color:var(--fg); opacity:.86; font-weight:600; }
+.navlinks a{ color:var(--fg); opacity:.86; font-weight:600; }
 .navlinks a:hover{ opacity:1; }
 
-/* ハンバーガー & モバイルメニュー */
+/* Hamburger + Drawer */
 .hamburger{
-  display:none; position:relative; width:40px; height:40px;
-  border:1px solid var(--line); border-radius:12px; background:#fff;
-  align-items:center; justify-content:center; cursor:pointer;
+  display:none; width:40px; height:40px; border:1px solid var(--line); border-radius:12px;
+  background:#fff; align-items:center; justify-content:center; cursor:pointer;
 }
-.hamburger .bar{
-  position:absolute; left:9px; right:9px; height:2px; background:var(--fg);
-  transition:transform .25s ease, opacity .2s ease, top .2s ease, bottom .2s ease;
-}
-.hamburger .bar:nth-child(1){ top:12px; }
-.hamburger .bar:nth-child(2){ top:19px; }
-.hamburger .bar:nth-child(3){ top:26px; }
-.bar-1-open{ transform:translateY(7px) rotate(45deg); }
-.bar-2-open{ opacity:0; }
-.bar-3-open{ transform:translateY(-7px) rotate(-45deg); }
+.hamburger .bar{ position:absolute; left:9px; right:9px; height:2px; background:var(--fg); transition:transform .25s, opacity .2s; }
+.hamburger .bar:nth-child(1){ top:12px; } .hamburger .bar:nth-child(2){ top:19px; } .hamburger .bar:nth-child(3){ top:26px; }
+.bar-1-open{ transform:translateY(7px) rotate(45deg); } .bar-2-open{ opacity:0; } .bar-3-open{ transform:translateY(-7px) rotate(-45deg); }
 
-.backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.35); border:none; padding:0; margin:0; z-index:70;
-}
+.backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:70; }
 .mobile-menu{
-  position:fixed; top:0; right:0; width:min(84vw,360px); height:100dvh;
+  position:fixed; top:0; right:0; width:min(84vw,360px); height:100dvh; z-index:90;
   background:var(--bg); border-left:1px solid var(--line); box-shadow:-12px 0 24px rgba(0,0,0,.08);
-  transform:translateX(100%); transition:transform .28s ease; z-index:90;
+  transform:translateX(100%); transition:transform .28s ease;
   display:flex; flex-direction:column; justify-content:space-between;
   padding:calc(12px + env(safe-area-inset-top)) 20px 20px;
 }
 .mobile-menu.open{ transform:translateX(0); }
 .mobile-nav{ display:flex; flex-direction:column; gap:16px; margin-top:8px; }
-.mobile-nav a{ font-weight:700; color:var(--fg); padding:12px 6px; border-radius:10px; border:1px solid transparent; text-decoration:none; }
+.mobile-nav a{ font-weight:700; color:var(--fg); padding:12px 6px; border-radius:10px; border:1px solid transparent; }
 .mobile-nav a:hover{ background:#f6f6f6; border-color:var(--line); }
 .mobile-meta{ padding:8px 6px; }
 
-/* 右上クローズ */
 .panel-close{
   position:absolute; top:calc(10px + env(safe-area-inset-top)); right:12px;
   width:40px; height:40px; border:1px solid var(--line); border-radius:12px; background:#fff;
   display:inline-flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.05); z-index:95;
 }
 .panel-close .x-1,.panel-close .x-2{ position:absolute; width:20px; height:2px; background:var(--fg); border-radius:1px; }
-.panel-close .x-1{ transform:rotate(45deg); }
-.panel-close .x-2{ transform:rotate(-45deg); }
+.panel-close .x-1{ transform:rotate(45deg); } .panel-close .x-2{ transform:rotate(-45deg); }
 @media (min-width:901px){ .panel-close{ display:none; } }
 
-/* ===================== ヒーロー ===================== */
+/* ===================== Hero ===================== */
 .hero{ padding:96px 0 72px; text-align:center; }
-.hero .cta{ display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:999px; border:1px solid var(--line); color:var(--fg); font-weight:600; text-decoration:none; }
+.hero .cta{ display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:999px; border:1px solid var(--line); color:var(--fg); font-weight:600; }
 .hero .cta.primary{ background:var(--fg); color:#fff; border-color:var(--fg); }
 .hero .cta:hover{ transform:translateY(-1px); }
 
-/* ===================== カード/グリッド ===================== */
+/* ===================== Grid / Cards ===================== */
 .grid{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr); }
 .card{
   grid-column:span 6; border:1px solid var(--line); border-radius:var(--radius); padding:24px;
@@ -118,35 +101,38 @@ a:hover{ text-decoration:underline; text-decoration-thickness:1px; text-underlin
 .card .title{ font-weight:700; font-size:20px; margin:0 0 6px; }
 .card .meta{ color:var(--muted); font-size:14px; }
 
-/* ===================== フッター（コンパクト/Apple風） ===================== */
+/* ===================== Footer (compact) ===================== */
 .site-footer{ border-top:1px solid var(--line); background:var(--bg); padding:16px 0; color:var(--muted); }
 .footerbar{ display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:40px; }
 .footerbar .copy{ font-weight:600; color:var(--fg); opacity:.9; }
 .footerbar .legal{ display:inline-flex; align-items:center; gap:10px; font-size:14px; white-space:nowrap; }
-.footerbar .legal a{ color:var(--muted); text-decoration:none; }
-.footerbar .legal a:hover{ color:var(--fg); text-decoration:underline; text-underline-offset:2px; }
-@media (max-width:640px){
-  .footerbar{ flex-direction:column; align-items:flex-start; gap:6px; }
-  .footerbar .legal{ font-size:13px; gap:8px; }
-}
+.footerbar .legal a{ color:var(--muted); }
+.footerbar .legal a:hover{ color:var(--fg); }
 
-/* ===================== 会社概要テーブル＋地図チップ ===================== */
-.orgtable{
-  width:100%; border-collapse:separate; border-spacing:0;
-  border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+/* ===================== Company: Definition card ===================== */
+.orgcard{
+  border:1px solid var(--line); border-radius:18px; background:#fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.04); padding:18px;
 }
-.orgtable tr+tr{ border-top:1px solid var(--line); }
-.orgtable .orgkey{ text-align:left; padding:12px 10px; width:200px; color:var(--muted); background:rgba(0,0,0,.02); }
-.orgtable .orgval{ padding:12px 10px; word-break:break-word; }
+.orgdl{ margin:0; }
+.orgdl .row{
+  display:grid; grid-template-columns:180px 1fr; gap:14px;
+  padding:14px 6px; border-top:1px solid var(--line);
+}
+.orgdl .row:first-child{ border-top:none; }
+.orgdl dt{ color:var(--muted); font-weight:700; letter-spacing:.01em; }
+.orgdl dd{ margin:0; }
 .addr{ font-style:normal; line-height:1.7; }
+.mono{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.02em; }
 .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
 .chip{
   display:inline-flex; align-items:center; padding:10px 14px; border:1px solid var(--line);
   border-radius:999px; background:#fff; color:var(--fg); font-weight:600; text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,.04);
 }
-.chip:hover{ background:#f6f6f6; text-decoration:none; }
+.chip:hover{ background:#f6f6f6; }
+.chip.ghost{ margin-left:10px; }
 
-/* ===================== Not Found / Error ===================== */
+/* ===================== Not Found ===================== */
 .nf-wrap{
   min-height:calc(100dvh - 64px); display:grid; place-items:center; padding:40px 20px;
   background:
@@ -159,9 +145,8 @@ a:hover{ text-decoration:underline; text-decoration-thickness:1px; text-underlin
 .nf-desc{ color:var(--muted); margin:0 auto 18px; max-width:54ch; }
 .nf-actions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:10px; }
 .nf-meta{ margin-top:8px; color:var(--muted); font-size:12px; }
-@media (max-width:640px){ .nf-card{ border-radius:18px; padding:24px; } }
 
-/* ===================== ZINE Coming Soon（静かな版） ===================== */
+/* ===================== ZINE: Coming (quiet) ===================== */
 .coming--quiet{
   border:1px solid var(--line); border-radius:18px; padding:28px; text-align:center;
   background:#f9f9f9; box-shadow:0 4px 14px rgba(0,0,0,.03);
@@ -173,59 +158,39 @@ a:hover{ text-decoration:underline; text-decoration-thickness:1px; text-underlin
   border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--muted); background:#fff;
 }
 .coming-note{ color:var(--muted); max-width:60ch; margin:8px auto 16px; }
-.coming-list{ margin:8px auto 14px; padding:0; list-style:none; color:var(--muted); display:inline-flex; gap:14px; flex-wrap:wrap; }
-.coming-list li::before{ content:"・"; margin-right:6px; color:var(--muted); }
 .coming-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:8px; margin-bottom:6px; }
-.coming--quiet .chip{ background:#fff; }
-.coming--quiet .chip:hover{ background:#f1f1f1; text-decoration:none; }
 .coming-meta{ margin-top:6px; color:var(--muted); font-size:12px; }
-@media (max-width:640px){ .coming--quiet{ border-radius:16px; padding:22px; } .coming-list{ gap:10px; } }
 
-/* ===================== Work page helpers ===================== */
+/* ===================== Work helpers ===================== */
 .list-check{ margin:8px 0 0; padding-left:18px; list-style:none; }
 .list-check li{ position:relative; margin:6px 0; padding-left:22px; }
 .list-check li::before{ content:"✓"; position:absolute; left:0; top:.1em; font-weight:800; color:var(--accent); }
 .list-dot{ margin:8px 0 0; padding-left:18px; list-style:disc; }
-.list-steps{ counter-reset:step; margin:8px 0 0; padding-left:0; list-style:none; }
-.list-steps li{ counter-increment:step; margin:10px 0; padding-left:28px; position:relative; }
-.list-steps li::before{ content:counter(step) "."; position:absolute; left:0; top:0; font-weight:800; color:var(--muted); }
 
-.table-pricing{ width:100%; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
-.trow{ display:grid; grid-template-columns:160px 1fr 1fr; border-top:1px solid var(--line); }
-.trow:first-child{ border-top:0; }
-.trow--head{ background:#f9f9f9; font-weight:700; }
-.tcell{ padding:12px 10px; min-height:44px; display:flex; align-items:center; }
-@media (max-width:900px){ .trow{ grid-template-columns:120px 1fr; } .trow .tcell:nth-child(3){ grid-column:1 / -1; border-top:1px dashed var(--line); } }
-@media (max-width:640px){
-  .trow{ grid-template-columns:1fr; }
-  .trow .tcell:nth-child(2), .trow .tcell:nth-child(3){ border-top:1px dashed var(--line); }
-}
-
-/* ===================== News Bar（1本化・コンパクト） ===================== */
+/* ===================== News Bar (left / pill More) ===================== */
 .newsbar{
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
   background:#fafafa; padding:8px 0; font-size:13px; color:var(--muted);
 }
 .newsbar ul{
   margin:0; padding:0; list-style:none;
-  display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center;
+  display:flex; flex-wrap:wrap; gap:16px; justify-content:flex-start; align-items:center;
 }
-.newsbar li{ white-space:nowrap; display:flex; align-items:center; gap:6px; }
-.newsbar li.more{ margin-left:8px; }
-.newsbar strong{ margin-right:2px; font-weight:600; color:var(--fg); }
-.newsbar a{ color:var(--accent); text-decoration:none; }
-.newsbar a:hover{ text-decoration:underline; text-underline-offset:2px; }
-.badge{ display:inline-block; padding:2px 6px; border:1px solid var(--line); border-radius:999px; font-size:11px; line-height:1; color:var(--fg); background:#fff; margin-left:6px; }
-.badge-upcoming{ border-color:#dbeafe; background:#eff6ff; }
-@media (max-width:640px){
-  .newsbar ul{ flex-direction:column; align-items:flex-start; gap:6px; }
+.newsbar li{ display:flex; align-items:center; gap:6px; white-space:nowrap; }
+.newsbar strong{ font-weight:600; color:var(--fg); margin-right:2px; }
+.newsbar .title{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.newsbar .more a{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:4px 12px; border:1px solid var(--line); border-radius:999px;
+  font-size:12px; font-weight:600; color:var(--accent); background:#fff; transition:background .2s ease;
 }
+.newsbar .more a:hover{ background:#f1f1f1; }
 
-/* ===================== レスポンシブ ===================== */
+/* ===================== Responsive ===================== */
 @media (max-width:900px){
   .card{ grid-column:span 12; }
   .navlinks{ display:none; }
-  .hamburger{ display:inline-flex; }
+  .hamburger{ display:inline-flex; position:relative; }
 }
 @media (min-width:901px){
   .mobile-menu, .backdrop, .hamburger{ display:none !important; }
@@ -238,129 +203,23 @@ a:hover{ text-decoration:underline; text-decoration-thickness:1px; text-underlin
     --safe-left:max(env(safe-area-inset-left),0px);
   }
   .container{ padding-left:calc(20px + var(--safe-left)); padding-right:calc(20px + var(--safe-right)); }
-  .section{ padding-top:56px; padding-bottom:56px; }
+  .section{ padding-block:56px; }
   .hero{ padding-top:calc(72px + var(--safe-top)); padding-bottom:56px; }
-  .h1{ line-height:1.2; }
-  .h2{ line-height:1.25; }
-  .grid{ gap:14px; }
-  .card{ grid-column:1 / -1; padding:20px; border-radius:18px; box-shadow:0 6px 18px rgba(0,0,0,.05); }
-  .site-header .nav{ height:60px; padding-left:calc(16px + var(--safe-left)); padding-right:calc(16px + var(--safe-right)); }
-  .site-footer{ padding-top:28px; padding-bottom:calc(32px + var(--safe-bottom)); }
-}
+  .grid{ grid-template-columns:1fr; gap:14px; }
+  .card{ padding:20px; border-radius:18px; box-shadow:0 6px 18px rgba(0,0,0,.05); }
 
-/* --- Card grid: モバイルは1カラムに --- */
-.grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
-.card { grid-column: span 6; }
-@media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; }  /* ← 1カラム */
-  .card { grid-column: auto; }           /* ← span解除 */
-}
+  /* Company card: label over value */
+  .orgcard{ border-radius:16px; padding:12px; }
+  .orgdl .row{ grid-template-columns:1fr; gap:6px; padding:14px 0; }
+  .orgdl dt{ font-size:13px; }
+  .orgdl dd{ font-size:18px; line-height:1.7; }
+  .chips{ gap:10px; }
+  .chip{ padding:12px 16px; }
 
-/* --- NewsBar: 共通の微調整 --- */
-.newsbar {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: #fafafa;
-  padding: 6px 0;            /* ← 低めに */
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-.newsbar ul {
-  margin: 0; padding: 0; list-style: none;
-  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center;
-}
-.newsbar li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-.newsbar strong { margin-right: 2px; font-weight: 600; color: var(--fg); }
-.newsbar a { color: var(--accent); text-decoration: none; }
-.newsbar a:hover { text-decoration: underline; text-underline-offset: 2px; }
-
-/* タイトルははみ出したら省略 */
-.newsbar .title {
-  display: inline-block;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  max-width: none;                /* PCでは制限なし */
-}
-
-/* --- NewsBar: モバイルは「最新1件＋More」のみ --- */
-@media (max-width: 640px) {
-  .newsbar ul { gap: 8px; justify-content: space-between; width: 100%; padding: 0 16px; }
-  .newsbar li { display: none; }
-  .newsbar li:first-child {               /* 最新1件だけ表示 */
-    display: flex; flex: 1 1 auto; min-width: 0;
-  }
-  .newsbar li.more {                      /* Moreは右端に配置 */
-    display: inline-flex; flex: 0 0 auto;
-  }
-  .newsbar .title {
-    max-width: 60vw;                      /* タイトルは横幅で省略 */
-  }
-}
-
-/* =====================
-   News Bar (modern pill style)
-===================== */
-.newsbar {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: #fafafa;
-  padding: 8px 0;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.newsbar ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: flex-start;   /* ← 常に左寄せ */
-}
-
-.newsbar li {
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.newsbar strong {
-  font-weight: 600;
-  color: var(--fg);
-  margin-right: 2px;
-}
-
-/* Modern pill-style More ボタン */
-.newsbar .more a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
-  background: #fff;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.newsbar .more a:hover {
-  background: #f1f1f1;
-  text-decoration: none;
-}
-
-/* モバイル調整: ニュースは縦並び、More ボタンは少し大きめ */
-@media (max-width: 640px) {
-  .newsbar ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-  .newsbar .more a {
-    font-size: 13px;
-    padding: 5px 14px;
-  }
+  /* NewsBar: 最新1件＋More、左右に配置 */
+  .newsbar ul{ gap:8px; justify-content:space-between; width:100%; padding:0 16px; }
+  .newsbar li{ display:none; }
+  .newsbar li:first-child{ display:flex; min-width:0; flex:1 1 auto; }
+  .newsbar li.more{ display:inline-flex; flex:0 0 auto; }
+  .newsbar .title{ max-width:60vw; }
 }

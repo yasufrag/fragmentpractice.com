@@ -33,16 +33,9 @@ export default function ZinePage() {
           </h2>
 
           <p className="coming-note">
-            初回は、注意・関係・編集をめぐる短いエッセイ／対話の抜粋／図版メモで構成する予定です。
+            初回は、注意・関係・編集をめぐる短いエッセイ／対話の抜粋／図版メモで構成予定です。
             冊子とPDFの二形態での頒布を想定し、少部数・不定期で刊行します。
           </p>
-
-          {/* 具体化（公開して差し支えない範囲） */}
-          <ul className="coming-list" aria-label="想定仕様">
-            <li>A5 32–64ページ想定（変更の可能性あり）</li>
-            <li>日英併記の抜粋を一部収録</li>
-            <li>PDF版と限定プリント版</li>
-          </ul>
 
           <div className="coming-actions" aria-label="関連リンク">
             <Link href="/news" className="chip" aria-label="News / Updates へ">

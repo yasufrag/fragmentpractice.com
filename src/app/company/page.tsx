@@ -1,5 +1,6 @@
 // app/company/page.tsx
 import type { Metadata } from "next";
+import CopyChip from "@/components/CopyChip";
 
 export const metadata: Metadata = {
   title: "Company",
@@ -18,6 +19,7 @@ export default function CompanyPage() {
   const buildingName = "高松セントラルスカイビルディング";
   const addressLine =
     "香川県高松市天神前10番5号 高松セントラルスカイビルディング 3F south";
+  // マップ検索はビル名＋住所をエンコード
   const q = encodeURIComponent(`${buildingName} ${addressLine}`);
 
   return (
@@ -26,31 +28,34 @@ export default function CompanyPage() {
       <section className="hero" style={{ textAlign: "left" }}>
         <h1 className="h1" style={{ marginTop: 16 }}>Company</h1>
         <p className="lead" style={{ marginTop: 8, maxWidth: 760 }}>
-          Fragment Practice合同会社（Fragment Practice LLC）の会社概要と基本方針です。
+          Fragment Practice合同会社（Fragment Practice LLC）の会社概要です。
           高松から世界へ。小さな実装と観察を重ね、確かな再現性を積層していきます。
         </p>
       </section>
 
-      {/* 概要テーブル */}
+      {/* 会社概要 */}
       <section className="section" aria-labelledby="overview">
         <h2 id="overview" className="h2" style={{ marginBottom: 12 }}>会社概要</h2>
-        <table className="orgtable">
-          <tbody>
-            <tr>
-              <th className="orgkey" scope="row">商号</th>
-              <td className="orgval">Fragment Practice合同会社</td>
-            </tr>
-            <tr>
-              <th className="orgkey" scope="row">代表</th>
-              <td className="orgval">新庄 泰大</td>
-            </tr>
-            <tr>
-              <th className="orgkey" scope="row">所在地</th>
-              <td className="orgval">
+
+        <article className="orgcard" aria-label="会社情報">
+          <dl className="orgdl">
+            <div className="row">
+              <dt>商号</dt>
+              <dd>Fragment Practice 合同会社</dd>
+            </div>
+
+            <div className="row">
+              <dt>代表</dt>
+              <dd>新庄 泰大</dd>
+            </div>
+
+            <div className="row">
+              <dt>所在地</dt>
+              <dd>
                 <address className="addr">
                   〒760-0018<br />
                   香川県高松市天神前10番5号<br />
-                  高松セントラルスカイビルディング 3F south
+                  {buildingName} 3F south
                 </address>
                 <div className="chips" aria-label="地図リンク">
                   <a
@@ -70,22 +75,29 @@ export default function CompanyPage() {
                     Google&nbsp;Maps
                   </a>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <th className="orgkey" scope="row">電話</th>
-              <td className="orgval"><a href="tel:+81878103037">087-810-3037</a></td>
-            </tr>
-            <tr>
-              <th className="orgkey" scope="row">設立</th>
-              <td className="orgval">2025年8月12日</td>
-            </tr>
-            <tr>
-              <th className="orgkey" scope="row">法人番号</th>
-              <td className="orgval">7470003002956</td>
-            </tr>
-          </tbody>
-        </table>
+              </dd>
+            </div>
+
+            <div className="row">
+              <dt>電話</dt>
+              <dd>
+                <a href="tel:+81878103037">087-810-3037</a>
+              </dd>
+            </div>
+
+            <div className="row">
+              <dt>設立</dt>
+              <dd>2025年8月12日</dd>
+            </div>
+
+            <div className="row">
+              <dt>法人番号</dt>
+              <dd>
+                <span className="mono">7470003002956</span>
+              </dd>
+            </div>
+          </dl>
+        </article>
       </section>
     </div>
   );
