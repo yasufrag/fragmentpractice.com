@@ -242,3 +242,52 @@ a:hover{ text-decoration:underline; text-decoration-thickness:1px; text-underlin
   .site-header .nav{ height:60px; padding-left:calc(16px + var(--safe-left)); padding-right:calc(16px + var(--safe-right)); }
   .site-footer{ padding-top:28px; padding-bottom:calc(32px + var(--safe-bottom)); }
 }
+
+/* --- Card grid: モバイルは1カラムに --- */
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
+.card { grid-column: span 6; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }  /* ← 1カラム */
+  .card { grid-column: auto; }           /* ← span解除 */
+}
+
+/* --- NewsBar: 共通の微調整 --- */
+.newsbar {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fafafa;
+  padding: 6px 0;            /* ← 低めに */
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.newsbar ul {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center;
+}
+.newsbar li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.newsbar strong { margin-right: 2px; font-weight: 600; color: var(--fg); }
+.newsbar a { color: var(--accent); text-decoration: none; }
+.newsbar a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* タイトルははみ出したら省略 */
+.newsbar .title {
+  display: inline-block;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  max-width: none;                /* PCでは制限なし */
+}
+
+/* --- NewsBar: モバイルは「最新1件＋More」のみ --- */
+@media (max-width: 640px) {
+  .newsbar ul { gap: 8px; justify-content: space-between; width: 100%; padding: 0 16px; }
+  .newsbar li { display: none; }
+  .newsbar li:first-child {               /* 最新1件だけ表示 */
+    display: flex; flex: 1 1 auto; min-width: 0;
+  }
+  .newsbar li.more {                      /* Moreは右端に配置 */
+    display: inline-flex; flex: 0 0 auto;
+  }
+  .newsbar .title {
+    max-width: 60vw;                      /* タイトルは横幅で省略 */
+  }
+}
