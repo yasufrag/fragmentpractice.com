@@ -1,0 +1,32 @@
+// app/error.tsx
+"use client"
+
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  return (
+    <html>
+      <body>
+        <main className="nf-wrap" role="main" aria-labelledby="err-title">
+          <section className="nf-card">
+            <div className="nf-badge" aria-hidden>500</div>
+            <h1 id="err-title" className="nf-title">エラーが発生しました</h1>
+            <p className="nf-desc">
+              一時的な問題の可能性があります。お手数ですが、もう一度お試しください。
+            </p>
+            <div className="nf-actions">
+              <button className="chip" onClick={() => reset()}>再読み込み</button>
+              <a className="chip" href="/">Home</a>
+            </div>
+            {/* 開発時のデバッグ用（必要なら表示） */}
+            {/* <pre className="nf-meta">{error?.digest || error?.message}</pre> */}
+          </section>
+        </main>
+      </body>
+    </html>
+  )
+}
