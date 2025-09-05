@@ -19,7 +19,7 @@ export default function StoryPage() {
         </p>
       </section>
 
-      {/* 小豆島から始まる軌跡 */}
+      {/* 瀬戸内から始まる軌跡 */}
       <section className="section" aria-labelledby="roots">
         <h2 id="roots" className="h2" style={{ marginBottom: 12 }}>
           瀬戸内から始まる軌跡
@@ -62,22 +62,24 @@ export default function StoryPage() {
         </p>
       </section>
 
-      {/* 技術と人間 */}
-      <section className="section" aria-labelledby="syntax">
-        <h2 id="syntax" className="h2" style={{ marginBottom: 12 }}>
-          技術と人間の交差点へ
+      {/* 結び */}
+      <section className="section" aria-labelledby="closing">
+        <h2 id="closing" className="h2" style={{ marginBottom: 12 }}>
+           高松から、世界へ
         </h2>
         <p style={{ maxWidth: 840, marginBottom: 16 }}>
-          私たちは <strong>Syntax（構文）</strong> を、文法にとどまらない「関わりの設計」と捉えます。
-          話す／間を取る／関係を結ぶ——その全体を設計対象とし、
-          AIを“生産性ツール”ではなく
-          <strong>“象徴的インフラ”</strong> として位置づけます。
+          私たちは、AIを“便利さ”のためだけに使いません。静けさと構文性を土台に、
+          注意・関係・編集を支える<strong>象徴的インフラ</strong>を設計し、運用に落とし込みます。
         </p>
-        <ul style={{ marginTop: 12, paddingLeft: 18, maxWidth: 720 }}>
-          <li>セキュリティの視座：信頼の前提を設計する</li>
-          <li>システム思考：人・プロセス・道具を一体で捉える</li>
-          <li>詩的構文：内的リズムを損なわない情報の流れを整える</li>
-        </ul>
+        <p style={{ maxWidth: 840, marginBottom: 16 }}>
+          研究と文化の往復を続けながら、再現可能な実践と成果物（プロトタイプ、ZINE、公開対話）を
+          積層していきます。技術は目的ではなく、関係を整えるための器です。
+        </p>
+        <p style={{ maxWidth: 840 }}>
+          本ページは理念の共有を目的としており、検索インデックスの対象外です。
+          共同検証や対話のご相談は、必要に応じて静かに受け付けています。
+          <a href="/contact" className="cta" style={{ marginLeft: 8 }}>Contact</a>
+        </p>
       </section>
     </div>
   )
