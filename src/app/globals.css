@@ -9,7 +9,12 @@ img, svg { display: block; max-width: 100%; height: auto; }
   --radius:14px; --container:1200px;
   --font-sans: ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
 }
-html{ color-scheme:light; }
+html {
+  color-scheme: light;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
 body{ background:var(--bg); color:var(--fg); font-family:var(--font-sans); -webkit-font-smoothing:antialiased; line-height:1.6; }
 
 /* ===================== Skip link ===================== */
