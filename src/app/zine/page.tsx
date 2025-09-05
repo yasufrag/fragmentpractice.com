@@ -1,63 +1,57 @@
-export const metadata = { title: "ZINE" };
+// app/zine/page.tsx
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "ZINE",
+  description:
+    "Fragment Practice の編集と小冊子（ZINE）の取り組み。現在は静かに準備中です。",
+};
 
 export default function ZinePage() {
   return (
     <div className="container">
-      {/* Hero */}
-      <section className="hero" style={{ textAlign: "center" }}>
-        <h1 className="h1">Fragment Practice ZINE</h1>
-        <p className="lead" style={{ marginTop: 12 }}>
-          断片から編まれる実験誌。業界向けのプロトタイピングと、一般にひらかれた文化的営み。<br />
-          両方を往復しながら、静かに刊行を準備しています。
+      {/* Hero（最小） */}
+      <section className="hero" style={{ textAlign: "left" }}>
+        <h1 className="h1" style={{ marginTop: 16 }}>ZINE</h1>
+        <p className="lead" style={{ marginTop: 8, maxWidth: 720 }}>
+          断片（Fragment）を束ね、静かな編集のリズムをかたちにする小冊子づくり。
+          現在は公開に向けて準備を進めています。
         </p>
       </section>
 
-      {/* 業界向け */}
-      <section className="section" aria-labelledby="pro">
-        <h2 id="pro" className="h2">プロトタイピングとしてのZINE</h2>
-        <p style={{ marginTop: 12, maxWidth: 760, color: "var(--muted)" }}>
-          AI 対話ログ、設計ノート、評価メモを冊子化。研究・開発・編集実務のための実験的ドキュメントです。
-          小さく試し、学習を残せる形へ。
-        </p>
+      {/* Coming Soon（静かなカード） */}
+      <section className="section" aria-labelledby="coming">
+        <div className="coming--quiet" role="status" aria-live="polite">
+          <div className="coming-header">
+            <span className="pill" aria-hidden>COMING&nbsp;SOON</span>
+          </div>
 
-        <div className="grid" style={{ marginTop: 20 }}>
-          <article className="card coming">
-            <div className="coming-ribbon" aria-hidden="true">COMING&nbsp;SOON</div>
-            <div className="title">Prototype Issue #01</div>
-            <div className="meta">LLM/Agent × 言語運用の設計断片</div>
-            <p className="coming-note">
-              収録予定：評価プロト、会話設計の版管理、失敗例と学びの抜粋、再現用スニペット
-            </p>
-          </article>
+          <h2 id="coming" className="h2" style={{ marginBottom: 8, textAlign: "center" }}>
+            静かに準備中です
+          </h2>
+
+          <p className="coming-note">
+            初期号は、対話・記述・構文設計の実践から生まれた断片を編集し、
+            冊子とPDFの二形態で小さく発行予定です。
+            発行は少部数／不定期。準備が整い次第、静かにお知らせします。
+          </p>
+
+          <ul className="coming-list">
+            <li>テーマ：注意・関係・編集（仮）</li>
+            <li>形式：冊子（少部数）／PDF</li>
+            <li>言語：日本語（一部英語併記の可能性）</li>
+          </ul>
+
+          <div className="coming-actions">
+            <Link href="/company" className="chip" aria-label="Company ページへ">Company</Link>
+            <Link href="/contact" className="chip" aria-label="Contact ページへ">Contact</Link>
+          </div>
+
+          <p className="coming-meta" aria-label="補足情報">
+            ※ 公開までは検索想定の発信は行っていません。必要に応じて個別にご案内します。
+          </p>
         </div>
-      </section>
-
-      {/* 一般向け */}
-      <section className="section" aria-labelledby="culture">
-        <h2 id="culture" className="h2">文化としてのZINE</h2>
-        <p style={{ marginTop: 12, maxWidth: 760, color: "var(--muted)" }}>
-          詩・写真・記述の断片を束ねる小冊子。暮らしのテンポ、注意の置き方、関係の編み方を、
-          ゆっくり手元に残るかたちに。
-        </p>
-
-        <div className="grid" style={{ marginTop: 20 }}>
-          <article className="card coming">
-            <div className="coming-ribbon" aria-hidden="true">COMING&nbsp;SOON</div>
-            <div className="title">Fragments / Season 01</div>
-            <div className="meta">詩・写真・会話の小編集</div>
-            <p className="coming-note">
-              収録予定：短い詩／写真 8–12点／公開対話の抜粋／編集後記
-            </p>
-          </article>
-        </div>
-      </section>
-
-      {/* クロージング */}
-      <section className="section" style={{ textAlign: "center" }}>
-        <p className="lead">
-          先行案内をご希望の方は <a className="cta" href="/contact">Contact</a> へ。<br />
-          刊行時にサンプルPDFと購読情報（一般・業界）をお送りします。
-        </p>
       </section>
     </div>
   );

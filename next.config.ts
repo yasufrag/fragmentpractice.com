@@ -1,18 +1,15 @@
-// next.config.js
+// next.config.ts
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
-
   async headers() {
     return [
       {
-        source: "/story",
+        source: "/story/:path*",
         headers: [
-          {
-            key: "X-Robots-Tag",
-            value: "noindex, nofollow",
-          },
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
         ],
       },
     ];

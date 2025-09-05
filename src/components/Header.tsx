@@ -12,14 +12,19 @@ export default function Header() {
 
   // Escで閉じる／開閉時にスクロール固定
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     document.addEventListener("keydown", onKey);
+
+    // スクロール固定
     document.body.style.overflow = open ? "hidden" : "";
+
+    // ← 追記：メニュー開閉フラグ（スタイル切替用）
+    document.body.classList.toggle("menu-open", open);
+
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      document.body.classList.remove("menu-open");
     };
   }, [open]);
 
