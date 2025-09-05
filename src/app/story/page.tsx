@@ -26,7 +26,7 @@ export default function StoryPage() {
         </h2>
         <p style={{ maxWidth: 840, marginBottom: 16 }}>
           Fragment Practice の物語は、香川県にルーツを持ちます。
-          瀬戸内を行き交う船の光景は、「人生を前に進めることは船旅に似ている」という実感を私たちに残しました。
+          瀬戸内を行き交う船の光景は、「人生を前に進めることは船旅に似ている」という感覚を呼び起こしました。
         </p>
         <p style={{ maxWidth: 840, marginBottom: 16 }}>
           幼少期から静けさや言葉にならない感情に敏感であること。
