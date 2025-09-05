@@ -492,3 +492,111 @@ a:hover {
   .trow .tcell:nth-child(2),
   .trow .tcell:nth-child(3) { border-top: 1px dashed var(--line); }
 }
+
+/* =====================
+   News Bar
+===================== */
+.newsbar {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fafafa;
+  padding: 12px 0;
+  font-size: 14px;
+}
+
+.newsbar .container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.newsbar strong {
+  margin-right: 6px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+/* =====================
+   News Bar (compact)
+===================== */
+.newsbar {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fafafa;
+  padding: 6px 0;              /* 高さを抑える */
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.newsbar .container {
+  display: flex;
+  justify-content: center;     /* 中央寄せ */
+}
+
+.newsbar strong {
+  margin-right: 6px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+/* =====================
+   News Bar
+===================== */
+.newsbar {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fafafa;
+  padding: 8px 0; /* 高さを抑えめ */
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.newsbar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.newsbar li {
+  white-space: nowrap;
+}
+
+.newsbar strong {
+  margin-right: 4px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.newsbar a.more {
+  margin-left: 6px;
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.newsbar a.more:hover {
+  text-decoration: underline;
+}
+
+/* モバイルは縦積み */
+@media (max-width: 640px) {
+  .newsbar ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+.newsbar { border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#fafafa; padding:8px 0; font-size:13px; color:var(--muted); }
+.newsbar ul { margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center; }
+.newsbar li { white-space:nowrap; display:flex; align-items:center; gap:6px; }
+.newsbar li.more { margin-left:8px; }
+.newsbar strong { margin-right:2px; font-weight:600; color:var(--fg); }
+.newsbar a { color:var(--accent); text-decoration:none; }
+.newsbar a:hover { text-decoration:underline; text-underline-offset:2px; }
+.badge { display:inline-block; padding:2px 6px; border:1px solid var(--line); border-radius:999px; font-size:11px; line-height:1; color:var(--fg); background:#fff; margin-left:6px; }
+.badge-upcoming { border-color:#dbeafe; background:#eff6ff; } /* ごく薄い青系 */
+@media (max-width:640px){ .newsbar ul{ flex-direction:column; align-items:flex-start; gap:6px; } }
