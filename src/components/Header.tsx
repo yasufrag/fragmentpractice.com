@@ -20,7 +20,7 @@ export default function Header() {
         {/* Brand */}
         <div className="brand">
           <Link href="/" aria-label="Fragment Practice ホーム" className="brand-link">
-            <BrandLogo size="header" />
+            <BrandLogo />
           </Link>
         </div>
 

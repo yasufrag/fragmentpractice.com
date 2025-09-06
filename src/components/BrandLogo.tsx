@@ -1,47 +1,35 @@
 // components/BrandLogo.tsx
 "use client";
 
-import { useId } from "react";
+import { memo, useId } from "react";
 
-type BrandLogoProps = {
-  /** ヘッダー用 or コンパクト（例：フッター/カード） */
-  size?: "header" | "compact";
-  /** テキスト色（既定: currentColor） */
-  color?: string;
-  /** 円の色（既定: var(--accent)） */
-  accent?: string;
-  /** 高さ(px)。未指定なら size に応じた推奨値 */
-  height?: number;
-  /** ベースラインの微調整 */
-  offset?: number;
-  /** 内側の小さなドットを表示するか */
-  showBadge?: boolean;
-  /** アクセシビリティ用のラベル/タイトル */
-  label?: string;
-};
+export default memo(function BrandLogo() {
+  const uid = useId();
+  const titleId = `fp-logo-${uid}`;
+  const maskId = `fp-bite-${uid}`;
 
-export default function BrandLogo({
-  size = "header",
-  color = "currentColor",
-  accent = "var(--accent)",
-  height,
-  offset = 0,
-  showBadge = true,
-  label = "Fragment Practice",
-}: BrandLogoProps) {
-  const titleId = useId();
+  // ヘッダー固定スケール
+  const FONT = 22;
+  const LINE = 22;
+  const CIRCLE = 40;
+  const GAP = 12;
+  const SVG_H = 50;
+  const BASE_Y = 29;
+  const CY = 30;
 
-  // スケール定義（見た目を保ちながらシンプルに）
-  const S = size === "header"
-    ? { font: 22, line: 22, circle: 40, gap: 12, svgH: 50, baseY: 28, cy: 31 }
-    : { font: 16, line: 20, circle: 30, gap:  8, svgH: 40, baseY: 24, cy: 25 };
+  // 欠け設定（案A）
+  const BITE_ANGLE_DEG = 20; // 0=右, 90=下
+  const BITE_RATIO = 0.33;   // 半径に対する欠けの半径
+  const toRad = (d: number) => (d * Math.PI) / 180;
 
-  const svgHeight = height ?? S.svgH;
-  // 横幅は可変（テキスト長に合わせつつ、余白を確保）
-  // ざっくり算出: 円の直径 + ギャップ + テキスト2行ぶんの目安幅
-  // ※ auto なので viewBox を広めに取って安全側に
-  const viewW = S.circle + S.gap + (S.font * 10);
-  const viewH = Math.max(S.svgH, S.cy + S.circle / 2 + 4);
+  const biteR = (CIRCLE / 2) * BITE_RATIO;
+  const biteCx = CIRCLE / 2 + (CIRCLE / 2) * Math.cos(toRad(BITE_ANGLE_DEG));
+  const biteCy = CY + (CIRCLE / 2) * Math.sin(toRad(BITE_ANGLE_DEG));
+
+  // ビューボックス（テキスト分に余裕を見て広め）
+  const textW = FONT * 10;
+  const viewW = CIRCLE + GAP + textW;
+  const viewH = Math.max(SVG_H, CY + CIRCLE / 2 + 4);
 
   return (
     <svg
@@ -50,52 +38,43 @@ export default function BrandLogo({
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${viewW} ${viewH}`}
       preserveAspectRatio="xMinYMid meet"
-      style={{ height: svgHeight, width: "auto", display: "block" }}
+      className="fp-brandlogo"               // ← CSSでフォント適用（下記2)参照）
+      style={{ height: SVG_H, width: "auto", display: "block" }}
     >
-      <title id={titleId}>{label}</title>
+      <title id={titleId}>Fragment Practice</title>
 
-      {/* 円（ブランドアクセントに連動） */}
+      {/* 欠けマスク */}
+      <defs>
+        <mask id={maskId}>
+          <rect x="0" y="0" width={viewW} height={viewH} fill="white" />
+          <circle cx={biteCx} cy={biteCy} r={biteR} fill="black" />
+        </mask>
+      </defs>
+
+      {/* 欠けた円（柿色＝--accent に追従） */}
       <circle
-        cx={S.circle / 2}
-        cy={S.cy}
-        r={S.circle / 2}
-        fill={accent}
+        cx={CIRCLE / 2}
+        cy={CY}
+        r={CIRCLE / 2}
+        fill="var(--accent)"
+        mask={`url(#${maskId})`}
       />
-      {showBadge && (
-        <circle
-          cx={S.circle / 2}
-          cy={S.cy}
-          r={S.circle / 4}
-          fill="var(--bg)" /* 背景色に追従：和紙の“気配”を保つ */
-        />
-      )}
 
-      {/* テキスト（見出しフォントに追従） */}
+      {/* ワードマーク（見出しフォント＝--font-display を“CSS＆inline”で二重適用） */}
       <g
-        transform={`translate(${S.circle + S.gap}, ${offset})`}
+        transform={`translate(${CIRCLE + GAP}, 0)`}
         style={{
           fontFamily:
-            // next/font の変数 → フォールバック（安全側）
             'var(--font-display), "Sora", ui-sans-serif, system-ui, -apple-system, "Zen Kaku Gothic New", "Noto Sans JP", sans-serif',
           fontWeight: 700 as any,
-          fill: color,
+          letterSpacing: "-0.01em",
+          fill: "currentColor",
+          textRendering: "optimizeLegibility",
         }}
       >
-        <text
-          x={0}
-          y={S.baseY}
-          fontSize={S.font}
-        >
-          Fragment
-        </text>
-        <text
-          x={0}
-          y={S.baseY + S.line}
-          fontSize={S.font}
-        >
-          Practice
-        </text>
+        <text x={0} y={BASE_Y} fontSize={FONT}>Fragment</text>
+        <text x={0} y={BASE_Y + LINE} fontSize={FONT}>Practice</text>
       </g>
     </svg>
   );
-}
+});
