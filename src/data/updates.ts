@@ -2,8 +2,8 @@
 export type Update = {
   slug: string;
   title: string;
-  date: string;        // ISO: "2025-09-05"
-  description: string; // ★ 必須
+  date: string;
+  description: string;
 };
 
 export const updates: Update[] = [
