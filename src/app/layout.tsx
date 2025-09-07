@@ -42,39 +42,3 @@ export const metadata: Metadata = {
     description: "共創・実験・編集のためのスタジオ",
     images: ["/og.jpg"],
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon-180x180.png",
-  },
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const year = new Date().getFullYear();
-
-  return (
-    /* ★ html にフォント変数クラスを付与 */
-    <html lang="ja" className={`${sora.variable} ${zenKaku.variable}`}>
-      <body>
-        <a href="#main" className="skip-link">本文へスキップ</a>
-
-        <Header />
-
-        <main id="main" role="main">
-          {children}
-        </main>
-
-        {/* フッター */}
-        <footer className="site-footer" role="contentinfo">
-          <div className="container footerbar" aria-label="著作権と法的リンク">
-            <div className="copy">© {year} Fragment Practice</div>
-            <nav className="legal" aria-label="法的リンク">
-              <a href="/terms">利用規約</a>
-              <span className="sep" aria-hidden="true">・</span>
-              <a href="/privacy">プライバシーポリシー</a>
-            </nav>
-          </div>
-        </footer>
-      </body>
-    </html>
-  );
-}
