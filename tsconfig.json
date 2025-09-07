@@ -15,11 +15,18 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [{ "name": "next" }],
-    "baseUrl": "./src",              // ★ 追加
-    "paths": {                       // ★ 追加
+
+    // ★ ここがポイント：src を基準に @/* をシンプル定義
+    "baseUrl": "./src",
+    "paths": {
       "@/*": ["*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,6 @@
 // app/news/page.tsx
 import Link from "next/link";
+
 import { updatesSorted } from "@/data/updates";
 
 export const metadata = { title: "News / Updates" };

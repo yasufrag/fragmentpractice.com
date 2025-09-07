@@ -1,5 +1,6 @@
 // app/sitemap.ts
 import type { MetadataRoute } from "next";
+
 import { siteUrl } from "@/lib/site";
 
 // ここに“公開して良い”URLだけを列挙します（/story は含めない）

@@ -1,6 +1,7 @@
 // src/app/news/[slug]/page.tsx
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
 import { updates } from "@/data/updates";
 
 type Params = { slug: string };

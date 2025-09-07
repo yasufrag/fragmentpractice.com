@@ -1,11 +1,8 @@
-// app/error.tsx
 "use client"
 
 export default function GlobalError({
-  error,
   reset,
 }: {
-  error: Error & { digest?: string }
   reset: () => void
 }) {
   return (
@@ -22,8 +19,6 @@ export default function GlobalError({
               <button className="chip" onClick={() => reset()}>再読み込み</button>
               <a className="chip" href="/">Home</a>
             </div>
-            {/* 開発時のデバッグ用（必要なら表示） */}
-            {/* <pre className="nf-meta">{error?.digest || error?.message}</pre> */}
           </section>
         </main>
       </body>

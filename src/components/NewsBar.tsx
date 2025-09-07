@@ -8,7 +8,7 @@ export default function NewsBar() {
     <div className="newsbar">
       <div className="container">
         <ul>
-          {items.map((u, i) => (
+          {items.map((u, _i) => (
             <li key={u.slug} title={u.title}>
               <strong>{u.date.replaceAll("-", "/")}</strong>
               <span>・</span>

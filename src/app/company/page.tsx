@@ -1,6 +1,5 @@
 // app/company/page.tsx
 import type { Metadata } from "next";
-import CopyChip from "@/components/CopyChip";
 
 export const metadata: Metadata = {
   title: "Company",

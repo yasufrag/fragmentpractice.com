@@ -1,10 +1,11 @@
 // app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
+import { Sora, Zen_Kaku_Gothic_New } from "next/font/google";
+
 import Header from "@/components/Header";
 
 /* ★ next/font（Google Fonts）でフォント読み込み */
-import { Sora, Zen_Kaku_Gothic_New } from "next/font/google";
 
 /* 見出し用（欧文主体） */
 const sora = Sora({
