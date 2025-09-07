@@ -1,76 +1,55 @@
 // components/BrandLogo.tsx
 "use client";
 
-import { memo, useId } from "react";
+import { memo } from "react";
 
-export default memo(function BrandLogo() {
-  const uid = useId();
-  const titleId = `fp-logo-${uid}`;
-
-  // ── 基本スケール
-  const FONT = 22;
-  const LINE = 22;
-  const CIRCLE = 40;     // 左シンボルの直径
-  const R = CIRCLE / 2;
-  const GAP = 12;
-  const SVG_H = 50;
-  const BASE_Y = 29;
-  const CY = 30;
-
-  const textW = FONT * 10;
-  const viewW = CIRCLE + GAP + textW;
-  const viewH = Math.max(SVG_H, CY + R + 4);
-
-  const SYM_SCALE = CIRCLE / 90;
-  const SYM_TX = R - 50 * SYM_SCALE;
-  const SYM_TY = CY - 50 * SYM_SCALE;
-
-  // ── 波線位置（2本のみ）
-  const W1 = 72, W2 = 82;
-  const CTRL_UP = 8; // 山の高さ
+function BrandLogo() {
+  // 図案（100x100）内の円の中心X
+  const CIRCLE_CX = 55;
+  // 波パスは中心X=50で描いてあるので +5 平行移動で揃える
+  const WAVE_OFFSET_X = CIRCLE_CX - 50; // = 5
 
   return (
     <svg
       role="img"
-      aria-labelledby={titleId}
+      aria-label="Fragment Practice"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 ${viewW} ${viewH}`}
-      preserveAspectRatio="xMinYMid meet"
+      viewBox="0 0 165 50"
       className="fp-brandlogo"
-      style={{ height: SVG_H, width: "auto", display: "block" }}
+      style={{ height: 50, width: "auto", display: "block" }}
     >
-      <title id={titleId}>Fragment Practice</title>
-
-      {/* ── 太陽（柿色）＋ 海（白抜き波2本） */}
-      <g transform={`translate(${SYM_TX}, ${SYM_TY}) scale(${SYM_SCALE})`}>
-        <circle cx="50" cy="50" r="45" fill="var(--accent)" />
-
+      {/* ── シンボル（太陽＋波） */}
+      <g transform="translate(0,5) scale(0.4)">
+        <circle cx={CIRCLE_CX} cy="50" r="45" fill="var(--accent)" />
         <g
-          stroke="var(--bg)" // 白抜き固定
-          strokeWidth="6"
+          transform={`translate(${WAVE_OFFSET_X},0)`}
+          stroke="#d9d9d9"
+          strokeWidth={6}
           fill="none"
           strokeLinecap="round"
         >
-          <path d={`M0 ${W1} Q 25 ${W1 - CTRL_UP}, 50 ${W1} T 100 ${W1}`} />
-          <path d={`M0 ${W2} Q 25 ${W2 - CTRL_UP}, 50 ${W2} T 100 ${W2}`} />
+          <path d="M0 72 Q 25 64, 50 72 T 100 72" />
+          <path d="M0 82 Q 25 74, 50 82 T 100 82" />
         </g>
       </g>
 
-      {/* ── ワードマーク */}
+      {/* ── ワードマーク（少し詰める：70 → 62） */}
       <g
-        transform={`translate(${CIRCLE + GAP}, 0)`}
+        transform="translate(60,0)"
         style={{
           fontFamily:
-            'var(--font-display), "Sora", ui-sans-serif, system-ui, -apple-system, "Zen Kaku Gothic New", "Noto Sans JP", sans-serif',
+            'var(--font-display), "Sora", ui-sans-serif, system-ui, "Zen Kaku Gothic New", "Noto Sans JP", sans-serif',
           fontWeight: 700,
           letterSpacing: "-0.01em",
           fill: "currentColor",
           textRendering: "optimizeLegibility",
         }}
       >
-        <text x={0} y={BASE_Y} fontSize={FONT}>Fragment</text>
-        <text x={0} y={BASE_Y + LINE} fontSize={FONT}>Practice</text>
+        <text x={0} y={22} fontSize={20}>Fragment</text>
+        <text x={0} y={45} fontSize={20}>Practice</text>
       </g>
     </svg>
   );
-});
+}
+
+export default memo(BrandLogo);
