@@ -1,10 +1,9 @@
-// /data/updates.ts
-export type Update = {
+export interface Update {
   slug: string;
   title: string;
   date: string;
   description: string;
-};
+}
 
 export const updates: Update[] = [
   {
@@ -25,4 +24,5 @@ export const updatesSorted = [...updates].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 );
 
+// 型チェック用: updates が Update[] であることを保証
 const _typeCheck: Update[] = updates;

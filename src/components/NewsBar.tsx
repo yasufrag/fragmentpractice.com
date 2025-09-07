@@ -1,4 +1,4 @@
-// /components/NewsBar.tsx
+import Link from "next/link";
 import { updatesSorted } from "@/data/updates";
 
 export default function NewsBar() {
@@ -8,16 +8,22 @@ export default function NewsBar() {
     <div className="newsbar">
       <div className="container">
         <ul>
-          {items.map((u, _i) => (
-            <li key={u.slug} title={u.title}>
+          {items.map((u) => (
+            <li key={u.slug}>
               <strong>{u.date.replaceAll("-", "/")}</strong>
               <span>・</span>
-              <a href={`/news/${u.slug}`} aria-label={`${u.title} の詳細へ`} className="title">
+              <Link
+                href={`/news/${u.slug}`}
+                aria-label={`${u.title} の詳細ページへ`}
+                className="title"
+              >
                 {u.title}
-              </a>
+              </Link>
             </li>
           ))}
-          <li className="more"><a href="/news">More</a></li>
+          <li className="more">
+            <Link href="/news">More</Link>
+          </li>
         </ul>
       </div>
     </div>

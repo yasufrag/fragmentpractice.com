@@ -4,19 +4,25 @@ import { notFound } from "next/navigation";
 
 import { updates } from "@/data/updates";
 
-type Params = { slug: string };
+/** ルートパラメータ */
+interface Params {
+  slug: string;
+}
 
+/** SSG: 動的パスを事前生成 */
 export function generateStaticParams() {
   return updates.map((u) => ({ slug: u.slug }));
 }
 
-// ★ Promise 版（async）に修正
+/** SEO: メタデータ（Next 15: params は Promise で受け取れる） */
 export async function generateMetadata(
   { params }: { params: Promise<Params> }
 ): Promise<Metadata> {
   const { slug } = await params;
   const u = updates.find((x) => x.slug === slug);
-  if (!u) return { title: "News" };
+  if (!u) {
+    return { title: "News" };
+  }
   return {
     title: u.title,
     description: u.description,
@@ -27,7 +33,7 @@ export async function generateMetadata(
   };
 }
 
-// ★ page 本体も Promise 版（async）に修正
+/** ページ本体（Next 15: params を Promise で受け取る） */
 export default async function NewsDetailPage(
   { params }: { params: Promise<Params> }
 ) {
@@ -47,7 +53,10 @@ export default async function NewsDetailPage(
           })}
         </p>
       </header>
-      <p style={{ fontSize: 18, lineHeight: 1.8 }}>{u.description}</p>
+
+      <p style={{ fontSize: 18, lineHeight: 1.8 }}>
+        {u.description}
+      </p>
     </article>
   );
 }
