@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link";
 
 export default function GlobalError({
   reset,
@@ -17,7 +18,7 @@ export default function GlobalError({
             </p>
             <div className="nf-actions">
               <button className="chip" onClick={() => reset()}>再読み込み</button>
-              <a className="chip" href="/">Home</a>
+              <Link className="chip" href="/">Home</Link>
             </div>
           </section>
         </main>

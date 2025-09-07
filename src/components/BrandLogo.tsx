@@ -62,7 +62,7 @@ export default memo(function BrandLogo() {
         style={{
           fontFamily:
             'var(--font-display), "Sora", ui-sans-serif, system-ui, -apple-system, "Zen Kaku Gothic New", "Noto Sans JP", sans-serif',
-          fontWeight: 700 as any,
+          fontWeight: 700,
           letterSpacing: "-0.01em",
           fill: "currentColor",
           textRendering: "optimizeLegibility",

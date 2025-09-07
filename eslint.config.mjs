@@ -1,88 +1,67 @@
 // eslint.config.mjs
 import js from "@eslint/js";
-import * as tseslint from "typescript-eslint"; // ← parser と plugin を使う
-import nextPlugin from "@next/eslint-plugin-next";
-import importPlugin from "eslint-plugin-import";
 import globals from "globals";
+import tseslint from "typescript-eslint";
 import { FlatCompat } from "@eslint/eslintrc";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
+});
 
 export default [
-  // 1) 無視（JSの設定ファイルは対象外に）
+  // JS/TS 共通設定
   {
-    ignores: [
-      "**/node_modules/**",
-      "**/.next/**",
-      "**/out/**",
-      "**/dist/**",
-      "**/.turbo/**",
-      "eslint.config.mjs",
-    ],
+    ignores: ["**/.next/**", "**/node_modules/**", "**/dist/**", "next-env.d.ts"],
   },
-
-  // 2) JS 基本
   {
-    ...js.configs.recommended,
-    languageOptions: { globals: { ...globals.browser, ...globals.node } },
-  },
-
-  // 3) Next Core Web Vitals（.eslintrc 形式は互換レイヤで）
-  ...compat.extends("plugin:@next/next/core-web-vitals"),
-
-  // 4) TS/TSX 専用（ここでだけ型付きLintを有効化）
-  {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.{js,mjs,cjs,ts,tsx}"],
     languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        project: "./tsconfig.json",
-        tsconfigRootDir: process.cwd(),
-        ecmaVersion: "latest",
-        sourceType: "module",
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.browser,
+        ...globals.node,
       },
     },
-    plugins: {
-      "@typescript-eslint": tseslint.plugin,
-      "@next/next": nextPlugin,
-      import: importPlugin,
-    },
-    settings: {
-      "import/resolver": {
-        typescript: { project: "./tsconfig.json", alwaysTryTypes: true },
-        node: { extensions: [".js", ".jsx", ".ts", ".tsx"] },
+  },
+
+  // Next.js core-web-vitals を FlatCompat で取り込み
+  ...compat.extends("plugin:@next/next/core-web-vitals"),
+
+  // TypeScript 向け設定
+  ...tseslint.config({
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      ...tseslint.configs.recommendedTypeChecked,
+      ...tseslint.configs.stylistic,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ["./tsconfig.json"],
+        tsconfigRootDir: __dirname,
       },
     },
     rules: {
-      // JSベースのルールはTSでは無効化
+      // JSルールを無効化し、TS版で上書き
       "no-unused-vars": "off",
-      "no-undef": "off",
-
-      // Next
-      "@next/next/no-html-link-for-pages": "off",
-
-      // import 並び
-      "import/order": [
-        "warn",
-        {
-          groups: ["builtin", "external", "internal", ["parent", "sibling", "index"]],
-          pathGroups: [{ pattern: "@/**", group: "internal", position: "before" }],
-          "newlines-between": "always",
-          alphabetize: { order: "asc", caseInsensitive: true },
-        },
-      ],
-
-      // TS推奨（型必須）
-      "@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
-      "@typescript-eslint/no-floating-promises": "error",
-      "@typescript-eslint/await-thenable": "error",
       "@typescript-eslint/no-unused-vars": [
         "warn",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" }
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
-
-      // console
-      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-undef": "off",
     },
-  },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: "./tsconfig.json",
+        },
+        node: true,
+      },
+    },
+  }),
 ];
