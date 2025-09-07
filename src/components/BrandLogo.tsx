@@ -26,7 +26,7 @@ export default memo(function BrandLogo() {
   const SYM_TY = CY - 50 * SYM_SCALE;
 
   // ── 波線位置（2本のみ）
-  const W1 = 70, W2 = 84;
+  const W1 = 72, W2 = 82;
   const CTRL_UP = 8; // 山の高さ
 
   return (
