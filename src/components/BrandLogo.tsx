@@ -6,30 +6,28 @@ import { memo, useId } from "react";
 export default memo(function BrandLogo() {
   const uid = useId();
   const titleId = `fp-logo-${uid}`;
-  const maskId = `fp-bite-${uid}`;
 
-  // ヘッダー固定スケール
+  // ── 基本スケール
   const FONT = 22;
   const LINE = 22;
-  const CIRCLE = 40;
+  const CIRCLE = 40;     // 左シンボルの直径
+  const R = CIRCLE / 2;
   const GAP = 12;
   const SVG_H = 50;
   const BASE_Y = 29;
   const CY = 30;
 
-  // 欠け設定（案A）
-  const BITE_ANGLE_DEG = 20; // 0=右, 90=下
-  const BITE_RATIO = 0.33;   // 半径に対する欠けの半径
-  const toRad = (d: number) => (d * Math.PI) / 180;
-
-  const biteR = (CIRCLE / 2) * BITE_RATIO;
-  const biteCx = CIRCLE / 2 + (CIRCLE / 2) * Math.cos(toRad(BITE_ANGLE_DEG));
-  const biteCy = CY + (CIRCLE / 2) * Math.sin(toRad(BITE_ANGLE_DEG));
-
-  // ビューボックス（テキスト分に余裕を見て広め）
   const textW = FONT * 10;
   const viewW = CIRCLE + GAP + textW;
-  const viewH = Math.max(SVG_H, CY + CIRCLE / 2 + 4);
+  const viewH = Math.max(SVG_H, CY + R + 4);
+
+  const SYM_SCALE = CIRCLE / 90;
+  const SYM_TX = R - 50 * SYM_SCALE;
+  const SYM_TY = CY - 50 * SYM_SCALE;
+
+  // ── 波線位置（2本のみ）
+  const W1 = 70, W2 = 84;
+  const CTRL_UP = 8; // 山の高さ
 
   return (
     <svg
@@ -38,29 +36,27 @@ export default memo(function BrandLogo() {
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${viewW} ${viewH}`}
       preserveAspectRatio="xMinYMid meet"
-      className="fp-brandlogo"               // ← CSSでフォント適用（下記2)参照）
+      className="fp-brandlogo"
       style={{ height: SVG_H, width: "auto", display: "block" }}
     >
       <title id={titleId}>Fragment Practice</title>
 
-      {/* 欠けマスク */}
-      <defs>
-        <mask id={maskId}>
-          <rect x="0" y="0" width={viewW} height={viewH} fill="white" />
-          <circle cx={biteCx} cy={biteCy} r={biteR} fill="black" />
-        </mask>
-      </defs>
+      {/* ── 太陽（柿色）＋ 海（白抜き波2本） */}
+      <g transform={`translate(${SYM_TX}, ${SYM_TY}) scale(${SYM_SCALE})`}>
+        <circle cx="50" cy="50" r="45" fill="var(--accent)" />
 
-      {/* 欠けた円（柿色＝--accent に追従） */}
-      <circle
-        cx={CIRCLE / 2}
-        cy={CY}
-        r={CIRCLE / 2}
-        fill="var(--accent)"
-        mask={`url(#${maskId})`}
-      />
+        <g
+          stroke="var(--bg)" // 白抜き固定
+          strokeWidth="6"
+          fill="none"
+          strokeLinecap="round"
+        >
+          <path d={`M0 ${W1} Q 25 ${W1 - CTRL_UP}, 50 ${W1} T 100 ${W1}`} />
+          <path d={`M0 ${W2} Q 25 ${W2 - CTRL_UP}, 50 ${W2} T 100 ${W2}`} />
+        </g>
+      </g>
 
-      {/* ワードマーク（見出しフォント＝--font-display を“CSS＆inline”で二重適用） */}
+      {/* ── ワードマーク */}
       <g
         transform={`translate(${CIRCLE + GAP}, 0)`}
         style={{
