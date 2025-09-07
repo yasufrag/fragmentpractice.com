@@ -41,10 +41,11 @@ export const metadata: Metadata = {
     description: "共創・実験・編集のためのスタジオ",
     images: ["/og.jpg"],
   },
-  icons: [
-    { rel: "icon", url: "/favicon.ico" },
-    { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
-  ],
+icons: [
+  { rel: "icon", url: "/favicon.ico" },
+  { rel: "icon", type: "image/svg+xml", url: "/icon.svg" },
+  { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
+],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
