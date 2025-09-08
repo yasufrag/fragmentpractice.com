@@ -32,13 +32,19 @@ const HEIGHT = 630 as const;
 async function loadFonts() {
   type FontMeta = {
     name: string;
-    file: string;
+    file: string;           // public/fonts に置く想定名（まずここを試す）
     weight: number;
     style: "normal" | "italic";
   };
+
   const must: FontMeta[] = [
     { name: "Sora", file: "Sora-Bold.ttf", weight: 700, style: "normal" },
-    { name: "Zen Kaku Gothic New", file: "ZenKakuGothicNew-Regular.ttf", weight: 400, style: "normal" },
+    {
+      name: "Zen Kaku Gothic New",
+      file: "ZenKakuGothicNew-Regular.ttf",
+      weight: 400,
+      style: "normal",
+    },
   ];
 
   const detectFormat = (buf: Buffer): "ttf" | "otf" | "woff" | "woff2" | "ttc" | "unknown" => {
@@ -47,51 +53,117 @@ async function loadFonts() {
     if (sig === "wOFF") return "woff";
     if (sig === "wOF2") return "woff2";
     if (sig === "ttcf") return "ttc";
-    // TTF は 00 01 00 00 か "true"
+    // TTF: 00 01 00 00 または 'true'
     if (buf[0] === 0x00 && buf[1] === 0x01 && buf[2] === 0x00 && buf[3] === 0x00) return "ttf";
     if (sig === "true") return "ttf";
     return "unknown";
   };
 
-  const fonts: Array<{
+  async function tryReadPublic(file: string) {
+    const p = path.join(FONTS, file);
+    try {
+      const data = await fs.readFile(p);
+      return { data, path: p };
+    } catch {
+      return null;
+    }
+  }
+
+  // @fontsource 側のファイルを自動検出（woff2 を優先）
+  async function tryReadFromFontsource(pkg: string, weight: number): Promise<{ data: Buffer; format: "woff2" | "woff"; path: string } | null> {
+    const base = path.join(ROOT, "node_modules", pkg, "files");
+    try {
+      const files = await fs.readdir(base);
+      // 優先順: woff2 → woff
+      const pick = (ext: "woff2" | "woff") =>
+        files.find((f) => new RegExp(`${weight}-normal\\.${ext}$`).test(f));
+      const w2 = pick("woff2");
+      if (w2) {
+        const p = path.join(base, w2);
+        const data = await fs.readFile(p);
+        return { data, format: "woff2", path: p };
+      }
+      const w1 = pick("woff");
+      if (w1) {
+        const p = path.join(base, w1);
+        const data = await fs.readFile(p);
+        return { data, format: "woff", path: p };
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  const out: Array<{
     name: string;
     data: Buffer;
     weight: number;
     style: "normal" | "italic";
-    // satori は format を指定可能（woff/woff2 を安全に扱う）
-    format?: "woff" | "woff2" | "ttf" | "otf";
+    format?: "ttf" | "otf" | "woff" | "woff2";
   }> = [];
 
-  for (const f of must) {
-    const p = path.join(FONTS, f.file);
-    let data: Buffer;
-    try {
-      data = await fs.readFile(p);
-    } catch {
+  for (const meta of must) {
+    // 1) public/fonts をまず試す
+    let buf: Buffer | null = null;
+    let fmt: ReturnType<typeof detectFormat> = "unknown";
+    let fromPath = "";
+
+    const pub = await tryReadPublic(meta.file);
+    if (pub) {
+      buf = pub.data;
+      fmt = detectFormat(buf);
+      fromPath = pub.path;
+    }
+
+    // 2) 形式が不正/未配置なら @fontsource を試す
+    if (!buf || fmt === "unknown" || fmt === "ttc") {
+      let fallback: { data: Buffer; format: "woff2" | "woff"; path: string } | null = null;
+      if (meta.name === "Sora") {
+        fallback = await tryReadFromFontsource("@fontsource/sora", meta.weight);
+      } else if (meta.name === "Zen Kaku Gothic New") {
+        // 日本語フォントは “japanese” サブセットの 400 を探す
+        // （パッケージ側の実ファイル名は環境で若干変わるため weight でマッチ）
+        fallback = await tryReadFromFontsource("@fontsource/zen-kaku-gothic-new", meta.weight);
+      }
+
+      if (fallback) {
+        buf = fallback.data;
+        fmt = fallback.format;
+        fromPath = fallback.path;
+      }
+    }
+
+    if (!buf) {
       throw new Error(
-        `Font not found: ${p}\n→ public/fonts/ に ${f.file} を配置してください（name="${f.name}", weight=${f.weight}).`
+        `Font not found for "${meta.name}".\n` +
+          `→ public/fonts/${meta.file} を正しい TTF/OTF で置くか、\n` +
+          `   pnpm add -D @fontsource/sora @fontsource/zen-kaku-gothic-new を入れて再実行してください。`
       );
     }
 
-    const format = detectFormat(data);
-    if (format === "unknown" || format === "ttc") {
+    // 最終判定
+    if (fmt === "unknown" || fmt === "ttc") {
+      const sig = buf.subarray(0, 8).toString("hex");
       throw new Error(
-        `Unsupported font format for ${f.file} (detected: ${format}).\n` +
-          `→ TTF/OTF か WOFF/WOFF2 を用意してください（TTCは不可）。`
+        `Unsupported font format for ${meta.name} (detected: ${fmt}).\n` +
+          `Path: ${fromPath}\n` +
+          `Head: ${sig}\n` +
+          `→ 正しい TTF/OTF か、@fontsource 由来の WOFF/WOFF2 を使ってください（TTC/Zip/HTML不可）。`
       );
     }
 
-    // opentype.js 経由の satori は TTF/OTF が最も堅い。
-    // WOFF/WOFF2 も format を付ければ動きますが、ビルドの相性で弾かれることがあります。
-    fonts.push({
-      name: f.name,
-      data,
-      weight: f.weight,
-      style: f.style,
-      format: format === "woff" || format === "woff2" ? format : undefined,
+    out.push({
+      name: meta.name,
+      data: buf,
+      weight: meta.weight,
+      style: meta.style,
+      // satori には woff/woff2 の場合 format を付けるのが安全
+      format: fmt === "woff" || fmt === "woff2" ? fmt : undefined,
     });
   }
-  return fonts;
+
+  return out;
 }
 
 function brandSymbol(size = 120) {

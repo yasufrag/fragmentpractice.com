@@ -12,7 +12,8 @@
     "og": "tsx scripts/gen-og.mts",
     "slides": "tsx scripts/gen-slides.mts",
     "slides:pdf": "tsx scripts/export-pdf.mts",
-    "generate": "pnpm icons && pnpm og && pnpm slides && pnpm slides:pdf"
+    "generate": "pnpm icons && pnpm og && pnpm slides && pnpm slides:pdf",
+    "postinstall": "playwright install chromium"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
@@ -23,6 +24,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.34.0",
+    "@fontsource/sora": "^5.2.6",
+    "@fontsource/zen-kaku-gothic-new": "^5.2.6",
     "@next/eslint-plugin-next": "^15.5.2",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.3.0",

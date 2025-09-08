@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>Fragment Practice — Slides</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.min.js" as="script">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" id="theme">
+  <style>
+    .reveal h1, .reveal h2, .reveal h3 { letter-spacing: -0.02em; }
+    .reveal section { text-align: left; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      
+        <section>
+          <h1>Fragment Practice</h1>
+          <p>（ここにスライドのMarkdownを置くと自動で読み込まれます）</p>
+          <pre><code>mkdir slides
+echo "# タイトル
+
+---
+
+本文" > slides/deck.md
+          </code></pre>
+        </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/markdown/markdown.min.js"></script>
+  <script>
+    const deck = new Reveal({
+      hash: true,
+      slideNumber: true,
+      plugins: [ RevealMarkdown ],
+      pdfSeparateFragments: false
+    });
+    deck.initialize();
+  </script>
+</body>
+</html>

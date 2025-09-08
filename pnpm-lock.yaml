@@ -27,6 +27,12 @@ importers:
       '@eslint/js':
         specifier: ^9.34.0
         version: 9.35.0
+      '@fontsource/sora':
+        specifier: ^5.2.6
+        version: 5.2.6
+      '@fontsource/zen-kaku-gothic-new':
+        specifier: ^5.2.6
+        version: 5.2.6
       '@next/eslint-plugin-next':
         specifier: ^15.5.2
         version: 15.5.2
@@ -299,6 +305,12 @@ packages:
   '@eslint/plugin-kit@0.3.5':
     resolution: {integrity: sha512-Z5kJ+wU3oA7MMIqVR9tyZRtjYPr4OC004Q4Rw7pgOKUOKkJfZ3O24nz3WYfGRpMDNmcOi3TwQOmgm7B7Tpii0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fontsource/sora@5.2.6':
+    resolution: {integrity: sha512-OPknOmn82HIJg32UGg9iEjEVFdC+xOZBqrmQNUgsem6hFwBBrqXnTwIpro7leq/uFRdupkN42hc0JJKH20j22w==}
+
+  '@fontsource/zen-kaku-gothic-new@5.2.6':
+    resolution: {integrity: sha512-8gh1SbAjzEtK36ZrzlR+U8SO+EdpgykyBviS/QIIgDNwUqERxyF0QSLvlLNtMtnFUC3AEPkOUGH0L+o7KGyMnA==}
 
   '@formspree/core@4.0.0':
     resolution: {integrity: sha512-geNlUut5nME1Ztej5Pzx1BrlQ1fFIcJYIqmF+Vm0jaUbpZxjXvt7SDOGeQVkuxn80QJiIHlwBGGjSBFjPX/KDw==}
@@ -2368,6 +2380,10 @@ snapshots:
     dependencies:
       '@eslint/core': 0.15.2
       levn: 0.4.1
+
+  '@fontsource/sora@5.2.6': {}
+
+  '@fontsource/zen-kaku-gothic-new@5.2.6': {}
 
   '@formspree/core@4.0.0':
     dependencies:
