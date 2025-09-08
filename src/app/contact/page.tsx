@@ -30,7 +30,7 @@ export default function ContactPage() {
   }, [state.ok]);
 
   return (
-    <main className="site-container py-12">
+    <main className="site-fp-container py-12">
       <a href="#contact-form" className="skip-link">フォームにスキップ</a>
 
       <header className="mb-6">

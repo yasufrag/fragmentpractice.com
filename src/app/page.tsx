@@ -13,7 +13,7 @@ export default function HomePage() {
       {/* News（最大3件・静かに） */}
       <NewsBar />
 
-      <div className="container">
+      <div className="fp-container">
         {/* Hero */}
         <section className="hero" style={{ textAlign: "left" }}>
           <h1 className="h1" style={{ marginTop: 16, maxWidth: 860 }}>
@@ -33,7 +33,7 @@ export default function HomePage() {
         </section>
 
         {/* 私たちが大切にすること（3点のみ） */}
-        <section className="section" aria-labelledby="values">
+        <section className="fp-section" aria-labelledby="values">
           <h2 id="values" className="h2" style={{ marginBottom: 12 }}>
             私たちが大切にすること
           </h2>

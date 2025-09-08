@@ -42,7 +42,7 @@ export default async function NewsDetailPage(
   if (!u) notFound();
 
   return (
-    <article className="container section" style={{ maxWidth: 840 }}>
+    <article className="fp-container fp-section" style={{ maxWidth: 840 }}>
       <header style={{ marginBottom: 16 }}>
         <h1 className="h2" style={{ marginBottom: 6 }}>{u.title}</h1>
         <p className="muted" aria-label="date">

@@ -7,8 +7,8 @@ export const metadata = { title: "News / Updates" };
 
 export default function NewsIndexPage() {
   return (
-    <div className="container">
-      <section className="section" aria-labelledby="news">
+    <div className="fp-container">
+      <section className="fp-section" aria-labelledby="news">
         <h1 id="news" className="h2">News / Updates</h1>
 
         <ul

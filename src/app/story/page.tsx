@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function StoryPage() {
   return (
-    <div className="container">
+    <div className="fp-container">
       {/* Hero */}
       <section className="hero" style={{ textAlign: "left" }}>
         <h1 className="h1" style={{ marginTop: 16 }}>Story</h1>
@@ -22,7 +22,7 @@ export default function StoryPage() {
       </section>
 
       {/* Roots */}
-      <section className="section" aria-labelledby="roots">
+      <section className="fp-section" aria-labelledby="roots">
         <h2 id="roots" className="h2">瀬戸内から始まる軌跡</h2>
         <p style={{ maxWidth: 840, marginBottom: 16 }}>
           Fragment Practice の物語は、香川県・瀬戸内に根を持ちます。
@@ -38,7 +38,7 @@ export default function StoryPage() {
       </section>
 
       {/* Company Vision */}
-      <section className="section" aria-labelledby="vision">
+      <section className="fp-section" aria-labelledby="vision">
         <h2 id="vision" className="h2">Fragment Practice という法人</h2>
         <p style={{ maxWidth: 840, marginBottom: 16 }}>
           Fragment Practice 合同会社は、
@@ -60,7 +60,7 @@ export default function StoryPage() {
       </section>
 
       {/* Closing */}
-      <section className="section" aria-labelledby="closing">
+      <section className="fp-section" aria-labelledby="closing">
         <h2 id="closing" className="h2">高松から、世界へ</h2>
         <p style={{ maxWidth: 840, marginBottom: 16 }}>
           私たちは AI を“便利さ”のためだけに使いません。

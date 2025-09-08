@@ -38,7 +38,7 @@ export default function CompanyPage() {
   };
 
   return (
-    <div className="container">
+    <div className="fp-container">
       {/* Hero */}
       <section className="hero" style={{ textAlign: "left" }}>
         <h1 className="h1" style={{ marginTop: 16 }}>Company</h1>
@@ -49,7 +49,7 @@ export default function CompanyPage() {
       </section>
 
       {/* 会社概要 */}
-      <section className="section" aria-labelledby="overview">
+      <section className="fp-section" aria-labelledby="overview">
         <h2 id="overview" className="h2" style={{ marginBottom: 12 }}>会社概要</h2>
 
         <article className="orgcard" aria-label="会社情報">

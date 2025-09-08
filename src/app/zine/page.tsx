@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ZinePage() {
   return (
-    <div className="container">
+    <div className="fp-container">
       {/* Hero（最小） */}
       <section className="hero" style={{ textAlign: "left" }}>
         <h1 className="h1" style={{ marginTop: 16 }}>ZINE</h1>
@@ -22,7 +22,7 @@ export default function ZinePage() {
       </section>
 
       {/* Coming Soon（静かなカード） */}
-      <section className="section" aria-labelledby="coming">
+      <section className="fp-section" aria-labelledby="coming">
         <div className="coming--quiet" role="status" aria-live="polite">
           <div className="coming-header">
             <span className="pill" aria-hidden>COMING&nbsp;SOON</span>
@@ -53,7 +53,7 @@ export default function ZinePage() {
       </section>
 
       {/* 編集の姿勢（短く） */}
-      <section className="section" aria-labelledby="ethos">
+      <section className="fp-section" aria-labelledby="ethos">
         <h2 id="ethos" className="h2" style={{ marginBottom: 12 }}>編集の姿勢</h2>
         <ul className="list-check" style={{ maxWidth: 840 }}>
           <li>技術を目的化せず、生活のリズムを損なわない編集。</li>
@@ -63,7 +63,7 @@ export default function ZinePage() {
       </section>
 
       {/* 参加・入手（プレースホルダ） */}
-      <section className="section" aria-labelledby="access">
+      <section className="fp-section" aria-labelledby="access">
         <h2 id="access" className="h2" style={{ marginBottom: 12 }}>入手と案内</h2>
         <p style={{ maxWidth: 840, marginBottom: 8, color: "var(--muted)" }}>
           初回は少部数頒布のため、一般販売は行わない可能性があります。

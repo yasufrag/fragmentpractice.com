@@ -17,7 +17,7 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <div className="container nav" aria-label="グローバルナビ">
+      <div className="fp-container nav" aria-label="グローバルナビ">
         {/* Brand */}
         <div className="brand">
           <Link href="/" aria-label="Fragment Practice ホーム" className="brand-link">

@@ -17,7 +17,7 @@ function ObfuscatedEmail() {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="container section prose">
+    <div className="fp-container fp-section prose">
       <h1 className="h1">プライバシーポリシー</h1>
       <p className="lead" style={{ marginTop: 8 }}>
         Fragment Practice合同会社（以下「当社」）は、個人情報の適正な取扱いを重要な責務とし、

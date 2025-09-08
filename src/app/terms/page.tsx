@@ -2,7 +2,7 @@ export const metadata = { title: "Terms of Service" };
 
 export default function TermsOfService() {
   return (
-    <div className="container section">
+    <div className="fp-container fp-section">
       <h1 className="h1">利用規約</h1>
       <p className="lead" style={{ marginTop: 8 }}>
         本利用規約（以下「本規約」）は、Fragment Practice合同会社（以下「当社」）が提供する各種サービスの利用条件を定めるものです。

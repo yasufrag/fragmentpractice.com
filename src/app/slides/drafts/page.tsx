@@ -12,7 +12,7 @@ export default async function DraftSlidesPage() {
   const drafts = await getSlides(true).then(list => list.filter(s => !s.published));
 
   return (
-    <div className="container">
+    <div className="fp-container">
       <section className="hero" style={{ textAlign: "left" }}>
         <h1 className="h1" style={{ marginTop: 16 }}>Draft Slides</h1>
         <p className="lead" style={{ marginTop: 8, maxWidth: 760 }}>

@@ -6,7 +6,7 @@ export default function NewsBar() {
 
   return (
     <div className="newsbar">
-      <div className="container">
+      <div className="fp-container">
         <ul>
           {items.map((u) => (
             <li key={u.slug}>

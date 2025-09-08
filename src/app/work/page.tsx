@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="container">
+    <div className="fp-container">
       {/* Hero */}
       <section className="hero" style={{ textAlign: "left" }}>
         <h1 className="h1" style={{ marginTop: 16 }}>Work</h1>
@@ -19,7 +19,7 @@ export default function WorkPage() {
       </section>
 
       {/* 提供内容 */}
-      <section className="section" aria-labelledby="offers">
+      <section className="fp-section" aria-labelledby="offers">
         <h2 id="offers" className="h2" style={{ marginBottom: 12 }}>提供内容</h2>
 
         <div className="grid" style={{ marginTop: 8 }}>
@@ -65,7 +65,7 @@ export default function WorkPage() {
       </section>
 
       {/* 進め方 */}
-      <section className="section" aria-labelledby="process">
+      <section className="fp-section" aria-labelledby="process">
         <h2 id="process" className="h2" style={{ marginBottom: 12 }}>進め方</h2>
         <ol style={{ marginTop: 8, paddingLeft: 18, maxWidth: 840 }}>
           <li>
@@ -81,7 +81,7 @@ export default function WorkPage() {
       </section>
 
       {/* 契約形態 */}
-      <section className="section" aria-labelledby="engagements">
+      <section className="fp-section" aria-labelledby="engagements">
         <h2 id="engagements" className="h2" style={{ marginBottom: 12 }}>契約形態</h2>
         <div className="grid" style={{ marginTop: 8 }}>
           <div className="card" style={{ gridColumn: "span 4" }}>
@@ -106,7 +106,7 @@ export default function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className="section" aria-labelledby="cta">
+      <section className="fp-section" aria-labelledby="cta">
         <h2 id="cta" className="h2" style={{ marginBottom: 12 }}>まずは小さく、静かに試す</h2>
         <p style={{ maxWidth: 720, marginBottom: 12 }}>
           現在、対応枠は限られています。概要が固まっていなくても構いません。

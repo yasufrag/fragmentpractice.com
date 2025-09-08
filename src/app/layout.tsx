@@ -88,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Footer */}
         <footer className="site-footer" role="contentinfo">
-          <div className="container footerbar" aria-label="著作権と法的リンク">
+          <div className="fp-container footerbar" aria-label="著作権と法的リンク">
             <nav className="legal" aria-label="法的リンク">
               <a href="/terms">利用規約</a>
               <span className="sep" aria-hidden="true">・</span>
