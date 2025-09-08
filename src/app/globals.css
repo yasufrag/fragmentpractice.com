@@ -329,3 +329,14 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
   .newsbar li.more{ display:inline-flex; flex:0 0 auto; }
   .newsbar .title{ max-width:60vw; }
 }
+
+/* contact: 2カラムレイアウト */
+.cf-grid{
+  display:grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px 16px;
+  max-width: 760px;
+}
+@media (max-width:640px){
+  .cf-grid{ grid-template-columns: 1fr; }
+}
