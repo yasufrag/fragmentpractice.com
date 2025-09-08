@@ -1,32 +1,76 @@
-// src/app/contact/page.tsx
 import type { Metadata } from "next";
-import { ContactForm } from "./form";
 
 export const metadata: Metadata = {
   title: "Contact — Fragment Practice",
-  description: "お問い合わせフォーム",
+  description: "Fragment Practice合同会社へのお問い合わせフォームです。",
 };
 
 export default function ContactPage() {
   return (
-    <main>
-      <div className="fp-container section">
-        {/* Heading */}
-        <section aria-labelledby="contact-title" className="fp-section">
-          <h1 id="contact-title" className="h1" style={{ marginTop: 8 }}>
-            お問い合わせ
-          </h1>
-          <p className="lead" style={{ marginTop: 8, maxWidth: 720 }}>
-            共同・講演・ZINE制作など、ご相談は以下からどうぞ。<br />
-            <span aria-hidden="true">※</span>は必須項目です。送信後は担当者より折り返しご連絡します。
-          </p>
-        </section>
+    <div className="fp-container">
+      <div className="fp-section">
+        <h1 className="h1">Contact</h1>
+        <p className="lead" style={{ marginTop: 8 }}>
+          お問い合わせは以下のフォームからお願いいたします。
+        </p>
 
-        {/* Form */}
-        <section aria-label="お問い合わせフォーム" className="fp-section" style={{ paddingTop: 12 }}>
-          <ContactForm />
-        </section>
+        <form
+          className="cf-form"
+          action={process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT}
+          method="POST"
+        >
+          {/* 名前 */}
+          <div className="cf-grid">
+            <label htmlFor="name" className="cf-label">お名前</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              className="cf-input"
+            />
+          </div>
+
+          {/* メール */}
+          <div className="cf-grid">
+            <label htmlFor="email" className="cf-label">メールアドレス</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className="cf-input"
+            />
+          </div>
+
+          {/* 内容 */}
+          <div className="cf-grid">
+            <label htmlFor="message" className="cf-label">お問い合わせ内容</label>
+            <textarea
+              id="message"
+              name="message"
+              rows={6}
+              required
+              className="cf-textarea"
+            />
+          </div>
+
+          {/* ハニーポット（スパム対策） */}
+          <input type="text" name="hp_url" className="sr-only" tabIndex={-1} autoComplete="off" />
+
+          {/* 同意 */}
+          <div className="cf-grid">
+            <label className="cf-label">
+              <input type="checkbox" name="consent" required /> 個人情報の取扱いに同意します
+            </label>
+          </div>
+
+          {/* ボタン */}
+          <button type="submit" className="btn-primary" style={{ marginTop: 16 }}>
+            送信する
+          </button>
+        </form>
       </div>
-    </main>
+    </div>
   );
 }
