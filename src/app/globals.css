@@ -319,3 +319,12 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
   .newsbar li.more{ display:inline-flex; flex:0 0 auto; }
   .newsbar .title{ max-width:60vw; }
 }
+
+:root {
+  --wave-line: hsl(0 0% 88%);  /* ライトモード用 */
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wave-line: hsl(0 0% 40%); /* ダークモード用はやや濃いめに */
+  }
+}
