@@ -61,7 +61,7 @@ async function readAllFromContent(): Promise<Slide[]> {
     const hasHtml = await pathExists(htmlIndex);
     const hasPdf  = await pathExists(pdfFile);
 
-    const htmlUrl = hasHtml ? `/slides-static/${slug}/` : undefined;
+    const htmlUrl = hasHtml ? `/slides-static/${slug}/index.html` : undefined;
     const pdfUrl  = hasPdf  ? `/slides-static/pdf/${slug}.pdf` : undefined;
 
     items.push({ slug, title, date, event, published, hasHtml, hasPdf, htmlUrl, pdfUrl });
