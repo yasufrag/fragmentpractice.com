@@ -5,7 +5,7 @@ import { getSlides } from "@/lib/slides";
 export const metadata: Metadata = {
   title: "Draft Slides — Slides",
   description: "非公開（下書き）スライド一覧",
-  robots: { index: false, follow: false }, // 検索避け
+  robots: { index: false, follow: false },
 };
 
 export default async function DraftSlidesPage() {

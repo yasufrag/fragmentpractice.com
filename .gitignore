@@ -1,25 +1,62 @@
-# Next.js build
+# ─────────────────────────
+# Node / Next.js 基本
+# ─────────────────────────
+node_modules/
 .next/
-
-# TypeScript / Next build cache
+.out/
 *.tsbuildinfo
 .swc/
+.eslintcache
+.turbo/
 
-# Dependencies
-node_modules/
+# ─────────────────────────
+# 生成アセット（スクリプトで再生成）
+# ─────────────────────────
+# スライド (HTML/PDF)
+public/slides/
 
-# Env (機密)
+# OG 画像（News 用のバッチ生成物）
+public/og-news/
+
+# 共通 OG 画像（CIで毎回生成するなら無視してOK）
+public/og.jpg
+
+# アイコン類（scripts/gen-icons.mjs で生成）
+public/favicon-*.png
+public/favicon.ico
+public/apple-touch-icon*.png
+
+# ─────────────────────────
+# Playwright / テスト
+# ─────────────────────────
+playwright-report/
+test-results/
+.ms-playwright/
+
+# ─────────────────────────
+# 環境変数（機密）
+# ─────────────────────────
 .env
 .env*.local
 
-# Logs
+# ─────────────────────────
+# ログ
+# ─────────────────────────
 *.log
 npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
 
-# Lint cache
-.eslintcache
-
-# OS / Editor
+# ─────────────────────────
+# エディタ / OS
+# ─────────────────────────
 .DS_Store
+Thumbs.db
+.idea/
+# .vscode/ を共有しない場合のみ有効化
+# .vscode/
+
+# ─────────────────────────
+# CI / ホスティング固有
+# ─────────────────────────
+.vercel/

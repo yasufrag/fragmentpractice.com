@@ -8,21 +8,21 @@ img, svg { display: block; max-width: 100%; height: auto; }
 /* ===================== Tokens / Base (Sumi & Kaki) ===================== */
 :root{
   /* Base */
-  --bg:#FAFAF7;        /* 和紙系オフ白 */
-  --fg:#0B0B0B;        /* 墨 */
-  --muted:#6C6F75;     /* ニュートラル灰 */
-  --line:#E8E4DC;      /* 温かい線色 */
+  --bg:#FAFAF7;
+  --fg:#0B0B0B;
+  --muted:#6C6F75;
+  --line:#E8E4DC;
 
   /* Brand */
-  --accent:#E4582B;    /* Kaki（主） */
-  --accent-2:#2F6F5E;  /* Matcha（副） */
-  --info:#3D5A98;      /* 群青（情報） */
+  --accent:#E4582B;
+  --accent-2:#2F6F5E;
+  --info:#3D5A98;
 
   /* Layout */
   --radius:18px;
   --container:1200px;
 
-  /* Fonts (next/font の CSS 変数を最優先) */
+  /* Fonts */
   --font-sans: var(--font-sans-jp), ui-sans-serif,system-ui,-apple-system,
                "Helvetica Neue",Arial,"Segoe UI","Zen Kaku Gothic New",
                "Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
@@ -55,8 +55,11 @@ body{
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* Focus ring（キーボード操作で見やすく） */
-:focus-visible{ outline:2px solid color-mix(in srgb, var(--accent) 70%, transparent); outline-offset:2px; border-radius:8px; }
+/* Focus ring */
+:focus-visible{
+  outline:2px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  outline-offset:2px; border-radius:8px;
+}
 
 /* ===================== A11y: Skip link ===================== */
 .skip-link{
@@ -85,6 +88,7 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
 /* ===================== Layout ===================== */
 .container{ max-width:var(--container); margin:0 auto; padding:0 24px; }
 .section{ padding:72px 0; }
+main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付かない */
 .kbd{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
 
 /* ===================== Header / Nav ===================== */
@@ -141,37 +145,60 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
 .hero .cta.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
 .hero .cta:hover{ transform:translateY(-1px); }
 
-/* “一滴”のブランド感（ヒーロー帯など） */
+/* “一滴”のブランド感 */
 .hero-grad {
   background:
     radial-gradient(600px 240px at 70% -10%, rgba(228,88,43,.06), transparent 60%),
     radial-gradient(480px 200px at 0% 110%, rgba(47,111,94,.05), transparent 60%);
 }
 
-/* ===================== Buttons ===================== */
+/* ===================== Buttons / Badges ===================== */
 .btn {
   display:inline-flex; align-items:center; gap:.6rem;
   padding:12px 18px; border-radius:999px; font-weight:700;
   border:1px solid var(--line); color:var(--fg); background:#fff;
   transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
+.btn.small{ padding:8px 12px; font-weight:600; }
 .btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
 .btn.primary:hover{ transform:translateY(-1px); box-shadow:0 8px 18px rgba(228,88,43,.18); }
 .btn.ghost{ background:#fff; border-color:var(--line); }
 .btn.ghost:hover{ background:#F7F1EC; }
+.badge{
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:4px 10px; border:1px solid var(--line); border-radius:999px;
+  font-size:12px; font-weight:700; color:var(--muted); background:#fff;
+}
 
 /* ===================== Grid / Cards ===================== */
 .grid{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr); }
 .card{
   grid-column:span 6; border:1px solid var(--line); border-radius:var(--radius); padding:24px;
   transition:transform .2s ease, box-shadow .2s ease;
+  margin-bottom:22px; /* ← 追加: カードの下に常に余白 */
 }
 .card:hover{ transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.06); }
 .card .title{ font-weight:700; font-size:20px; margin:0 0 6px; }
 .card .meta{ color:var(--muted); font-size:14px; }
 
+/* ===================== Slides / Drafts (一覧) ===================== */
+.section--slides .intro{ color:var(--muted); margin-top:6px; }
+.slides-list{ display:flex; flex-direction:column; gap:14px; margin-top:18px; }
+.slide-card{
+  border:1px solid var(--line); border-radius:18px; background:#fff; padding:16px 18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.04);
+  margin-bottom:18px; /* ← 要望の“カード下に余白”を明示 */
+}
+.slide-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.slide-title{ font-weight:800; letter-spacing:-.01em; }
+.slide-meta{ color:var(--muted); font-size:13px; display:flex; gap:10px; flex-wrap:wrap; }
+.slide-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+.slide-actions .btn[aria-disabled="true"]{ opacity:.55; cursor:not-allowed; }
+.badge.draft{ border-color:#E7D7C9; background:#FBF7F3; color:#7C5B3A; }
+.badge.public{ border-color:#D5E8E1; background:#F3FAF7; color:#2F6F5E; }
+
 /* ===================== Footer ===================== */
-.site-footer{ border-top:1px solid var(--line); background:var(--bg); padding:16px 0; color:var(--muted); }
+.site-footer{ border-top:1px solid var(--line); background:var(--bg); padding:16px 0 28px; color:var(--muted); }
 .footerbar{
   display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:40px; flex-wrap:nowrap;
 }
@@ -187,11 +214,6 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
   .footerbar .legal{ display: inline-flex; white-space: nowrap; gap: 8px; font-size: clamp(12px, 3.5vw, 14px); }
   .footerbar .legal .sep{ margin: 0 2px; }
   .footerbar .copy{ white-space: nowrap; font-size: clamp(13px, 3.8vw, 14px); }
-}
-@media (max-width: 360px){
-  .footerbar{ gap:6px; }
-  .footerbar .legal{ gap:6px; font-size:12px; }
-  .footerbar .copy{ font-size:12px; }
 }
 
 /* ===================== Company: Definition card ===================== */
@@ -276,6 +298,7 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
   .card{ grid-column:span 12; }
   .navlinks{ display:none; }
   .hamburger{ display:inline-flex; position:relative; }
+  .slide-head{ flex-direction:column; align-items:flex-start; gap:6px; }
 }
 @media (min-width:901px){
   .mobile-menu, .backdrop, .hamburger{ display:none !important; }
@@ -306,73 +329,3 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
   .newsbar li.more{ display:inline-flex; flex:0 0 auto; }
   .newsbar .title{ max-width:60vw; }
 }
-
-/* ===================== Forms (Contact scoped) ===================== */
-.cf-wrap{ width:100%; max-width:640px; margin-top:24px; }
-.cf-field{ margin:16px 0 18px; }
-.cf-label{ display:block; font-weight:700; margin-bottom:8px; }
-.cf-req{ color:var(--accent); margin-left:.2em; }
-
-.cf-input,
-.cf-textarea{
-  display:block;               /* 幅縮み防止 */
-  width:100%;
-  color-scheme: light;         /* 自動ダーク抑止 */
-  -webkit-appearance:none;
-  appearance:none;
-  padding:12px 14px;
-  border-radius:10px;
-  background:#F7F7F7 !important;
-  color:var(--fg) !important;
-  border:1px solid #E6E6E6 !important;
-  line-height:1.55;
-  font:inherit;
-  background-clip:padding-box;
-  box-shadow: inset 0 1px 0 rgba(0,0,0,.02);
-  transition:border-color .15s ease, box-shadow .15s ease, background .2s ease;
-}
-.cf-textarea{ resize:vertical; min-height:140px; }
-
-.cf-input::placeholder, .cf-textarea::placeholder{ color:#B4B8BE; }
-
-.cf-input:focus, .cf-textarea:focus{
-  outline:none;
-  background:#FAFAFA !important;
-  border-color:#CFCFCF !important;
-  box-shadow:
-    inset 0 1px 0 rgba(0,0,0,.02),
-    0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
-}
-
-.cf-input[aria-invalid="true"], .cf-textarea[aria-invalid="true"]{
-  border-color:#E86A5E !important;
-  background:#FFF6F5 !important;
-  box-shadow:
-    inset 0 1px 0 rgba(232,106,94,.06),
-    0 0 0 3px color-mix(in srgb, #E86A5E 22%, transparent);
-}
-
-.cf-hint{ margin:6px 0 0; font-size:13px; color:var(--muted); }
-
-.cf-actions{ display:flex; align-items:center; gap:12px; margin-top:6px; }
-.cf-meta{ font-size:13px; color:var(--muted); }
-
-.cf-success{
-  border:1px solid var(--line);
-  background:#fff;
-  padding:16px 18px;
-  border-radius:12px;
-  box-shadow:0 6px 18px rgba(0,0,0,.05);
-}
-
-/* Autofill 黒化対策（Safari/Chrome） */
-.cf-input:-webkit-autofill,
-.cf-textarea:-webkit-autofill{
-  -webkit-text-fill-color: var(--fg) !important;
-  -webkit-box-shadow: 0 0 0px 1000px #F7F7F7 inset !important;
-  box-shadow: 0 0 0px 1000px #F7F7F7 inset !important;
-  transition: background-color 9999s ease-out, color 9999s ease-out;
-}
-
-/* 送信ボタンの状態 */
-.btn.primary[disabled]{ opacity:.6; cursor:not-allowed; }
