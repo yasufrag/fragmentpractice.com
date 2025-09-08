@@ -9,9 +9,9 @@
     "clean": "rm -rf .next .turbo .eslintcache tsconfig.tsbuildinfo",
     "gen:icons": "node scripts/gen-icons.mjs",
     "icons": "node scripts/gen-icons.mjs",
-    "og": "node scripts/gen-og.mjs",
-    "slides": "node scripts/gen-slides.mjs",
-    "slides:pdf": "node scripts/export-pdf.mjs",
+    "og": "tsx scripts/gen-og.mts",
+    "slides": "tsx scripts/gen-slides.mts",
+    "slides:pdf": "tsx scripts/export-pdf.mts",
     "generate": "pnpm icons && pnpm og && pnpm slides && pnpm slides:pdf"
   },
   "dependencies": {
@@ -33,15 +33,16 @@
     "eslint-import-resolver-typescript": "^3",
     "eslint-plugin-import": "^2.31.0",
     "globals": "^15.15.0",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^4.1.13",
-    "typescript": "^5.9.2",
-    "typescript-eslint": "^8.0.0",
-    "sharp": "^0.33.3",
-    "png-to-ico": "^2.1.8",
     "gray-matter": "^4.0.3",
     "playwright": "^1.48.2",
+    "png-to-ico": "^2.1.8",
+    "postcss": "^8.4.31",
     "reveal.js": "^5.1.0",
-    "satori": "^0.11.0"
+    "satori": "^0.11.0",
+    "sharp": "^0.33.3",
+    "tailwindcss": "^4.1.13",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.0.0"
   }
 }
