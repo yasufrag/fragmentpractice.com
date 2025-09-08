@@ -1,4 +1,4 @@
-// app/company/page.tsx
+// src/app/company/page.tsx
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,16 +25,15 @@ export default function CompanyPage() {
   const LAT = 34.3375959;
   const LNG = 134.0467874;
 
-  // 地図用クエリ
+  // 地図用クエリ（人間可読）
   const qHuman = `${buildingName} ${addressLine}`;
-  const q = encodeURIComponent(qHuman);
 
-  // 各サービスへのリンク（緯度経度を優先）
+  // 各サービス（緯度経度優先、fallback に検索語）
   const links = {
     apple: `https://maps.apple.com/?ll=${LAT},${LNG}&q=${encodeURIComponent(buildingName)}`,
     google: `https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`,
     osm: `https://www.openstreetmap.org/?mlat=${LAT}&mlon=${LNG}#map=18/${LAT}/${LNG}`,
-    // モバイルのマップアプリに直接渡す（対応端末のみ）
+    // 対応端末のみ：モバイルのマップアプリ起動
     geo: `geo:${LAT},${LNG}?q=${encodeURIComponent(qHuman)}`,
   };
 
@@ -82,6 +81,13 @@ export default function CompanyPage() {
                   <a className="chip" href={links.google} target="_blank" rel="noopener noreferrer">
                     Google&nbsp;Maps
                   </a>
+                  <a className="chip" href={links.osm} target="_blank" rel="noopener noreferrer">
+                    OpenStreetMap
+                  </a>
+                  {/* モバイル向けダイレクト起動（非対応環境では無視されます） */}
+                  <a className="chip ghost" href={links.geo}>
+                    Open in Maps App
+                  </a>
                 </div>
               </dd>
             </div>
@@ -106,10 +112,9 @@ export default function CompanyPage() {
         </article>
       </section>
 
-      {/* 構造化データ（SEO/共有用に最小限） */}
+      {/* 構造化データ（最小限） */}
       <script
         type="application/ld+json"
-        // 住所とGeo座標を併記
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",

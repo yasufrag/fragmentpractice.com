@@ -16,8 +16,8 @@ export default function OG() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#FAFAF7", // var(--bg)
-          color: "#0B0B0B",      // var(--fg)
+          background: "#FAFAF7", // 背景色
+          color: "#0B0B0B",      // テキスト色
           padding: "64px 80px",
         }}
       >
@@ -42,18 +42,16 @@ export default function OG() {
             gap: 28,
           }}
         >
-          {/* Symbol (centered circle + full-width waves) */}
+          {/* Symbol (sun + waves) */}
           <svg
             width="120"
             height="120"
             viewBox="0 0 100 100"
             style={{ display: "block" }}
           >
-            {/* 太陽（中央） */}
             <circle cx="50" cy="50" r="45" fill="#E4582B" />
-            {/* 波（左右端まで / 対称） */}
             <g
-              stroke="#D7D7D7"
+              stroke="#C8C9CC" // 少し濃いグレー
               strokeWidth={6}
               strokeLinecap="round"
               fill="none"
@@ -70,7 +68,13 @@ export default function OG() {
               flexDirection: "column",
             }}
           >
-            <div style={{ display: "flex", fontSize: 44, fontWeight: 800 }}>
+            <div
+              style={{
+                display: "flex",
+                fontSize: 44,
+                fontWeight: 800,
+              }}
+            >
               Fragment Practice — Company
             </div>
             <div
