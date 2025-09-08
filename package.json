@@ -3,23 +3,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-
     "lint": "eslint . --cache",
     "typecheck": "tsc --noEmit",
-
     "icons": "node scripts/gen-icons.mjs",
     "og": "tsx scripts/gen-og.mts",
     "slides": "tsx scripts/gen-slides.mts",
     "slides:pdf": "tsx scripts/export-pdf.mts",
     "slides:pdf:all": "tsx scripts/export-pdf.mts --include-drafts",
-
+    "generate": "pnpm icons && pnpm og && pnpm slides && pnpm slides:pdf",
     "clean": "rm -rf .next .turbo out public/slides public/og-news public/og.jpg",
     "clean:public": "rm -rf public/slides public/og-news public/og.jpg public/favicon-*.png public/favicon.ico public/apple-touch-icon*.png",
-
     "build:min": "pnpm icons && pnpm og && next build",
     "build:pdf": "pnpm icons && pnpm og && pnpm slides:pdf && next build",
-    "rebuild": "pnpm clean:public && pnpm icons && pnpm og && pnpm slides && pnpm slides:pdf && next build",
-
+    "rebuild": "pnpm clean:public && pnpm generate && next build",
+    "build:local": "pnpm generate && next build",
     "postinstall": "playwright install chromium"
   },
   "dependencies": {
@@ -43,6 +40,7 @@
     "globals": "^15.15.0",
     "gray-matter": "^4.0.3",
     "playwright": "^1.48.2",
+    "png-to-ico": "^3.0.1",
     "postcss": "^8.4.31",
     "reveal.js": "^5.1.0",
     "satori": "^0.11.3",

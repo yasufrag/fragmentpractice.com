@@ -40,3 +40,6 @@ export default async function DraftSlidesPage() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
