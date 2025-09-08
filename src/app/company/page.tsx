@@ -81,13 +81,6 @@ export default function CompanyPage() {
                   <a className="chip" href={links.google} target="_blank" rel="noopener noreferrer">
                     Google&nbsp;Maps
                   </a>
-                  <a className="chip" href={links.osm} target="_blank" rel="noopener noreferrer">
-                    OpenStreetMap
-                  </a>
-                  {/* モバイル向けダイレクト起動（非対応環境では無視されます） */}
-                  <a className="chip ghost" href={links.geo}>
-                    Open in Maps App
-                  </a>
                 </div>
               </dd>
             </div>
