@@ -15,11 +15,28 @@ export const metadata: Metadata = {
 };
 
 export default function CompanyPage() {
+  // 表記
   const buildingName = "高松セントラルスカイビルディング";
+  const postal = "760-0018";
   const addressLine =
     "香川県高松市天神前10番5号 高松セントラルスカイビルディング 3F south";
-  // マップ検索はビル名＋住所をエンコード
-  const q = encodeURIComponent(`${buildingName} ${addressLine}`);
+
+  // 位置情報（MapFan 掲載座標）
+  const LAT = 34.3375959;
+  const LNG = 134.0467874;
+
+  // 地図用クエリ
+  const qHuman = `${buildingName} ${addressLine}`;
+  const q = encodeURIComponent(qHuman);
+
+  // 各サービスへのリンク（緯度経度を優先）
+  const links = {
+    apple: `https://maps.apple.com/?ll=${LAT},${LNG}&q=${encodeURIComponent(buildingName)}`,
+    google: `https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`,
+    osm: `https://www.openstreetmap.org/?mlat=${LAT}&mlon=${LNG}#map=18/${LAT}/${LNG}`,
+    // モバイルのマップアプリに直接渡す（対応端末のみ）
+    geo: `geo:${LAT},${LNG}?q=${encodeURIComponent(qHuman)}`,
+  };
 
   return (
     <div className="container">
@@ -52,25 +69,17 @@ export default function CompanyPage() {
               <dt>所在地</dt>
               <dd>
                 <address className="addr">
-                  〒760-0018<br />
+                  〒{postal}<br />
                   香川県高松市天神前10番5号<br />
                   {buildingName} 3F south
                 </address>
+
+                {/* 地図リンク（緯度経度でピン） */}
                 <div className="chips" aria-label="地図リンク">
-                  <a
-                    className="chip"
-                    href={`https://maps.apple.com/?q=${q}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a className="chip" href={links.apple} target="_blank" rel="noopener noreferrer">
                     Apple&nbsp;Maps
                   </a>
-                  <a
-                    className="chip"
-                    href={`https://www.google.com/maps/search/?api=1&query=${q}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a className="chip" href={links.google} target="_blank" rel="noopener noreferrer">
                     Google&nbsp;Maps
                   </a>
                 </div>
@@ -91,13 +100,34 @@ export default function CompanyPage() {
 
             <div className="row">
               <dt>法人番号</dt>
-              <dd>
-                <span className="mono">7470003002956</span>
-              </dd>
+              <dd><span className="mono">7470003002956</span></dd>
             </div>
           </dl>
         </article>
       </section>
+
+      {/* 構造化データ（SEO/共有用に最小限） */}
+      <script
+        type="application/ld+json"
+        // 住所とGeo座標を併記
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Fragment Practice 合同会社",
+            url: "https://fragmentpractice.com",
+            address: {
+              "@type": "PostalAddress",
+              postalCode: postal,
+              addressRegion: "香川県",
+              addressLocality: "高松市",
+              streetAddress: "天神前10番5号 高松セントラルスカイビルディング 3F south",
+            },
+            geo: { "@type": "GeoCoordinates", latitude: LAT, longitude: LNG },
+            telephone: "+81-87-810-3037",
+          }),
+        }}
+      />
     </div>
   );
 }
