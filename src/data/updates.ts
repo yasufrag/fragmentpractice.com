@@ -9,14 +9,14 @@ export const updates: Update[] = [
   {
     slug: "site-launch-2025-09",
     title: "公式サイトを公開しました",
-    date: "2025-09-05",
-    description: "法人設立に伴い公式サイトを静かに公開しました。",
+    date: "2025-09-04",
+    description: "法人設立にあわせて、Fragment Practice の公式サイトを静かに公開しました。",
   },
   {
     slug: "soft-launch-2025-08",
     title: "Fragment Practice 合同会社を設立しました",
     date: "2025-08-12",
-    description: "Fragment Practice 合同会社を設立しました。",
+    description: "Fragment Practice 合同会社を設立し、本格的な活動をスタートしました。",
   },
 ];
 
