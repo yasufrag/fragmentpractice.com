@@ -1,10 +1,13 @@
 import { ImageResponse } from "next/og";
 import { updates } from "@/data/updates";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OG({
+export default function OG({
   params,
 }: {
   params: { slug: string };
