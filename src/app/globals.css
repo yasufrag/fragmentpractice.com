@@ -408,3 +408,60 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
     transition: background-color 9999s ease-out, color 9999s ease-out;
   }
 }
+
+.cf-submit-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cf-button {
+  background-color: #E45D2B; /* 柿色 */
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cf-button:hover {
+  background-color: #c94f24; /* 濃い柿色 */
+}
+
+.cf-note {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.cf-success {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #E45D2B;
+  border-radius: 0.5rem;
+  background: #fff8f4;
+  color: #E45D2B;
+  font-weight: 600;
+}
+
+.cf-error {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #b91c1c;
+  border-radius: 0.5rem;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.cf-success {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #E45D2B;
+  border-radius: 0.5rem;
+  background: #fff8f4;
+  color: #E45D2B;
+  font-weight: 600;
+}

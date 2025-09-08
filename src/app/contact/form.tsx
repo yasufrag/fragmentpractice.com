@@ -1,81 +1,115 @@
-'use client';
+"use client";
 
-import React from 'react';
+import { useState } from "react";
 
-const FORMSPREE =
-  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ??
-  'https://formspree.io/f/xnnbojyp';
+const FORMSPREE = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
-export function ContactForm() {
+export default function ContactForm() {
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    // フロント簡易バリデーション（空欄防止）
+    const fd = new FormData(form);
+    if (
+      !String(fd.get("name") || "").trim() ||
+      !String(fd.get("email") || "").trim() ||
+      !String(fd.get("message") || "").trim()
+    ) {
+      setStatus("error");
+      return;
+    }
+
+    try {
+      const res = await fetch(FORMSPREE, {
+        method: "POST",
+        body: fd,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  // 成功表示（このページで完結）
+  if (status === "success") {
+    return (
+      <div className="cf-success" role="status" aria-live="polite">
+        送信が完了しました。担当者より折り返しご連絡いたします。
+      </div>
+    );
+  }
+
+  // 失敗表示（エンドポイント未設定・ネットワーク等）
+  const showEndpointWarning = status === "error" || !FORMSPREE;
+
   return (
     <form
-      action={FORMSPREE}
+      className="cf-form"
       method="POST"
-      className="cf-wrap"
-      noValidate
+      action={FORMSPREE || undefined}
+      onSubmit={handleSubmit}
       aria-describedby="cf-note"
+      noValidate
     >
-      {/* Bot 対策（Formspree 公認の honeypot） */}
-      <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" hidden />
-
-      {/* 2カラム */}
-      <div className="cf-grid">
-        <label className="cf-label" htmlFor="cf-name">
-          お名前 <span className="cf-req">必須</span>
+      <div className="cf-field">
+        <label className="cf-label" htmlFor="name">
+          お名前 <span className="cf-req">※</span>
         </label>
-        <div className="cf-field">
-          <input
-            id="cf-name"
-            name="name"
-            className="cf-input"
-            required
-            autoComplete="name"
-            placeholder="山田 太郎"
-          />
-        </div>
-
-        <label className="cf-label" htmlFor="cf-email">
-          メール <span className="cf-req">必須</span>
-        </label>
-        <div className="cf-field">
-          <input
-            id="cf-email"
-            type="email"
-            name="email"
-            className="cf-input"
-            required
-            inputMode="email"
-            autoComplete="email"
-            placeholder="taro@example.com"
-          />
-        </div>
-
-        <label className="cf-label" htmlFor="cf-message">
-          本文 <span className="cf-req">必須</span>
-        </label>
-        <div className="cf-field">
-          <textarea
-            id="cf-message"
-            name="message"
-            className="cf-textarea"
-            required
-            rows={8}
-            placeholder="ご用件をご記入ください。"
-          />
-          <p id="cf-note" className="cf-hint">
-            送信内容は Formspree 経由で配信されます。
-          </p>
-        </div>
+        <input className="cf-input" id="name" name="name" required placeholder="山田 太郎" />
       </div>
 
-      <div className="cf-actions" style={{ marginTop: 12 }}>
-        <button type="submit" className="btn primary">送信する</button>
-        <span className="cf-meta">営業日中にご返信いたします。</span>
+      <div className="cf-field">
+        <label className="cf-label" htmlFor="email">
+          メール <span className="cf-req">※</span>
+        </label>
+        <input
+          className="cf-input"
+          id="email"
+          name="email"
+          type="email"
+          inputMode="email"
+          required
+          placeholder="you@example.com"
+        />
       </div>
 
-      {/* 任意のメタ（ダッシュボードで確認しやすく） */}
-      <input type="hidden" name="_subject" value="fragmentpractice.com からのお問い合わせ" />
-      <input type="hidden" name="site" value="fragmentpractice.com" />
+      <div className="cf-field">
+        <label className="cf-label" htmlFor="message">
+          内容 <span className="cf-req">※</span>
+        </label>
+        <textarea
+          className="cf-textarea"
+          id="message"
+          name="message"
+          required
+          placeholder="ご用件をご記入ください。"
+        />
+      </div>
+
+      <div className="cf-submit-row">
+        <button type="submit" className="cf-button">送信</button>
+        <span id="cf-note" className="cf-note">
+          送信内容は当社の <a href="/privacy">プライバシーポリシー</a> に基づき扱います。
+        </span>
+      </div>
+
+      {showEndpointWarning && (
+        <div className="cf-error" role="alert" aria-live="assertive" style={{ marginTop: "1rem" }}>
+          送信に失敗しました。恐れ入りますが{" "}
+          <a href="mailto:hello@fragmentpractice.com">hello@fragmentpractice.com</a>{" "}
+          まで直接ご連絡ください。
+        </div>
+      )}
     </form>
   );
 }
