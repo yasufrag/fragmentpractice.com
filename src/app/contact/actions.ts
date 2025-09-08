@@ -3,28 +3,33 @@
 interface FieldErrors { name?: string; email?: string; message?: string }
 
 export interface State {
-  ok: boolean;            // ← boolean に統一（null は使わない）
+  ok: boolean;
   message: string;
   errors?: FieldErrors;
 }
 
-// 簡易バリデーション関数
+// FormDataEntryValue を安全に string にするヘルパ
+function str(v: FormDataEntryValue | null): string {
+  return typeof v === "string" ? v : ""; // File のときや null は空文字に
+}
+
+// ゆるめのメール形式チェック
 function isEmail(v: string) {
-  // ゆるめの RFC 準拠チェック
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 }
 
 export async function submitContact(prev: State, formData: FormData): Promise<State> {
-  // 文字列化（eslint の no-base-to-string 対策）
-  const hp = String(formData.get("hp_url") ?? "");         // ハニーポット
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const message = String(formData.get("message") ?? "").trim();
+  // eslint 的に await が必要なので無害な await を一発入れておく
+  await Promise.resolve();
 
-  // ボット（ハニーポット）なら成功扱いで黙って終了
-  if (hp) {
-    return { ok: true, message: "Thanks!", errors: {} };
-  }
+  // 値の取得（no-base-to-string 回避のため str() を通す）
+  const hp = str(formData.get("hp_url"));              // ハニーポット
+  const name = str(formData.get("name")).trim();
+  const email = str(formData.get("email")).trim();
+  const message = str(formData.get("message")).trim();
+
+  // ボット: 成功扱いで静かに終了
+  if (hp) return { ok: true, message: "Thanks!", errors: {} };
 
   const errors: FieldErrors = {};
   if (!name) errors.name = "お名前を入力してください。";
@@ -36,7 +41,7 @@ export async function submitContact(prev: State, formData: FormData): Promise<St
     return { ok: false, message: "入力内容をご確認ください。", errors };
   }
 
-  // ここで送信処理（外部API / メールなど）を実装
+  // ここで送信処理（API / メール等）
   // await sendToXxx({ name, email, message });
 
   return { ok: true, message: "送信が完了しました。担当者より折り返しご連絡します。", errors: {} };

@@ -73,7 +73,7 @@ export function ContactForm() {
         </p>
         <div className="cf-actions">
           <button type="submit" className="btn primary">送信</button>
-          <span className="cf-meta">担当者から折り返しご連絡します。</span>
+          <span className="cf-meta"></span>
         </div>
         {state.message && (
           <div className="cf-success" role="status" aria-live="polite" style={{ marginTop: 12 }}>
