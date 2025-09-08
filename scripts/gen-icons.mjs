@@ -1,6 +1,6 @@
 // scripts/gen-icons.mjs
 // SVG（public/icon.svg）から各種 PNG と ICO を生成
-// 16px は外し、見栄えが崩れにくい 32px 以上のみ出力
+// 16px は外し、Apple Touch 向けも含めて出力
 
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -11,15 +11,16 @@ const ROOT = process.cwd();
 const SRC = path.join(ROOT, "public", "icon.svg");
 const OUT = path.join(ROOT, "public");
 
-// 生成したい PNG サイズ（16 は除外）
-const PNG_SIZES = [32, 48, 64, 180, 192, 512];
+// 通常の favicon サイズ
+const PNG_SIZES = [32, 48, 64, 192, 512];
 
-// ICO に含める解像度（Win 向けに 32/48/64 を用意）
+// Apple Touch 用サイズ
+const APPLE_SIZES = [120, 152, 167, 180];
+
+// ICO に含めるサイズ
 const ICO_SIZES = [32, 48, 64];
 
-// 小さいアイコンほど密度を上げてアンチエイリアスを効かせる
-// （sharp の SVG → ラスタライズ時のオプション）
-const svgDensity = 480; // 300〜600 あたりが無難
+const svgDensity = 480;
 
 async function ensureExists(file) {
   try {
@@ -29,19 +30,19 @@ async function ensureExists(file) {
   }
 }
 
-async function renderPng(size) {
-  const out = path.join(OUT, `favicon-${size}x${size}.png`);
+async function renderPng(size, name = `favicon-${size}x${size}.png`) {
+  const out = path.join(OUT, name);
   const buf = await sharp(SRC, { density: svgDensity, unlimited: true })
     .resize(size, size, {
       fit: "cover",
-      kernel: sharp.kernel.lanczos3, // 小さいサイズでのエッジを滑らかに
+      kernel: sharp.kernel.lanczos3,
       withoutEnlargement: false,
     })
     .png({
       compressionLevel: 9,
       adaptiveFiltering: true,
       effort: 10,
-      palette: size <= 64, // 小さいサイズは減色でにじみを抑える
+      palette: size <= 64,
     })
     .toBuffer();
 
@@ -57,10 +58,10 @@ async function renderIco(buffers) {
 }
 
 (async () => {
-  console.log("→ Generating favicons from public/icon.svg");
+  console.log("→ Generating favicons & apple-touch-icons from public/icon.svg");
   await ensureExists(SRC);
 
-  // PNG を生成
+  // favicon PNG
   const results = [];
   for (const s of PNG_SIZES) {
     const r = await renderPng(s);
@@ -68,13 +69,18 @@ async function renderIco(buffers) {
     console.log(`  ✓ favicon-${s}x${s}.png`);
   }
 
-  // ICO を生成（32/48/64）
+  // Apple Touch Icons
+  for (const s of APPLE_SIZES) {
+    await renderPng(s, `apple-touch-icon-${s}x${s}.png`);
+    console.log(`  ✓ apple-touch-icon-${s}x${s}.png`);
+  }
+
+  // ICO
   const icoInput = [];
   for (const s of ICO_SIZES) {
     const hit = results.find((r) => r.size === s);
     if (hit) icoInput.push(hit.buf);
     else {
-      // 無ければ都度生成
       const r = await renderPng(s);
       icoInput.push(r.buf);
     }
