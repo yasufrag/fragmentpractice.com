@@ -7,17 +7,22 @@ const FORMSPREE = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  // safe getter: string 以外(File/null)は空文字に落とす
+  const getStr = (fd: FormData, key: string) => {
+    const v = fd.get(key);
+    return typeof v === "string" ? v : "";
+  };
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     const form = e.currentTarget;
-
-    // フロント簡易バリデーション（空欄防止）
     const fd = new FormData(form);
-    if (
-      !String(fd.get("name") || "").trim() ||
-      !String(fd.get("email") || "").trim() ||
-      !String(fd.get("message") || "").trim()
-    ) {
+
+    const name = getStr(fd, "name").trim();
+    const email = getStr(fd, "email").trim();
+    const message = getStr(fd, "message").trim();
+
+    if (!name || !email || !message) {
       setStatus("error");
       return;
     }
@@ -40,7 +45,6 @@ export default function ContactForm() {
     }
   }
 
-  // 成功表示（このページで完結）
   if (status === "success") {
     return (
       <div className="cf-success" role="status" aria-live="polite">
@@ -49,7 +53,6 @@ export default function ContactForm() {
     );
   }
 
-  // 失敗表示（エンドポイント未設定・ネットワーク等）
   const showEndpointWarning = status === "error" || !FORMSPREE;
 
   return (
@@ -57,7 +60,8 @@ export default function ContactForm() {
       className="cf-form"
       method="POST"
       action={FORMSPREE || undefined}
-      onSubmit={handleSubmit}
+      // async関数を直接渡さず void ラッパーでESLint回避
+      onSubmit={(e) => { void handleSubmit(e); }}
       aria-describedby="cf-note"
       noValidate
     >
