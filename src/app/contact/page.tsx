@@ -12,7 +12,7 @@ export default function ContactPage() {
     <main>
       <div className="fp-container section">
         {/* Heading */}
-        <section aria-labelledby="contact-title" className="section">
+        <section aria-labelledby="contact-title" className="fp-section">
           <h1 id="contact-title" className="h1" style={{ marginTop: 8 }}>
             お問い合わせ
           </h1>
@@ -23,7 +23,7 @@ export default function ContactPage() {
         </section>
 
         {/* Form */}
-        <section aria-label="お問い合わせフォーム" className="section" style={{ paddingTop: 12 }}>
+        <section aria-label="お問い合わせフォーム" className="fp-section" style={{ paddingTop: 12 }}>
           <ContactForm />
         </section>
       </div>

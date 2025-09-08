@@ -1,14 +1,21 @@
 // src/app/contact/form.tsx
 "use client";
 
-import * as React from "react";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { submitContact } from "./actions";
 
-type State = Awaited<ReturnType<typeof submitContact>>;
+// ← 返却 shape に合わせた State を定義（例）
+interface FieldErrors { name?: string; email?: string; message?: string }
+export interface State {
+  ok: boolean | null;
+  message: string;
+  errors?: FieldErrors;
+}
 
 export function ContactForm() {
-  const [state, formAction] = useFormState<State, FormData>(submitContact as any, null);
+  // ✅ null ではなく、初期 state をオブジェクトで渡す
+  const initialState: State = { ok: null, message: "" };
+  const [state, formAction] = useFormState<State, FormData>(submitContact, initialState);
 
   return (
     <form action={formAction} noValidate className="cf-wrap" aria-describedby="cf-note">
