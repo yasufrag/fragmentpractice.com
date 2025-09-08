@@ -20,40 +20,84 @@ const zenKaku = Zen_Kaku_Gothic_New({
   display: "swap",
 });
 
+const metadataBase = new URL("https://fragmentpractice.com");
+
 export const metadata: Metadata = {
-  title: "Fragment Practice — Company",
-  description: "Fragment Practice合同会社 公式サイト",
-  metadataBase: new URL("https://fragmentpractice.com"),
+  metadataBase,
+  // 既定タイトル + ページ側で template を使って上書き可
+  title: {
+    default: "Fragment Practice",
+    template: "%s — Fragment Practice",
+  },
+  description:
+    "AI・言語・編集を横断し、注意・関係・編集を支える“静かな仕組み”を設計します。高松から、実務と研究を往復させながら検証していきます。",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Fragment Practice — Company",
-    description: "共創・実験・編集のためのスタジオ",
-    url: "https://fragmentpractice.com",
-    siteName: "Fragment Practice",
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Fragment Practice" }],
     type: "website",
+    url: metadataBase,
+    siteName: "Fragment Practice",
+    title: "Fragment Practice",
+    description:
+      "AI・言語・編集を横断し、注意・関係・編集を支える“静かな仕組み”を設計します。",
     locale: "ja_JP",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Fragment Practice",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fragment Practice — Company",
-    description: "共創・実験・編集のためのスタジオ",
+    site: "@", // 取得次第ここにアカウントを入れてください
+    title: "Fragment Practice",
+    description:
+      "AI・言語・編集を横断し、注意・関係・編集を支える“静かな仕組み”を設計します。",
     images: ["/og.jpg"],
   },
-  icons: [
-    { rel: "icon", url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    { rel: "icon", url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
-    { rel: "icon", url: "/favicon-64x64.png", sizes: "64x64", type: "image/png" },
-    { rel: "apple-touch-icon", url: "/apple-touch-icon.png", sizes: "180x180" }
-  ]
+  // iOS/Android の UI 着色
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAFAF7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B0B0B" },
+  ],
+  // favicon 類は Next 15 の書式に寄せて整理
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-64x64.png", sizes: "64x64", type: "image/png" },
+      // 16px/24pxは見栄え優先で外しています（必要になれば追加）
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    other: [
+      // 用意があれば：Safari pinned tab
+      // { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#E4582B" },
+    ],
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const year = new Date().getFullYear();
 
   return (
     <html lang="ja" className={`${sora.variable} ${zenKaku.variable}`}>
       <body>
-        <a href="#main" className="skip-link">本文へスキップ</a>
+        {/* Skip link for keyboard users */}
+        <a href="#main" className="skip-link">
+          本文へスキップ
+        </a>
 
         <Header />
 
@@ -61,12 +105,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
 
-        {/* フッター */}
+        {/* Footer */}
         <footer className="site-footer" role="contentinfo">
           <div className="container footerbar" aria-label="著作権と法的リンク">
             <nav className="legal" aria-label="法的リンク">
               <a href="/terms">利用規約</a>
-              <span className="sep" aria-hidden="true">・</span>
+              <span className="sep" aria-hidden="true">
+                ・
+              </span>
               <a href="/privacy">プライバシーポリシー</a>
             </nav>
             <div className="copy">© {year} Fragment Practice</div>

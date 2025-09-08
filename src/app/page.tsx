@@ -4,7 +4,7 @@ import NewsBar from "@/components/NewsBar";
 export const metadata = {
   title: "Fragment Practice — Home",
   description:
-    "AI・言語・編集を横断し、注意・関係・編集を支える静かな仕組みを設計します。高松から、実務と研究を往復させながら検証していきます。",
+    "AI・言語・編集を横断し、「注意・関係・編集」を支える静かな仕組みを設計します。高松から、実務と研究を往復させながら検証を続けます。",
 };
 
 export default function HomePage() {
@@ -22,8 +22,8 @@ export default function HomePage() {
           </h1>
           <p className="lead" style={{ marginTop: 14, maxWidth: 760 }}>
             Fragment Practice は、AI・言語・編集を横断して
-            「注意・関係・編集」を支える仕組みを設計します。
-            高松から、実務と研究を往復させながら静かに検証していきます。
+            「注意・関係・編集」を支える静かな仕組みを設計します。
+            高松から、実務と研究を往復させながら丁寧に検証を進めていきます。
           </p>
 
           <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
@@ -32,7 +32,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 私たちが大切にすること（3点だけ） */}
+        {/* 私たちが大切にすること（3点のみ） */}
         <section className="section" aria-labelledby="values">
           <h2 id="values" className="h2" style={{ marginBottom: 12 }}>
             私たちが大切にすること
@@ -43,7 +43,7 @@ export default function HomePage() {
               <div className="title">注意</div>
               <p className="meta">Quiet Attention</p>
               <p style={{ marginTop: 6 }}>
-                情報を足す前に、まずノイズを減らす。観察・記録・間合いを
+                情報を加える前に、まずノイズを減らす。観察・記録・間合いを
                 乱さないための最小フローを設計します。
               </p>
             </div>
@@ -53,7 +53,7 @@ export default function HomePage() {
               <p className="meta">Relational Syntax</p>
               <p style={{ marginTop: 6 }}>
                 対話の構文（前提・タグ・応答）を整え、実務と表現の双方で
-                再現可能なやり取りをつくります。
+                再現可能なやり取りを設計します。
               </p>
             </div>
 
@@ -61,8 +61,8 @@ export default function HomePage() {
               <div className="title">編集</div>
               <p className="meta">Editing as Practice</p>
               <p style={{ marginTop: 6 }}>
-                断片を集めて編む。メモ、試作、ZINE 等の軽い成果物に落とし、
-                検証と共有をくり返します。
+                断片を集めて編む。メモや試作、ZINE などの軽やかな成果物に落とし、
+                検証と共有を重ねていきます。
               </p>
             </div>
           </div>
