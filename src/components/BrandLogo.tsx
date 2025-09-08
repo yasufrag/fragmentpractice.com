@@ -4,20 +4,26 @@
 import { memo } from "react";
 
 function BrandLogo() {
-  const HEIGHT = 50;          // ロゴ全体の高さ
-  const SYMBOL_SCALE = 0.4;   // 100x100図案 → 40px相当
+  // 見た目サイズ
+  const HEIGHT = 50;
+  // 左のシンボルは 100x100 図案を 0.4 倍で描画（= 40px 相当）
+  const SYMBOL_SCALE = 0.4;
   const SYMBOL_TX = 0;
   const SYMBOL_TY = 5;
 
-  const CIRCLE_CX = 55;       // 太陽の中心X
+  // === 図案（100x100）側のジオメトリ ===
+  // ※「アイコン版」に合わせて円の中心は (50,50)
+  const CIRCLE_CX = 50;
   const CIRCLE_CY = 50;
   const CIRCLE_R  = 45;
 
-  // 波の基準
+  // 波（開始0→終了100、中心X=50で対称）もアイコン版に合わせる
   const W1 = 76;
   const W2 = 86;
   const CTRL_UP = 8;
+  const WAVE_STROKE = 5; // アイコンSVGと同値（スケールで最終約2px相当）
 
+  // ワードマークを少し詰めて配置
   const WORDMARK_TX = 60;
 
   return (
@@ -34,10 +40,9 @@ function BrandLogo() {
         <circle cx={CIRCLE_CX} cy={CIRCLE_CY} r={CIRCLE_R} fill="var(--accent)" />
         <g
           stroke="hsl(0 0% 88%)"
-          strokeWidth="6"
-          fill="none"
+          strokeWidth={WAVE_STROKE}
           strokeLinecap="round"
-          transform="translate(5,0)" // ★ 波全体をX方向に+5移動
+          fill="none"
         >
           <path d={`M0 ${W1} Q 25 ${W1 - CTRL_UP}, 50 ${W1} T 100 ${W1}`} />
           <path d={`M0 ${W2} Q 25 ${W2 - CTRL_UP}, 50 ${W2} T 100 ${W2}`} />
