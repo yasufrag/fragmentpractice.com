@@ -64,7 +64,7 @@ importers:
         specifier: ^8.4.31
         version: 8.4.31
       sharp:
-        specifier: ^0.33.5
+        specifier: ^0.33.3
         version: 0.33.5
       tailwindcss:
         specifier: ^4.1.13

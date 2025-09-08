@@ -1,6 +1,5 @@
-// scripts/gen-icons.mjs
-// SVG（public/icon.svg）から各種 PNG と ICO を生成
-// 16px は外し、Apple Touch 向けも含めて出力
+// SVG（public/icon.svg）→ 各種 PNG / ICO を一括生成（フル対応）
+// 16px は除外。アンチエイリアス最適化＆Apple Touch複数サイズを出力
 
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -11,38 +10,39 @@ const ROOT = process.cwd();
 const SRC = path.join(ROOT, "public", "icon.svg");
 const OUT = path.join(ROOT, "public");
 
-// 通常の favicon サイズ
-const PNG_SIZES = [32, 48, 64, 192, 512];
+// 一般（favicon/manifest 等）
+const PNG_SIZES = [32, 48, 64, 180, 192, 512];
 
-// Apple Touch 用サイズ
+// Apple Touch Icon（端末別フル）
 const APPLE_SIZES = [120, 152, 167, 180];
 
-// ICO に含めるサイズ
+// ICO に含めるサイズ（Windows 用）
 const ICO_SIZES = [32, 48, 64];
 
+// 小サイズほど密度を高め、エッジを滑らかに
 const svgDensity = 480;
 
 async function ensureExists(file) {
-  try {
-    await fs.access(file);
-  } catch {
-    throw new Error(`Source SVG not found: ${file}`);
-  }
+  try { await fs.access(file); }
+  catch { throw new Error(`Source SVG not found: ${file}`); }
 }
 
-async function renderPng(size, name = `favicon-${size}x${size}.png`) {
-  const out = path.join(OUT, name);
+async function renderPng(size, name) {
+  const filename = name ?? `favicon-${size}x${size}.png`;
+  const out = path.join(OUT, filename);
+
   const buf = await sharp(SRC, { density: svgDensity, unlimited: true })
     .resize(size, size, {
       fit: "cover",
       kernel: sharp.kernel.lanczos3,
       withoutEnlargement: false,
+      background: { r: 255, g: 255, b: 255, alpha: 0 }, // 透過保持
     })
     .png({
       compressionLevel: 9,
       adaptiveFiltering: true,
       effort: 10,
-      palette: size <= 64,
+      palette: size <= 64, // 小サイズは減色
     })
     .toBuffer();
 
@@ -58,10 +58,10 @@ async function renderIco(buffers) {
 }
 
 (async () => {
-  console.log("→ Generating favicons & apple-touch-icons from public/icon.svg");
+  console.log("→ Generating icons from public/icon.svg");
   await ensureExists(SRC);
 
-  // favicon PNG
+  // 一般 PNG
   const results = [];
   for (const s of PNG_SIZES) {
     const r = await renderPng(s);
@@ -69,21 +69,24 @@ async function renderIco(buffers) {
     console.log(`  ✓ favicon-${s}x${s}.png`);
   }
 
-  // Apple Touch Icons
+  // Apple Touch（ファイル名は慣例に合わせる）
   for (const s of APPLE_SIZES) {
     await renderPng(s, `apple-touch-icon-${s}x${s}.png`);
     console.log(`  ✓ apple-touch-icon-${s}x${s}.png`);
   }
+  // 互換用（iOS は 180 を優先で拾うため alias も用意）
+  await fs.copyFile(
+    path.join(OUT, "apple-touch-icon-180x180.png"),
+    path.join(OUT, "apple-touch-icon.png")
+  );
+  console.log("  ✓ apple-touch-icon.png (alias → 180x180)");
 
   // ICO
   const icoInput = [];
   for (const s of ICO_SIZES) {
     const hit = results.find((r) => r.size === s);
     if (hit) icoInput.push(hit.buf);
-    else {
-      const r = await renderPng(s);
-      icoInput.push(r.buf);
-    }
+    else icoInput.push((await renderPng(s)).buf);
   }
   const icoPath = await renderIco(icoInput);
   console.log(`  ✓ ${path.basename(icoPath)}`);

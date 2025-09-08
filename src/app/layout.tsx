@@ -74,17 +74,15 @@ export const metadata: Metadata = {
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
       { url: "/favicon-64x64.png", sizes: "64x64", type: "image/png" },
+      { url: "/favicon.ico", type: "image/x-icon" }
     ],
     apple: [
-      { url: "/apple-touch-icon-180x180.png" },
-      { url: "/apple-touch-icon-167x167.png" },
-      { url: "/apple-touch-icon-152x152.png" },
-      { url: "/apple-touch-icon-120x120.png" },
-    ],
-    other: [
-      // 用意があれば：Safari pinned tab
-      // { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#E4582B" },
-    ],
+      { url: "/apple-touch-icon-120x120.png", sizes: "120x120" },
+      { url: "/apple-touch-icon-152x152.png", sizes: "152x152" },
+      { url: "/apple-touch-icon-167x167.png", sizes: "167x167" },
+      { url: "/apple-touch-icon-180x180.png", sizes: "180x180" },
+      { url: "/apple-touch-icon.png", sizes: "180x180" }
+    ]
   },
 };
 
