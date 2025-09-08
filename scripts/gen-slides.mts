@@ -1,101 +1,68 @@
 // scripts/gen-slides.mts
-import { readdir, readFile, mkdir, writeFile } from "node:fs/promises";
+import { promises as fs } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-// 入力MD
-const CONTENT_DIR = path.join(process.cwd(), "content", "slides");
-// 出力
-const OUT_PUBLIC = path.join(process.cwd(), "public", "slides");
+const ROOT = process.cwd();
+const CONTENT = path.join(ROOT, "content", "slides");
+const PUBLIC = path.join(ROOT, "public");
+const OUT_HTML = path.join(PUBLIC, "slides-static"); // ← ここに出力
 
-type Front = {
-  title: string;
-  date?: string;
-  event?: string;
-  slug?: string;
-  published?: boolean;
-};
+const REVEAL = "https://cdn.jsdelivr.net/npm/reveal.js@5";
 
-function toSlug(s: string) {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9\-]+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
-
-function htmlTemplate(md: string, front: Front) {
-  const title = front.title ?? "Slides";
-  return `<!doctype html>
+const htmlTemplate = (title: string, md: string) => `<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8" />
-<title>${title}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" id="theme">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/print.css">
-<style>
-  .reveal { font-family: "Sora","Zen Kaku Gothic New", system-ui, -apple-system, sans-serif; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${title}</title>
+  <link rel="stylesheet" href="${REVEAL}/dist/reveal.css">
+  <link rel="stylesheet" href="${REVEAL}/dist/theme/white.css" id="theme">
+  <style>
+    .reveal { font-family: system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif; }
+  </style>
 </head>
 <body>
-<div class="reveal">
-  <div class="slides">
+  <div class="reveal"><div class="slides">
     <section data-markdown>
-      <script type="text/template">
-${md.replace(/<\/script>/g, "<\\/script>")}
-      </script>
+      <textarea data-template>${md.replace(/<\/textarea>/g, "<\\/textarea>")}</textarea>
     </section>
-  </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/markdown/markdown.js"></script>
-<script>
-  const deck = new Reveal({
-    hash: true,
-    plugins: [ RevealMarkdown ],
-  });
-  deck.initialize();
-</script>
+  </div></div>
+
+  <script src="${REVEAL}/dist/reveal.js"></script>
+  <script src="${REVEAL}/plugin/markdown/markdown.js"></script>
+  <script>
+    const deck = new Reveal({
+      hash: true,
+      plugins: [ RevealMarkdown ],
+      slideNumber: true,
+      showNotes: false
+    });
+    deck.initialize();
+  </script>
 </body>
 </html>`;
-}
 
 async function main() {
-  console.log("→ Generating slide HTML (reveal.js via CDN)");
-  await mkdir(OUT_PUBLIC, { recursive: true });
+  await fs.mkdir(OUT_HTML, { recursive: true });
 
-  const files = (await readdir(CONTENT_DIR)).filter((f) => f.endsWith(".md"));
-  if (files.length === 0) {
-    console.log("  ↷ No markdown files in content/slides.");
-    return;
-  }
-
+  const files = await fs.readdir(CONTENT);
   for (const file of files) {
-    const raw = await readFile(path.join(CONTENT_DIR, file), "utf8");
-    const { content, data } = matter(raw);
-    const front = (data || {}) as Front;
+    if (!file.endsWith(".md")) continue;
+    const slug = file.replace(/\.md$/, "");
+    const src = path.join(CONTENT, file);
+    const mdRaw = await fs.readFile(src, "utf8");
+    const { data, content } = matter(mdRaw);
+    const title = String(data.title ?? slug);
 
-    const slug =
-      front.slug ??
-      toSlug(path.basename(file, path.extname(file))); // ファイル名からフォールバック
+    const outDir = path.join(OUT_HTML, slug);
+    await fs.mkdir(outDir, { recursive: true });
+    await fs.writeFile(path.join(outDir, "index.html"), htmlTemplate(title, content), "utf8");
 
-    const isDraft = front.published === false || front.published === undefined;
-    const outDir = isDraft
-      ? path.join(OUT_PUBLIC, "drafts", slug)
-      : path.join(OUT_PUBLIC, slug);
-
-    await mkdir(outDir, { recursive: true });
-    const html = htmlTemplate(content.trim(), front);
-    await writeFile(path.join(outDir, "index.html"), html);
-
-    console.log(
-      `  ✓ ${path.relative(process.cwd(), path.join(outDir, "index.html"))}`
-    );
+    console.log(`  ✓ ${path.posix.join("public", "slides-static", slug, "index.html")}`);
   }
 
-  console.log("✔ Done. Slide HTML written under public/slides/");
+  console.log("✔ Done. Slide HTML written under public/slides-static/");
 }
 
 main().catch((e) => {

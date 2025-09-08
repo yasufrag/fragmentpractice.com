@@ -1,45 +1,63 @@
 // src/app/slides/drafts/page.tsx
 import type { Metadata } from "next";
-import { getSlides } from "@/lib/slides";
+import { getSlides, hasHtml, hasPdf, htmlUrl, pdfUrl } from "@/lib/slides";
 
 export const metadata: Metadata = {
   title: "Draft Slides — Slides",
-  description: "非公開（下書き）スライド一覧",
-  robots: { index: false, follow: false },
+  description: "下書きのスライド一覧（published: false）。社内確認・生成テスト用。",
 };
 
+export const dynamic = "force-static";
+
 export default async function DraftSlidesPage() {
-  const drafts = await getSlides(true).then(list => list.filter(s => !s.published));
+  const all = await getSlides({ includeDrafts: true });
+  const drafts = all.filter((s) => !s.published);
 
   return (
     <div className="fp-container">
-      <section className="hero" style={{ textAlign: "left" }}>
-        <h1 className="h1" style={{ marginTop: 16 }}>Draft Slides</h1>
-        <p className="lead" style={{ marginTop: 8, maxWidth: 760 }}>
+      <section className="fp-section">
+        <h1 className="h1">Draft Slides</h1>
+        <p className="lead" style={{ marginTop: 6 }}>
           下書き（published: false）のスライド。社内確認や生成テスト用の場です。
         </p>
-      </section>
 
-      <ul className="cardlist" style={{ marginTop: 24 }}>
-        {drafts.map(s => (
-          <li key={s.slug} className="card">
-            <div className="card-body">
-              <div className="h3" style={{ marginBottom: 6 }}>{s.title}</div>
-              <div className="muted">
-                {s.date}{s.event ? ` ・ ${s.event}` : ""}（slug: {s.slug}）
+        <div style={{ marginTop: 28 }}>
+          {drafts.map((s) => {
+            const htmlReady = hasHtml(s.slug);
+            const pdfReady = hasPdf(s.slug);
+            return (
+              <div key={s.slug} className="slide-card">
+                <div className="slide-head">
+                  <div>
+                    <div className="slide-title">{s.title}</div>
+                    <div className="slide-meta">
+                      <span>{s.date}</span>
+                      {s.event && <span>・{s.event}</span>}
+                      <span>（slug: {s.slug}）</span>
+                    </div>
+                  </div>
+                  <div className="slide-actions">
+                    {htmlReady ? (
+                      <a className="btn small" href={htmlUrl(s.slug)} target="_blank" rel="noopener">
+                        HTML
+                      </a>
+                    ) : (
+                      <button className="btn small" aria-disabled="true">HTML 未生成</button>
+                    )}
+                    {pdfReady ? (
+                      <a className="btn small" href={pdfUrl(s.slug)} target="_blank" rel="noopener">
+                        PDF
+                      </a>
+                    ) : (
+                      <button className="btn small" aria-disabled="true">PDF 未生成</button>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="chips" style={{ marginTop: 10 }}>
-                {s.htmlPath ? <a className="chip" href={s.htmlPath} target="_blank" rel="noopener noreferrer">HTML</a> : <span className="chip disabled">HTML 未生成</span>}
-                {s.pdfPath  ? <a className="chip" href={s.pdfPath}  target="_blank" rel="noopener noreferrer">PDF</a>  : <span className="chip disabled">PDF 未生成</span>}
-              </div>
-            </div>
-          </li>
-        ))}
-        {drafts.length === 0 && <p>下書きはありません。</p>}
-      </ul>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
-
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;

@@ -1,107 +1,55 @@
 // scripts/export-pdf.mts
-import { readdir, readFile, mkdir, access } from "node:fs/promises";
-import { constants as FS } from "node:fs";
-import path from "node:path";
-import matter from "gray-matter";
 import { chromium } from "playwright";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 
 const ROOT = process.cwd();
-const CONTENT_DIR = path.join(ROOT, "content", "slides");
-const PUBLIC_DIR = path.join(ROOT, "public", "slides");
-const PDF_DIR = path.join(PUBLIC_DIR, "pdf");
-
-// --include-drafts を付けたらドラフトもPDF化
-const INCLUDE_DRAFTS = process.argv.includes("--include-drafts");
-
-type Front = {
-  title?: string;
-  slug?: string;
-  published?: boolean;
-};
-
-function toSlug(s: string) {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9\-]+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
+const OUT_HTML = path.join(ROOT, "public", "slides-static");
+const OUT_PDF  = path.join(OUT_HTML, "pdf");
 
 async function exists(p: string) {
-  try {
-    await access(p, FS.F_OK);
-    return true;
-  } catch {
-    return false;
-  }
+  try { await fs.access(p); return true; } catch { return false; }
 }
 
 async function main() {
   console.log("→ Exporting slides to PDF");
-  await mkdir(PDF_DIR, { recursive: true });
+  await fs.mkdir(OUT_PDF, { recursive: true });
 
-  const mdFiles = (await readdir(CONTENT_DIR)).filter((f) => f.endsWith(".md"));
-  if (mdFiles.length === 0) {
-    console.log("  ↷ No markdown files in content/slides.");
-    return;
+  // slides-static 直下の「スライド用ディレクトリ」のみを対象にする
+  const dirents = await fs.readdir(OUT_HTML, { withFileTypes: true });
+  const slugs = [];
+  for (const d of dirents) {
+    if (!d.isDirectory()) continue;
+    if (d.name === "pdf") continue; // ← ここがポイント
+    const indexHtml = path.join(OUT_HTML, d.name, "index.html");
+    if (await exists(indexHtml)) slugs.push(d.name);
   }
 
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  // 印刷に必要な CSS を優先（reveal は print.css がある）
-  await page.emulateMedia({ media: "print" });
+  let failures = 0;
+  for (const slug of slugs) {
+    try {
+      const fileUrl = "file://" + path.join(OUT_HTML, slug, "index.html") + "?print-pdf";
+      await page.goto(fileUrl, { waitUntil: "load", timeout: 60_000 });
+      await page.waitForTimeout(800); // reveal の印刷CSS安定待ち
 
-  let count = 0;
-
-  for (const file of mdFiles) {
-    const raw = await readFile(path.join(CONTENT_DIR, file), "utf8");
-    const { data } = matter(raw);
-    const front = (data || {}) as Front;
-
-    const slug = front.slug ?? toSlug(path.basename(file, path.extname(file)));
-    const isDraft = front.published === false || front.published === undefined;
-
-    if (isDraft && !INCLUDE_DRAFTS) {
-      // ドラフトはデフォルト非対象
-      continue;
+      const dest = path.join(OUT_PDF, `${slug}.pdf`);
+      await page.pdf({ path: dest, printBackground: true, preferCSSPageSize: true });
+      console.log(`  ✓ public/slides-static/pdf/${slug}.pdf`);
+    } catch (e) {
+      failures++;
+      console.error(`  ✖ ${slug}:`, (e as Error).message);
     }
-
-    // 生成済みHTMLの場所
-    const htmlDir = isDraft
-      ? path.join(PUBLIC_DIR, "drafts", slug)
-      : path.join(PUBLIC_DIR, slug);
-    const htmlFile = path.join(htmlDir, "index.html");
-
-    if (!(await exists(htmlFile))) {
-      console.warn(
-        `  ! HTML not found for "${slug}". Run "pnpm slides" first. (missing: ${path.relative(
-          ROOT,
-          htmlFile
-        )})`
-      );
-      continue;
-    }
-
-    const fileUrl = `file://${htmlFile}`;
-    await page.goto(fileUrl, { waitUntil: "load" });
-
-    const outPdf = path.join(PDF_DIR, `${slug}.pdf`);
-    await page.pdf({
-      path: outPdf,
-      printBackground: true,
-      preferCSSPageSize: true, // reveal の print.css に任せる
-    });
-
-    console.log(`  ✓ ${path.relative(ROOT, outPdf)}`);
-    count++;
   }
 
   await browser.close();
-  if (count === 0) {
-    console.log("  ↷ Nothing exported. (no published slides or HTML missing)");
+  if (failures > 0) {
+    console.error(`✖ Done with ${failures} failure(s).`);
+    process.exit(1);
   } else {
-    console.log("✔ Done.");
+    console.log("✔ Done. PDFs written under public/slides-static/pdf/");
   }
 }
 
