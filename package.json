@@ -4,7 +4,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --cache",
-    "typecheck": "tsc --noEmit"
+    "lint:fix": "eslint . --cache --fix",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf .next .turbo .eslintcache tsconfig.tsbuildinfo",
+    "gen:icons": "node scripts/gen-icons.mjs",
+    "icons": "node scripts/gen-icons.mjs"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
@@ -28,6 +32,8 @@
     "postcss": "^8.4.31",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.0.0"
+    "typescript-eslint": "^8.0.0",
+    "sharp": "^0.33.5",
+    "png-to-ico": "^2.1.8"
   }
 }

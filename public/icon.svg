@@ -1,6 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <circle cx="55" cy="50" r="45" fill="#E75A2C"/>
-  <g transform="translate(5,0)" stroke="hsl(0 0% 88%)" stroke-width="6" fill="none" stroke-linecap="round">
+<!-- Fragment Practice icon (centered circle, waves span full width) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" shape-rendering="geometricPrecision">
+  <!-- 太陽（中央配置） -->
+  <circle cx="50" cy="50" r="45" fill="#E4582B" />
+
+  <!-- 波線（開始0→終了100、中心X=50で対称） -->
+  <!-- strokeは生成スクリプト側で上書き（{__STROKE__}） -->
+  <g stroke="#D5D7DB" stroke-width="{__STROKE__}" stroke-linecap="round" fill="none">
     <path d="M0 76 Q 25 68, 50 76 T 100 76" />
     <path d="M0 86 Q 25 78, 50 86 T 100 86" />
   </g>
