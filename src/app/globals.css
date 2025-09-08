@@ -18,22 +18,35 @@ img, svg { display: block; max-width: 100%; height: auto; }
   --accent-2:#2F6F5E;  /* Matcha（副） */
   --info:#3D5A98;      /* 群青（情報） */
 
+  /* Layout */
   --radius:18px;
   --container:1200px;
 
-  /* Fonts
-     next/font で注入する CSS 変数（--font-display / --font-sans-jp）を最優先に。
-     未ロード時も安全にフォールバック。 */
-  --font-sans: var(--font-sans-jp), ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,"Segoe UI",
-               "Zen Kaku Gothic New","Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+  /* Fonts (next/font の CSS 変数を最優先) */
+  --font-sans: var(--font-sans-jp), ui-sans-serif,system-ui,-apple-system,
+               "Helvetica Neue",Arial,"Segoe UI","Zen Kaku Gothic New",
+               "Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
   --font-display: var(--font-display), "Sora", ui-sans-serif, system-ui, -apple-system,
                   "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+
+  /* Waves (logo) */
+  --wave-line: hsl(0 0% 88%);
 }
-html{ color-scheme: light; overflow-y: scroll; scrollbar-gutter: stable; }
+@media (prefers-color-scheme: dark) {
+  :root { --wave-line: hsl(0 0% 40%); }
+}
+
+html{
+  color-scheme: light;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
 body{
-  background:var(--bg); color:var(--fg);
+  background:var(--bg);
+  color:var(--fg);
   font-family:var(--font-sans);
-  -webkit-font-smoothing:antialiased; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
   text-rendering:optimizeLegibility;
 }
 
@@ -43,7 +56,7 @@ body{
 }
 
 /* Focus ring（キーボード操作で見やすく） */
-:focus-visible{ outline:2px solid rgba(228,88,43,.6); outline-offset:2px; border-radius:8px; }
+:focus-visible{ outline:2px solid color-mix(in srgb, var(--accent) 70%, transparent); outline-offset:2px; border-radius:8px; }
 
 /* ===================== A11y: Skip link ===================== */
 .skip-link{
@@ -128,23 +141,21 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
 .hero .cta.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
 .hero .cta:hover{ transform:translateY(-1px); }
 
-/* “一滴”のブランド感（ヒーロー帯に適用可） */
+/* “一滴”のブランド感（ヒーロー帯など） */
 .hero-grad {
   background:
     radial-gradient(600px 240px at 70% -10%, rgba(228,88,43,.06), transparent 60%),
     radial-gradient(480px 200px at 0% 110%, rgba(47,111,94,.05), transparent 60%);
 }
 
-/* ===================== Buttons (汎用) ===================== */
+/* ===================== Buttons ===================== */
 .btn {
   display:inline-flex; align-items:center; gap:.6rem;
   padding:12px 18px; border-radius:999px; font-weight:700;
   border:1px solid var(--line); color:var(--fg); background:#fff;
   transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.btn.primary{
-  background:var(--accent); border-color:var(--accent); color:#fff;
-}
+.btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
 .btn.primary:hover{ transform:translateY(-1px); box-shadow:0 8px 18px rgba(228,88,43,.18); }
 .btn.ghost{ background:#fff; border-color:var(--line); }
 .btn.ghost:hover{ background:#F7F1EC; }
@@ -159,46 +170,24 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
 .card .title{ font-weight:700; font-size:20px; margin:0 0 6px; }
 .card .meta{ color:var(--muted); font-size:14px; }
 
-/* ===================== Footer (desktop base) ===================== */
+/* ===================== Footer ===================== */
 .site-footer{ border-top:1px solid var(--line); background:var(--bg); padding:16px 0; color:var(--muted); }
 .footerbar{
-  display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:40px;
-  flex-wrap:nowrap;
+  display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:40px; flex-wrap:nowrap;
 }
 .footerbar .copy{ font-weight:600; color:var(--fg); opacity:.9; white-space:nowrap; }
-.footerbar .legal{
-  display:inline-flex; align-items:center; gap:10px; font-size:14px; white-space:nowrap;
-}
+.footerbar .legal{ display:inline-flex; align-items:center; gap:10px; font-size:14px; white-space:nowrap; }
 .footerbar .legal .sep{ opacity:.5; }
 .footerbar .legal a{ color:var(--muted); }
 .footerbar .legal a:hover{ color:var(--fg); }
 
-/* ===================== Footer (mobile: links on top, copyright bottom) ===================== */
+/* Footer responsive */
 @media (max-width: 640px){
-  .footerbar{
-    /* DOMは copy → legal のまま、視覚は legal → copy に */
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-height: unset;
-  }
-  .footerbar .legal{
-    /* 常に一行・中央寄せ・狭幅対策 */
-    display: inline-flex;
-    white-space: nowrap;
-    gap: 8px;
-    font-size: clamp(12px, 3.5vw, 14px);
-  }
+  .footerbar{ flex-direction: column-reverse; align-items: center; justify-content: center; gap: 8px; min-height: unset; }
+  .footerbar .legal{ display: inline-flex; white-space: nowrap; gap: 8px; font-size: clamp(12px, 3.5vw, 14px); }
   .footerbar .legal .sep{ margin: 0 2px; }
-  .footerbar .copy{
-    /* 最下段で折返し回避 */
-    white-space: nowrap;
-    font-size: clamp(13px, 3.8vw, 14px);
-  }
+  .footerbar .copy{ white-space: nowrap; font-size: clamp(13px, 3.8vw, 14px); }
 }
-
-/* 超狭幅フォールバック（任意：320px以下などでの安定化） */
 @media (max-width: 360px){
   .footerbar{ gap:6px; }
   .footerbar .legal{ gap:6px; font-size:12px; }
@@ -263,7 +252,7 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
 .list-check li::before{ content:"✓"; position:absolute; left:0; top:.1em; font-weight:800; color:var(--accent); }
 .list-dot{ margin:8px 0 0; padding-left:18px; list-style:disc; }
 
-/* ===================== News Bar (left / pill More) ===================== */
+/* ===================== News Bar ===================== */
 .newsbar{
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
   background:#fafafa; padding:8px 0; font-size:13px; color:var(--muted);
@@ -309,10 +298,8 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
   .orgdl .row{ grid-template-columns:1fr; gap:6px; padding:14px 0; }
   .orgdl dt{ font-size:13px; }
   .orgdl dd{ font-size:18px; line-height:1.7; }
-  .chips{ gap:10px; }
-  .chip{ padding:12px 16px; }
 
-  /* NewsBar: 最新1件＋More、左右に配置 */
+  /* NewsBar: 最新1件＋More を左右配置 */
   .newsbar ul{ gap:8px; justify-content:space-between; width:100%; padding:0 16px; }
   .newsbar li{ display:none; }
   .newsbar li:first-child{ display:flex; min-width:0; flex:1 1 auto; }
@@ -320,80 +307,56 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
   .newsbar .title{ max-width:60vw; }
 }
 
-:root {
-  --wave-line: hsl(0 0% 88%);  /* ライトモード用 */
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --wave-line: hsl(0 0% 40%); /* ダークモード用はやや濃いめに */
-  }
-}
+/* ===================== Forms (Contact scoped) ===================== */
+.cf-wrap{ width:100%; max-width:640px; margin-top:24px; }
+.cf-field{ margin:16px 0 18px; }
+.cf-label{ display:block; font-weight:700; margin-bottom:8px; }
+.cf-req{ color:var(--accent); margin-left:.2em; }
 
-/* ===================== Forms (Contact) — refined ===================== */
-.cf-wrap{ max-width:640px; margin-top:24px; }
-
-.cf-field{ margin:18px 0 20px; }
-.cf-label{
-  display:block; font-weight:700; margin-bottom:8px;
-  color: var(--fg);
-}
-
-/* 入力・テキストエリア：白ベース＋繊細ボーダー＋薄い内側影で沈静化 */
-.cf-input, .cf-textarea{
-  width:100%;
-  padding:12px 14px;
-  border:1px solid #E6E6E6;              /* うっすら境界 */
-  border-radius:10px;                     /* やわらかい角丸 */
-  background:#fff;                        /* 白ベース */
-  color:var(--fg);
-  font:inherit;
-  line-height:1.55;
-  box-shadow: inset 0 1px 0 rgba(0,0,0,.02);  /* 極薄の内側影で凹み感 */
-  transition: border-color .15s ease, box-shadow .15s ease, background .2s ease;
-}
-
-/* テキストエリアの使い心地 */
+.cf-input,
 .cf-textarea{
-  min-height:160px;        /* 画像の見た目相当 */
-  resize: vertical;        /* 横は固定、縦だけ伸縮 */
+  display:block;               /* 幅縮み防止 */
+  width:100%;
+  color-scheme: light;         /* 自動ダーク抑止 */
+  -webkit-appearance:none;
+  appearance:none;
+  padding:12px 14px;
+  border-radius:10px;
+  background:#F7F7F7 !important;
+  color:var(--fg) !important;
+  border:1px solid #E6E6E6 !important;
+  line-height:1.55;
+  font:inherit;
+  background-clip:padding-box;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,.02);
+  transition:border-color .15s ease, box-shadow .15s ease, background .2s ease;
 }
+.cf-textarea{ resize:vertical; min-height:140px; }
 
-/* プレースホルダは少し淡く */
-.cf-input::placeholder,
-.cf-textarea::placeholder{ color:#B4B8BE; }
+.cf-input::placeholder, .cf-textarea::placeholder{ color:#B4B8BE; }
 
-/* フォーカス：アクセントの淡いリング＋ボーダー強調（スクショの自然な主張） */
 .cf-input:focus, .cf-textarea:focus{
   outline:none;
-  border-color:#CFCFCF;
+  background:#FAFAFA !important;
+  border-color:#CFCFCF !important;
   box-shadow:
     inset 0 1px 0 rgba(0,0,0,.02),
     0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
-/* 無効状態 */
-.cf-input:disabled, .cf-textarea:disabled{
-  background:#F7F7F7; color:#9AA0A6; cursor:not-allowed;
-}
-
-/* エラー：赤みを帯びた枠＋淡いリング（強すぎない） */
-.cf-input[aria-invalid="true"],
-.cf-textarea[aria-invalid="true"]{
-  border-color:#E86A5E;
+.cf-input[aria-invalid="true"], .cf-textarea[aria-invalid="true"]{
+  border-color:#E86A5E !important;
+  background:#FFF6F5 !important;
   box-shadow:
     inset 0 1px 0 rgba(232,106,94,.06),
     0 0 0 3px color-mix(in srgb, #E86A5E 22%, transparent);
 }
 
-/* フィールド下の補助テキスト／エラー */
 .cf-hint{ margin:6px 0 0; font-size:13px; color:var(--muted); }
-.cf-error{ margin:6px 0 0; font-size:13px; color:#E15548; }
 
-/* 送信ボタン行 */
 .cf-actions{ display:flex; align-items:center; gap:12px; margin-top:6px; }
 .cf-meta{ font-size:13px; color:var(--muted); }
 
-/* サクセスカード（送信完了） */
 .cf-success{
   border:1px solid var(--line);
   background:#fff;
@@ -402,24 +365,14 @@ a:hover{ text-decoration:underline; text-underline-offset:2px; color:var(--fg); 
   box-shadow:0 6px 18px rgba(0,0,0,.05);
 }
 
-/* ダークモード（将来の切替用のやさしい対処） */
-@media (prefers-color-scheme: dark){
-  .cf-input, .cf-textarea{
-    background:#111; border-color:#2B2B2B; color:#F2F2F2;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
-  }
-  .cf-input:focus, .cf-textarea:focus{
-    border-color:#3A3A3A;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.02),
-      0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
-  }
-  .cf-hint{ color:#A0A0A0; }
-  .cf-success{ background:#111; border-color:#2B2B2B; }
+/* Autofill 黒化対策（Safari/Chrome） */
+.cf-input:-webkit-autofill,
+.cf-textarea:-webkit-autofill{
+  -webkit-text-fill-color: var(--fg) !important;
+  -webkit-box-shadow: 0 0 0px 1000px #F7F7F7 inset !important;
+  box-shadow: 0 0 0px 1000px #F7F7F7 inset !important;
+  transition: background-color 9999s ease-out, color 9999s ease-out;
 }
 
-/* モバイル微調整 */
-@media (max-width:640px){
-  .cf-wrap{ margin-top:16px; }
-  .cf-field{ margin:14px 0 16px; }
-}
+/* 送信ボタンの状態 */
+.btn.primary[disabled]{ opacity:.6; cursor:not-allowed; }
