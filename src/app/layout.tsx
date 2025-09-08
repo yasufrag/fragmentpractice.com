@@ -3,6 +3,8 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Sora, Zen_Kaku_Gothic_New } from "next/font/google";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
 
 /* Google Fonts (next/font) */
 const sora = Sora({
@@ -86,17 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <main id="main" role="main">{children}</main>
 
-        {/* Footer */}
-        <footer className="site-footer" role="contentinfo">
-          <div className="fp-container footerbar" aria-label="著作権と法的リンク">
-            <nav className="legal" aria-label="法的リンク">
-              <a href="/terms">利用規約</a>
-              <span className="sep" aria-hidden="true">・</span>
-              <a href="/privacy">プライバシーポリシー</a>
-            </nav>
-            <div className="copy">© {year} Fragment Practice</div>
-          </div>
-        </footer>
+        <Footer />
       </body>
     </html>
   );
