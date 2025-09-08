@@ -479,3 +479,40 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
 .contact-page .cf-form {
   margin-top: 16px;     /* 本文とフォームの距離 */
 }
+
+/* Contact form submit row */
+.cf-submit-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* ボタンとテキストの間隔 */
+  margin-top: 1rem;
+  flex-wrap: wrap; /* モバイルで幅が足りないときは折り返す */
+}
+
+.cf-submit-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 9999px; /* pill型 */
+  padding: 0.4rem 1.2rem; /* 文字幅＋少し余白 */
+  font-size: 1rem;
+  font-weight: 600;
+  width: auto; /* 横幅いっぱいにしない */
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cf-submit-btn:hover,
+.cf-submit-btn:focus {
+  background: color-mix(in srgb, var(--accent) 90%, black);
+}
+
+.cf-submit-note {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.cf-submit-note a {
+  color: var(--accent);
+  text-decoration: underline;
+}
