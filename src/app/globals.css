@@ -465,3 +465,17 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
   color: #E45D2B;
   font-weight: 600;
 }
+
+/* Contact ページ調整 */
+.contact-page .h1 {
+  margin-top: 0;        /* section 内なので不要 */
+  margin-bottom: 32px;  /* 見出しと本文の距離 */
+}
+
+.contact-page .lead {
+  margin-bottom: 24px;
+}
+
+.contact-page .cf-form {
+  margin-top: 16px;     /* 本文とフォームの距離 */
+}
