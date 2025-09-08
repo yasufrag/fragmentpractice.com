@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>Sample Talk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" id="theme">
+  <style>
+    .reveal h1 { letter-spacing: .02em; }
+    .reveal pre { background:#f5f5f5; padding:16px; border-radius:10px; }
+    .badge { position:fixed; right:16px; bottom:14px; opacity:.5; font:12px/1.2 ui-sans-serif,system-ui; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown data-separator="^---$" data-separator-vertical="^--$">
+        <textarea data-template>
+# Sample Talk
+_Sample Conference 2025_
+
+
+# サンプル登壇タイトル
+### Fragment Practice
+
+---
+
+# アジェンダ
+- セクション1
+- セクション2
+- セクション3
+
+---
+
+# セクション1
+ここに内容が入ります（仮）
+
+--
+
+## 詳細スライド
+（縦方向のスライド）
+
+---
+
+# セクション2
+ここに内容が入ります（仮）
+
+---
+
+# セクション3
+ここに内容が入ります（仮）
+
+---
+
+# まとめ
+- ポイント1
+- ポイント2
+
+---
+
+# ご清聴ありがとうございました
+連絡先: [yasuhiro@fragmentpractice.com](mailto:yasuhiro@fragmentpractice.com)
+
+Note:
+- このスライドはプレースホルダーです。
+- 実際の内容は後日埋め込みます。
+        </textarea>
+      </section>
+    </div>
+  </div>
+
+  <div class="badge">DRAFT</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/markdown/markdown.js"></script>
+  <script>
+    const deck = new Reveal({
+      hash: true,
+      slideNumber: true,
+      plugins: [ RevealMarkdown ],
+      width: 1280, height: 720,
+      margin: 0.06,
+    });
+    deck.initialize();
+  </script>
+</body>
+</html>

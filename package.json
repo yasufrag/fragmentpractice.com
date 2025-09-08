@@ -12,6 +12,7 @@
     "og": "tsx scripts/gen-og.mts",
     "slides": "tsx scripts/gen-slides.mts",
     "slides:pdf": "tsx scripts/export-pdf.mts",
+    "slides:pdf:all": "tsx scripts/export-pdf.mts --include-drafts",
     "generate": "pnpm icons && pnpm og && pnpm slides && pnpm slides:pdf",
     "postinstall": "playwright install chromium"
   },
