@@ -30,30 +30,66 @@ const WIDTH = 1200 as const;
 const HEIGHT = 630 as const;
 
 async function loadFonts() {
-  // 必要フォント
-  const must = [
-    { name: "Sora", file: "Sora-Bold.ttf", weight: 700, style: "normal" as const },
-    {
-      name: "Zen Kaku Gothic New",
-      file: "ZenKakuGothicNew-Regular.ttf",
-      weight: 400,
-      style: "normal" as const,
-    },
+  type FontMeta = {
+    name: string;
+    file: string;
+    weight: number;
+    style: "normal" | "italic";
+  };
+  const must: FontMeta[] = [
+    { name: "Sora", file: "Sora-Bold.ttf", weight: 700, style: "normal" },
+    { name: "Zen Kaku Gothic New", file: "ZenKakuGothicNew-Regular.ttf", weight: 400, style: "normal" },
   ];
 
-  const fonts: { name: string; data: Buffer; weight: number; style: "normal" | "italic" }[] = [];
+  const detectFormat = (buf: Buffer): "ttf" | "otf" | "woff" | "woff2" | "ttc" | "unknown" => {
+    const sig = buf.subarray(0, 4).toString("ascii");
+    if (sig === "OTTO") return "otf";
+    if (sig === "wOFF") return "woff";
+    if (sig === "wOF2") return "woff2";
+    if (sig === "ttcf") return "ttc";
+    // TTF は 00 01 00 00 か "true"
+    if (buf[0] === 0x00 && buf[1] === 0x01 && buf[2] === 0x00 && buf[3] === 0x00) return "ttf";
+    if (sig === "true") return "ttf";
+    return "unknown";
+  };
+
+  const fonts: Array<{
+    name: string;
+    data: Buffer;
+    weight: number;
+    style: "normal" | "italic";
+    // satori は format を指定可能（woff/woff2 を安全に扱う）
+    format?: "woff" | "woff2" | "ttf" | "otf";
+  }> = [];
 
   for (const f of must) {
     const p = path.join(FONTS, f.file);
+    let data: Buffer;
     try {
-      const data = await fs.readFile(p);
-      fonts.push({ name: f.name, data, weight: f.weight, style: f.style });
+      data = await fs.readFile(p);
     } catch {
       throw new Error(
-        `Font not found: ${p}\n` +
-          `→ public/fonts/ に ${f.file} を配置してください（name="${f.name}", weight=${f.weight}).`
+        `Font not found: ${p}\n→ public/fonts/ に ${f.file} を配置してください（name="${f.name}", weight=${f.weight}).`
       );
     }
+
+    const format = detectFormat(data);
+    if (format === "unknown" || format === "ttc") {
+      throw new Error(
+        `Unsupported font format for ${f.file} (detected: ${format}).\n` +
+          `→ TTF/OTF か WOFF/WOFF2 を用意してください（TTCは不可）。`
+      );
+    }
+
+    // opentype.js 経由の satori は TTF/OTF が最も堅い。
+    // WOFF/WOFF2 も format を付ければ動きますが、ビルドの相性で弾かれることがあります。
+    fonts.push({
+      name: f.name,
+      data,
+      weight: f.weight,
+      style: f.style,
+      format: format === "woff" || format === "woff2" ? format : undefined,
+    });
   }
   return fonts;
 }
