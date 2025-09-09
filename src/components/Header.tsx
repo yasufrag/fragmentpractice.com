@@ -29,6 +29,8 @@ export default function Header() {
         <nav className="navlinks" aria-label="主要ページ">
           <Link href="/company">Company</Link>
           <Link href="/work">Work</Link>
+          <Link href="/about">About</Link>
+          <Link href="/press">Press</Link>
           <Link href="/zine">ZINE</Link>
           <Link href="/contact">Contact</Link>
         </nav>
@@ -67,6 +69,8 @@ export default function Header() {
         <nav className="mobile-nav">
           <Link href="/company" onClick={() => setOpen(false)}>Company</Link>
           <Link href="/work" onClick={() => setOpen(false)}>Work</Link>
+          <Link href="/about" onClick={() => setOpen(false)}>About</Link>
+          <Link href="/press" onClick={() => setOpen(false)}>Press</Link>
           <Link href="/zine" onClick={() => setOpen(false)}>ZINE</Link>
           <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
         </nav>

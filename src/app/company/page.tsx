@@ -1,14 +1,14 @@
-// src/app/company/page.tsx
+// src/app/company/page.tsx (revised – 安定版: カードデザインを元に戻し、内容のみ更新)
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Company",
   description:
-    "Fragment Practice合同会社の会社概要。AI・言語・編集を横断し、注意・関係・編集を支える“象徴的インフラ”を設計します。",
+    "Fragment Practice合同会社の会社概要。公的情報（所在地・法人番号）と、信頼性・セキュリティ方針、取材・問い合わせ窓口を掲載しています。",
   openGraph: {
     title: "Fragment Practice — Company",
     description:
-      "Fragment Practice合同会社の会社概要。AI・言語・編集を横断し、注意・関係・編集を支える“象徴的インフラ”を設計します。",
+      "Fragment Practice合同会社の会社概要。公的情報／信頼性・セキュリティ方針／関連リンク（About, Work, Press, Trust）。",
     url: "https://fragmentpractice.com/company",
     type: "article",
   },
@@ -21,7 +21,7 @@ export default function CompanyPage() {
   const addressLine =
     "香川県高松市天神前10番5号 高松セントラルスカイビルディング 3F south";
 
-  // 位置情報（MapFan 掲載座標）
+  // 位置情報（掲載座標）
   const LAT = 34.3375959;
   const LNG = 134.0467874;
 
@@ -35,7 +35,7 @@ export default function CompanyPage() {
     osm: `https://www.openstreetmap.org/?mlat=${LAT}&mlon=${LNG}#map=18/${LAT}/${LNG}`,
     // 対応端末のみ：モバイルのマップアプリ起動
     geo: `geo:${LAT},${LNG}?q=${encodeURIComponent(qHuman)}`,
-  };
+  } as const;
 
   return (
     <div className="fp-container">
@@ -81,6 +81,9 @@ export default function CompanyPage() {
                   <a className="chip" href={links.google} target="_blank" rel="noopener noreferrer">
                     Google&nbsp;Maps
                   </a>
+                  <a className="chip" href={links.osm} target="_blank" rel="noopener noreferrer">
+                    OpenStreetMap
+                  </a>
                 </div>
               </dd>
             </div>
@@ -105,7 +108,42 @@ export default function CompanyPage() {
         </article>
       </section>
 
-      {/* 構造化データ（最小限） */}
+      {/* 関連ページ */}
+      <section className="fp-section" aria-labelledby="related">
+        <h2 id="related" className="h2" style={{ marginBottom: 12 }}>関連ページ</h2>
+        <div className="grid" style={{ marginTop: 8 }}>
+          <a className="card" style={{ gridColumn: "span 4" }} href="/about">
+            <h3 className="title">About</h3>
+            <p className="meta">代表／理念／活動領域</p>
+            <p style={{ marginTop: 8 }}>背景やビジョンはこちら。</p>
+          </a>
+          <a className="card" style={{ gridColumn: "span 4" }} href="/work">
+            <h3 className="title">Work</h3>
+            <p className="meta">提供メニュー・進め方</p>
+            <p style={{ marginTop: 8 }}>Workshop / Sprint / Retainer。</p>
+          </a>
+          <a className="card" style={{ gridColumn: "span 4" }} href="/press">
+            <h3 className="title">Press / Media</h3>
+            <p className="meta">取材・掲載のご案内</p>
+            <p style={{ marginTop: 8 }}>メディア用プロフィールと窓口。</p>
+          </a>
+          <a className="card" style={{ gridColumn: "span 4" }} href="/trust">
+            <h3 className="title">Trust</h3>
+            <p className="meta">信頼・セキュリティ運用</p>
+            <p style={{ marginTop: 8 }}>セキュリティ／契約フロー／守秘。</p>
+          </a>
+        </div>
+      </section>
+
+      {/* 連絡先 CTA */}
+      <section className="fp-section" aria-labelledby="cta">
+        <h2 id="cta" className="h2" style={{ marginBottom: 12 }}>お問い合わせ</h2>
+        <p style={{ maxWidth: 720, marginBottom: 12 }}>
+          取引・取材・業務提携のご相談は、<a href="/contact">Contact</a> フォームからご連絡ください。
+        </p>
+      </section>
+
+      {/* 構造化データ（Organization最小） */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -114,6 +152,7 @@ export default function CompanyPage() {
             "@type": "Organization",
             name: "Fragment Practice 合同会社",
             url: "https://fragmentpractice.com",
+            foundingDate: "2025-08-12",
             address: {
               "@type": "PostalAddress",
               postalCode: postal,

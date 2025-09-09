@@ -1,4 +1,3 @@
-// src/components/Footer.tsx
 export default function Footer() {
   return (
     <footer className="site-footer">
@@ -9,6 +8,8 @@ export default function Footer() {
             <a href="/terms">利用規約</a>
             <span className="sep">・</span>
             <a href="/privacy">プライバシーポリシー</a>
+            <span className="sep">・</span>
+            <a href="/trust">信頼性ポリシー</a>
           </nav>
 
           {/* 下段: コピーライト（常に最下段） */}

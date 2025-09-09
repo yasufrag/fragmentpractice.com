@@ -1,8 +1,8 @@
-// app/work/page.tsx
+// app/work/page.tsx (revised)
 export const metadata = {
   title: "Work",
   description:
-    "AI・言語・編集の交差点で、「静けさと構文性」に基づく軽量な伴走を提供します。小さく試し、確かめながら深めます。",
+    "AI・言語・編集の交差点で、『静けさと構文性』に基づく軽量な伴走を提供します。まずは小さく試し、検証しながら深めます。提供メニュー（Workshop / Sprint / Retainer）の価格帯を公開し、詳細は対話で調整します。",
 };
 
 export default function WorkPage() {
@@ -18,7 +18,52 @@ export default function WorkPage() {
         </p>
       </section>
 
-      {/* 提供内容 */}
+      {/* 提供メニュー（価格帯の“窓”） */}
+      <section className="fp-section" aria-labelledby="menu" style={{ marginTop: 12 }}>
+        <h2 id="menu" className="h2" style={{ marginBottom: 12 }}>提供メニュー</h2>
+        <p style={{ maxWidth: 840, marginBottom: 12 }}>
+          価格帯の“窓”のみを公開しています。内容と公開範囲に応じて、詳細は対話で合意します（NDA／契約雛形あり）。
+        </p>
+        <div className="grid" style={{ marginTop: 8 }}>
+          {/* Workshop */}
+          <article className="card" style={{ gridColumn: "span 4" }}>
+            <h3 className="title">Workshop（1回）</h3>
+            <p className="meta">10–30万円</p>
+            <p style={{ marginTop: 8 }}>専門家・チーム向けの小規模セッション。テーマ例：AIと構文設計、対話システムの思想、詩的実践と研究の往復。</p>
+            <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+              <li>講演／対話アウトライン</li>
+              <li>合意形成のフレーム（メモ）</li>
+              <li>質疑ログ（抜粋）</li>
+            </ul>
+          </article>
+
+          {/* Sprint */}
+          <article className="card" style={{ gridColumn: "span 4" }}>
+            <h3 className="title">Sprint（2–4週）</h3>
+            <p className="meta">30–50万円</p>
+            <p style={{ marginTop: 8 }}>意図・関係性を整理し、対話構造／プロンプトを設計。軽い検証と導線改善までを短距離で実施します。</p>
+            <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+              <li>言葉の設計書（前提・意図・タグ）</li>
+              <li>小さな試作（テキスト中心のプロトタイプ）</li>
+              <li>導線改善の提案（サイト／運用）</li>
+            </ul>
+          </article>
+
+          {/* Retainer */}
+          <article className="card" style={{ gridColumn: "span 4" }}>
+            <h3 className="title">Retainer（月次）</h3>
+            <p className="meta">40–70万円</p>
+            <p style={{ marginTop: 8 }}>月次レビューと小改修を中心に、必要なタイミングで集中的に伴走します。密度優先・少数限定。</p>
+            <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+              <li>定例レビュー（言葉／導線）</li>
+              <li>軽微な改修・ドキュメント更新</li>
+              <li>次のスプリント設計</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      {/* 提供内容（サービス詳細） */}
       <section className="fp-section" aria-labelledby="offers">
         <h2 id="offers" className="h2" style={{ marginBottom: 12 }}>提供内容</h2>
 
@@ -91,7 +136,7 @@ export default function WorkPage() {
           </div>
           <div className="card" style={{ gridColumn: "span 4" }}>
             <h3 className="title">Sprint</h3>
-            <p className="meta">1–2 週間</p>
+            <p className="meta">2–4 週間</p>
             <p style={{ marginTop: 8 }}>最小の仮説検証と設計メモの束ね。成果はテキスト中心。</p>
           </div>
           <div className="card" style={{ gridColumn: "span 4" }}>

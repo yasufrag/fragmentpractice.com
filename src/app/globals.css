@@ -349,18 +349,18 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
 /* 2カラム → SPで1カラム */
 .cf-grid{
   display:grid;
-  grid-template-columns: 160px 1fr;
-  gap: 12px 16px;
-  max-width: 760px;
+  grid-template-columns:160px 1fr;
+  gap:12px 16px;
+  max-width:760px;
 }
 @media (max-width:640px){
-  .cf-grid{ grid-template-columns: 1fr; }
+  .cf-grid{ grid-template-columns:1fr; }
 }
 
 /* Contact ページの余白調整 */
-.contact-page .h1 { margin-top: 0; margin-bottom: 32px; }
-.contact-page .lead { margin-bottom: 24px; }
-.contact-page .cf-form { margin-top: 16px; }
+.contact-page .h1{ margin-top:0; margin-bottom:32px; }
+.contact-page .lead{ margin-bottom:24px; }
+.contact-page .cf-form{ margin-top:16px; }
 
 /* ラベル */
 .cf-label{ display:block; font-weight:700; margin-top:4px; }
@@ -370,23 +370,25 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
 :where(input).cf-input,
 :where(textarea).cf-textarea{
   display:block; width:100%;
-  color-scheme: light;
+  color-scheme:light;
   -webkit-appearance:none; appearance:none;
   padding:12px 14px; border-radius:10px;
   background:#F7F7F7 !important; color:var(--fg) !important;
   border:1px solid #E6E6E6 !important; line-height:1.55; font:inherit;
-  background-clip:padding-box; box-shadow: inset 0 1px 0 rgba(0,0,0,.02);
+  background-clip:padding-box; box-shadow:inset 0 1px 0 rgba(0,0,0,.02);
   transition:border-color .15s ease, box-shadow .15s ease, background .2s ease;
 }
 :where(textarea).cf-textarea{ resize:vertical; min-height:140px; }
-.cf-input::placeholder, .cf-textarea::placeholder{ color:#B4B8BE; }
-.cf-input:focus, .cf-textarea:focus{
+.cf-input::placeholder,.cf-textarea::placeholder{ color:#B4B8BE; }
+.cf-input:focus,.cf-textarea:focus{
   outline:none; background:#FAFAFA !important; border-color:#CFCFCF !important;
-  box-shadow: inset 0 1px 0 rgba(0,0,0,.02), 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.02),
+             0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
 }
-.cf-input[aria-invalid="true"], .cf-textarea[aria-invalid="true"]{
+.cf-input[aria-invalid="true"],.cf-textarea[aria-invalid="true"]{
   border-color:#E86A5E !important; background:#FFF6F5 !important;
-  box-shadow: inset 0 1px 0 rgba(232,106,94,.06), 0 0 0 3px color-mix(in srgb, #E86A5E 22%, transparent);
+  box-shadow:inset 0 1px 0 rgba(232,106,94,.06),
+             0 0 0 3px color-mix(in srgb, #E86A5E 22%, transparent);
 }
 
 /* 文言・補助 */
@@ -398,43 +400,56 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
   display:flex; align-items:center; gap:1rem; margin-top:1.5rem; flex-wrap:wrap;
 }
 .cf-submit-btn{
-  background: var(--accent);
-  color:#fff; border:none; border-radius:9999px;
-  padding:.4rem 1.2rem; font-size:.95rem; font-weight:700; width:auto; cursor:pointer;
-  transition:background .2s ease;
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.58rem 1.25rem;
+  min-height:40px; border-radius:9999px;
+  background:var(--accent); color:#fff;
+  border:1px solid color-mix(in srgb, var(--accent) 90%, #000 0%);
+  font-weight:700; letter-spacing:.01em;
+  transition:transform .12s ease, box-shadow .18s ease, background .18s ease;
+  will-change:transform;
 }
-.cf-submit-btn:hover, .cf-submit-btn:focus{
-  background: color-mix(in srgb, var(--accent) 90%, black);
+.cf-submit-btn:hover{
+  background:color-mix(in srgb, var(--accent) 90%, #000 10%);
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(228,88,43,.18);
 }
-.cf-submit-note{
-  font-size:.9rem; color:var(--muted); line-height:1.4;
+.cf-submit-btn:focus-visible{
+  outline:3px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  outline-offset:2px;
 }
+.cf-submit-btn:active{
+  transform:translateY(0);
+  box-shadow:0 4px 10px rgba(228,88,43,.16);
+}
+.cf-submit-btn[disabled],
+.cf-submit-btn[aria-disabled="true"]{
+  opacity:.55; cursor:not-allowed; transform:none; box-shadow:none;
+}
+.cf-submit-note{ font-size:.9rem; color:var(--muted); line-height:1.4; }
 .cf-submit-note a{ color:var(--accent); text-decoration:underline; }
 
 /* 成功 / エラー表示 */
 .cf-success{
-  margin-top: 2rem;
-  padding: 1rem;
-  border: 1px solid var(--accent);
-  border-radius: 0.5rem;
-  background: #fff8f4;
-  color: var(--accent);
-  font-weight: 600;
+  margin-top:2rem; padding:1rem;
+  border:1px solid var(--accent); border-radius:.5rem;
+  background:#fff8f4; color:var(--accent); font-weight:600;
 }
 .cf-error{
-  margin-top: 2rem;
-  padding: 1rem;
-  border: 1px solid #b91c1c;
-  border-radius: 0.5rem;
-  background: #fef2f2;
-  color: #b91c1c;
-  font-weight: 600;
+  margin-top:2rem; padding:1rem;
+  border:1px solid #b91c1c; border-radius:.5rem;
+  background:#fef2f2; color:#b91c1c; font-weight:600;
 }
 
 /* Safari/Chrome オートフィル対策 */
-.cf-input:-webkit-autofill, .cf-textarea:-webkit-autofill{
-  -webkit-text-fill-color: var(--fg) !important;
-  -webkit-box-shadow: 0 0 0px 1000px #F7F7F7 inset !important;
-  box-shadow: 0 0 0px 1000px #F7F7F7 inset !important;
-  transition: background-color 9999s ease-out, color 9999s ease-out;
+.cf-input:-webkit-autofill,.cf-textarea:-webkit-autofill{
+  -webkit-text-fill-color:var(--fg) !important;
+  -webkit-box-shadow:0 0 0px 1000px #F7F7F7 inset !important;
+  box-shadow:0 0 0px 1000px #F7F7F7 inset !important;
+  transition:background-color 9999s ease-out, color 9999s ease-out;
+}
+
+/* モバイル時の行間微調整 */
+@media (max-width:640px){
+  .cf-submit-row{ row-gap:.5rem; }
 }
