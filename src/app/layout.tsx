@@ -76,8 +76,6 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const year = new Date().getFullYear();
-
   return (
     <html lang="ja" className={`${sora.variable} ${zenKaku.variable}`}>
       <body>

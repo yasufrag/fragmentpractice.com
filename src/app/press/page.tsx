@@ -1,4 +1,6 @@
-// app/press/page.tsx (Press/Media – 全体版・プレスキット除外)
+// app/press/page.tsx
+import Link from "next/link";
+
 export const metadata = {
   title: "Press / Media",
   description:
@@ -68,12 +70,12 @@ export default function PressPage() {
       <section className="fp-section" id="guidance" aria-labelledby="guidance-h">
         <h2 id="guidance-h" className="h2" style={{ marginBottom: 12 }}>取材をご検討の方へ</h2>
         <p style={{ maxWidth: 840, marginBottom: 12 }}>
-          取材・掲載に際しては、まず <a href="/work">Work ページ</a> をご覧ください。提供メニューや活動範囲を簡潔にまとめています。
+          取材・掲載に際しては、まず <Link href="/work">Work ページ</Link> をご覧ください。提供メニューや活動範囲を簡潔にまとめています。
           法人案件の信頼性に関する情報や、文化的活動との調和もご確認いただけます。
         </p>
         <p style={{ maxWidth: 840, marginBottom: 12 }}>
-          プロフィールや活動の背景に関する基本的な情報は <a href="/about">About ページ</a> に掲載しています。
-          また、最新の登壇予定や更新情報は <a href="/news">News ページ</a> にてご覧いただけます。
+          プロフィールや活動の背景に関する基本的な情報は <Link href="/about">About ページ</Link> に掲載しています。
+          また、最新の登壇予定や更新情報は <Link href="/news">News ページ</Link> にてご覧いただけます。
         </p>
       </section>
 
@@ -81,10 +83,10 @@ export default function PressPage() {
       <section className="fp-section" id="contact" aria-labelledby="contact-h">
         <h2 id="contact-h" className="h2" style={{ marginBottom: 12 }}>お問い合わせ</h2>
         <p style={{ maxWidth: 720, marginBottom: 12 }}>
-          掲載や取材のご相談は、<a href="/contact">Contact</a> フォームからご連絡ください。
+          掲載や取材のご相談は、<Link href="/contact">Contact</Link> フォームからご連絡ください。
           内容を確認の上、必要に応じて折り返しご案内いたします。
         </p>
-        <a className="cta" href="/contact" aria-label="お問い合わせフォームへ">Contact Form</a>
+        <Link className="cta" href="/contact" aria-label="お問い合わせフォームへ">Contact Form</Link>
       </section>
 
       {/* 構造化データ（Organization + Person） */}

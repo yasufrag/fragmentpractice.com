@@ -15,8 +15,7 @@ function isFsResponse(v: unknown): v is FormspreeResponse {
   const errs = o.errors;
   const errsPart =
     errs === undefined ||
-    (Array.isArray(errs) &&
-      errs.every((e) => typeof e === "object" && e !== null));
+    (Array.isArray(errs) && errs.every((e) => typeof e === "object" && e !== null));
   return okPart && errsPart;
 }
 
@@ -55,7 +54,6 @@ export default function ContactForm() {
     }
 
     if (!FORMSPREE) {
-      // 送信を試みた時だけ“hello”の赤帯を出す
       setFatal("endpoint");
       setStatus("error");
       return;
@@ -95,11 +93,9 @@ export default function ContactForm() {
         setErrors(fsErrors);
         setStatus("error");
       } else if (res.status >= 500) {
-        // サーバ側の一時障害のみ赤帯（hello 案内）
         setFatal("network");
         setStatus("error");
       } else {
-        // 想定外の4xxなどはフォーム下に軽め通知
         setErrors({ message: "送信に失敗しました。入力内容をご確認ください。" });
         setStatus("error");
       }
@@ -189,14 +185,16 @@ export default function ContactForm() {
       </div>
 
       <div className="cf-submit-row">
+        {/* ← ここをCTAに統一 */}
         <button
           type="submit"
-          className="cf-button"
+          className="cta primary"
           disabled={status === "submitting"}
           aria-busy={status === "submitting"}
         >
           {status === "submitting" ? "送信中…" : "送信"}
         </button>
+
         <span id="cf-note" className="cf-note">
           送信内容は当社の <a href="/privacy">プライバシーポリシー</a> に基づき扱います。
         </span>
@@ -204,9 +202,8 @@ export default function ContactForm() {
 
       {fatal && (
         <div className="cf-error" role="alert" aria-live="assertive" style={{ marginTop: "1rem" }}>
-          送信に失敗しました。恐れ入りますが{" "}
-          <a href="mailto:hello@fragmentpractice.com">hello@fragmentpractice.com</a>{" "}
-          まで直接ご連絡ください。
+          送信に失敗しました。しばらく時間をおいて再度お試しください。至急のご連絡は
+          <a href="/company">Company</a> 記載の電話番号をご利用ください。
         </div>
       )}
     </form>

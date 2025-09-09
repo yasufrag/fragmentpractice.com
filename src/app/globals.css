@@ -453,3 +453,105 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
 @media (max-width:640px){
   .cf-submit-row{ row-gap:.5rem; }
 }
+
+/* リンクカードのコンテナ */
+.linkcards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+/* 各カード */
+.linkcard {
+  display: block;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: var(--surface);
+}
+
+/* タイトル */
+.linkcard h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  border-bottom: 2px solid transparent;
+  display: inline-block;
+  transition: border-color 0.2s ease;
+}
+
+/* 本文 */
+.linkcard p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: opacity 0.2s ease;
+}
+
+/* ホバー時の挙動 */
+.linkcard:hover {
+  background: var(--surface-hover);
+}
+
+.linkcard:hover h3 {
+  border-color: var(--accent);
+}
+
+.linkcard:hover p {
+  opacity: 0.8;
+}
+
+/* すべてのCTAの見た目を統一（a / button / input[type=submit]） */
+:where(a, button, input[type="submit"]).cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  /* タップしやすいサイズ（iOSのズーム防止で16px以上） */
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg);
+  text-decoration: none;
+
+  /* 端末差異をならす */
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition: background .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+:where(a, button, input[type="submit"]).cta:hover {
+  background: var(--surface-hover);
+}
+
+:where(a, button, input[type="submit"]).cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+:where(a, button, input[type="submit"]).cta.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+:where(a, button, input[type="submit"]).cta.primary:hover {
+  filter: brightness(0.96);
+}
+:where(a, button, input[type="submit"]).cta[disabled],
+:where(a, button, input[type="submit"]).cta[aria-disabled="true"] {
+  opacity: .6;
+  cursor: not-allowed;
+}

@@ -1,5 +1,6 @@
 // src/app/company/page.tsx (revised – 安定版: カードデザインを元に戻し、内容のみ更新)
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Company",
@@ -111,27 +112,25 @@ export default function CompanyPage() {
       {/* 関連ページ */}
       <section className="fp-section" aria-labelledby="related">
         <h2 id="related" className="h2" style={{ marginBottom: 12 }}>関連ページ</h2>
-        <div className="grid" style={{ marginTop: 8 }}>
-          <a className="card" style={{ gridColumn: "span 4" }} href="/about">
-            <h3 className="title">About</h3>
-            <p className="meta">代表／理念／活動領域</p>
-            <p style={{ marginTop: 8 }}>背景やビジョンはこちら。</p>
-          </a>
-          <a className="card" style={{ gridColumn: "span 4" }} href="/work">
-            <h3 className="title">Work</h3>
-            <p className="meta">提供メニュー・進め方</p>
-            <p style={{ marginTop: 8 }}>Workshop / Sprint / Retainer。</p>
-          </a>
-          <a className="card" style={{ gridColumn: "span 4" }} href="/press">
-            <h3 className="title">Press / Media</h3>
-            <p className="meta">取材・掲載のご案内</p>
-            <p style={{ marginTop: 8 }}>メディア用プロフィールと窓口。</p>
-          </a>
-          <a className="card" style={{ gridColumn: "span 4" }} href="/trust">
-            <h3 className="title">Trust</h3>
-            <p className="meta">信頼・セキュリティ運用</p>
-            <p style={{ marginTop: 8 }}>セキュリティ／契約フロー／守秘。</p>
-          </a>
+
+        {/* ここを linkcards / linkcard に置換 */}
+        <div className="linkcards">
+          <Link className="linkcard" href="/about">
+            <h3 className="h3">About</h3>
+            <p>代表／理念／活動領域</p>
+          </Link>
+          <Link className="linkcard" href="/work">
+            <h3 className="h3">Work</h3>
+            <p>提供メニュー・進め方</p>
+          </Link>
+          <Link className="linkcard" href="/press">
+            <h3 className="h3">Press / Media</h3>
+            <p>取材・掲載のご案内</p>
+          </Link>
+          <Link className="linkcard" href="/trust">
+            <h3 className="h3">Trust</h3>
+            <p>信頼・セキュリティ運用</p>
+          </Link>
         </div>
       </section>
 
