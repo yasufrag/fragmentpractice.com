@@ -1,24 +1,25 @@
+// src/components/ContactForm.tsx
 "use client";
 
 import { useState } from "react";
 
-/** フォームスプリーのエンドポイントを環境変数から解決
- * - NEXT_PUBLIC_FORMSPREE_ENDPOINT … 直接URL（推奨）
- * - NEXT_PUBLIC_FORMSPREE_FORM_ID … フォームID or URL どちらでもOK
- */
-function resolveFormspreeEndpoint(): string {
-  const ep =
-    process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ??
-    process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID ??
-    "";
+/** Formspree のエンドポイント（URLのみ利用） */
+const FORMSPREE = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
-  if (!ep) return "";
-  // フォームIDのみ渡された場合にURL化
-  if (/^https?:\/\//i.test(ep)) return ep;
-  return `https://formspree.io/f/${ep}`;
+/** 連絡先メール（難読化して表示） */
+function ObfuscatedEmail() {
+  const user = "yasuhiro";
+  const at = "@";
+  const domain = "fragmentpractice.com";
+  const email = `${user}${at}${domain}`;
+  return (
+    <a href={`mailto:${email}`}>
+      {user}
+      {at}
+      {domain}
+    </a>
+  );
 }
-
-const FORMSPREE = resolveFormspreeEndpoint();
 
 type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
 interface FsError { field?: string; message?: string }
@@ -55,6 +56,7 @@ export default function ContactForm() {
     const email = safeGet(fd, "email").trim();
     const message = safeGet(fd, "message").trim();
 
+    // 簡易バリデーション
     const nextErrors: FieldErrors = {};
     if (!name) nextErrors.name = "お名前は必須です。";
     if (!email) nextErrors.email = "メールアドレスは必須です。";
@@ -129,12 +131,12 @@ export default function ContactForm() {
     <form
       className="cf-form"
       method="POST"
-      action={FORMSPREE || undefined}  // JS無効時のフォールバック
+      action={FORMSPREE || undefined} // JS無効時フォールバック
       onSubmit={(e) => { void handleSubmit(e); }}
       aria-describedby="cf-note"
       noValidate
     >
-      {/* フォームのメタ（subject / 参照元 / ハニーポット） */}
+      {/* メタ情報（subject / 参照元 / ハニーポット） */}
       <input type="hidden" name="_subject" value="【Contact】サイトからの新規お問い合わせ" />
       <input type="hidden" name="source" value="fragmentpractice.com/contact" />
       <input
@@ -146,6 +148,7 @@ export default function ContactForm() {
         style={{ position: "absolute", left: "-9999px", width: 1, height: 1 }}
       />
 
+      {/* お名前 */}
       <div className="cf-field">
         <label className="cf-label" htmlFor="name">
           お名前 <span className="cf-req">※</span>
@@ -166,6 +169,7 @@ export default function ContactForm() {
         )}
       </div>
 
+      {/* メール */}
       <div className="cf-field">
         <label className="cf-label" htmlFor="email">
           メール <span className="cf-req">※</span>
@@ -188,6 +192,7 @@ export default function ContactForm() {
         )}
       </div>
 
+      {/* 内容 */}
       <div className="cf-field">
         <label className="cf-label" htmlFor="message">
           内容 <span className="cf-req">※</span>
@@ -208,6 +213,7 @@ export default function ContactForm() {
         )}
       </div>
 
+      {/* 送信 */}
       <div className="cf-submit-row">
         <button
           type="submit"
@@ -217,25 +223,16 @@ export default function ContactForm() {
         >
           {status === "submitting" ? "送信中…" : "送信"}
         </button>
-
         <span id="cf-note" className="cf-note">
           送信内容は当社の <a href="/privacy">プライバシーポリシー</a> に基づき扱います。
         </span>
       </div>
 
-      {fatal === "endpoint" && (
+      {/* 致命的エラー時のみ、直接連絡先（難読化）を案内 */}
+      {fatal && (
         <div className="cf-error" role="alert" aria-live="assertive" style={{ marginTop: "1rem" }}>
-          送信先の設定に問題があります。管理画面で<strong>フォームのエンドポイント</strong>か
-          <strong>フォームID</strong>の環境変数をご確認ください（
-          <code>NEXT_PUBLIC_FORMSPREE_ENDPOINT</code> か <code>NEXT_PUBLIC_FORMSPREE_FORM_ID</code>）。
-          また Formspree の <em>Allowed domains</em> に <code>fragmentpractice.com</code> と
-          <code>localhost:3000</code> を追加してください。
-        </div>
-      )}
-      {fatal === "network" && (
-        <div className="cf-error" role="alert" aria-live="assertive" style={{ marginTop: "1rem" }}>
-          送信に失敗しました。しばらく時間をおいて再度お試しください。至急のご連絡は
-          <a href="/company">Company</a> 記載の電話番号をご利用ください。
+          送信に失敗しました（{fatal === "endpoint" ? "送信先設定の不備" : "ネットワーク/サーバの一時的な問題"}の可能性）。
+          お急ぎの場合は <ObfuscatedEmail /> まで直接ご連絡ください。
         </div>
       )}
     </form>
