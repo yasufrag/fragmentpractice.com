@@ -81,20 +81,20 @@ export default function WorkPage() {
               テーマ例：AI と構文設計、対話システムの思想、詩的実践と研究の往復。
               30–60 分のトーク、または少人数ワークショップを実施します。
             </p>
-            <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+            <ul className="list-check--card">
               <li>講演アウトライン</li>
               <li>質疑ログ（抜粋）</li>
             </ul>
           </article>
 
           <article className="card" style={{ gridColumn: "span 6" }}>
-            <h3 className="title">AI 対話設計 & 軽量リサーチ</h3>
+            <h3 className="title">AI 対話設計 &amp; 軽量リサーチ</h3>
             <p className="meta">仮説検証の最小単位を設計</p>
             <p style={{ marginTop: 8 }}>
               意図と関係性を整理し、対話構造／プロンプトを設計して簡易検証。
               成果は再現可能なメモと小さな試作に集約します。
             </p>
-            <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+            <ul className="list-check--card">
               <li>設計メモ（前提・意図・タグ）</li>
               <li>試作（テキスト中心のプロトタイプ）</li>
             </ul>
@@ -107,7 +107,7 @@ export default function WorkPage() {
               断片（Fragment）を編集し、テーマごとに束ねます。
               公開は段階的に。まずは私家版の小冊子／PDF 草案から。
             </p>
-            <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+            <ul className="list-check--card">
               <li>ZINE 企画メモ・目次案</li>
               <li>サンプル数ページ（PDF）</li>
             </ul>
