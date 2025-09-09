@@ -288,6 +288,25 @@ main{ min-height:60svh; } /* 画面が短い時でもフッターが張り付か
 .list-check li::before{ content:"✓"; position:absolute; left:0; top:.1em; font-weight:800; color:var(--accent); }
 .list-dot{ margin:8px 0 0; padding-left:18px; list-style:disc; }
 
+/* ===== Card内で使うチェックリスト（ZINEと統一） ===== */
+.list-check--card { margin: 8px 0 0; padding-left: 0; list-style: none; }
+.list-check--card li{
+  position: relative;
+  margin: 6px 0;
+  padding: 8px 10px 8px 28px;              /* 左に✓ぶんの余白 */
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;                         /* カード内に馴染む白 */
+}
+.list-check--card li::before{
+  content: "✓";
+  position: absolute; left: 10px; top: .55em;
+  font-weight: 800; color: var(--accent);
+}
+@media (max-width:640px){
+  .list-check--card li{ padding: 8px 10px 8px 26px; }
+}
+
 /* ===================== News Bar ===================== */
 .newsbar{
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);

@@ -86,7 +86,7 @@ export default function PressPage() {
           掲載や取材のご相談は、<Link href="/contact">Contact</Link> フォームからご連絡ください。
           内容を確認の上、必要に応じて折り返しご案内いたします。
         </p>
-        <Link className="cta" href="/contact" aria-label="お問い合わせフォームへ">Contact Form</Link>
+        <Link className="cta" href="/contact" aria-label="お問い合わせフォームへ">Contact</Link>
       </section>
 
       {/* 構造化データ（Organization + Person） */}

@@ -1,4 +1,4 @@
-// app/page.tsx (Home – 全体修正版)
+// app/page.tsx (Home – spacing tuned & copy refined)
 import Link from "next/link";
 import NewsBar from "@/components/NewsBar";
 
@@ -23,7 +23,7 @@ export default function HomePage() {
 
       <div className="fp-container">
         {/* Hero */}
-        <section className="hero" style={{ textAlign: "left", paddingTop: 48 }}>
+        <section className="hero" style={{ textAlign: "left", paddingTop: 48, paddingBottom: 56 }}>
           <h1 className="h1" style={{ marginTop: 16, maxWidth: 860 }}>
             Quiet systems for
             <br />
@@ -45,19 +45,27 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 私たちが大切にすること（3点のみ） */}
-        <section className="fp-section" aria-labelledby="values" style={{ paddingTop: 8 }}>
+        {/* 私たちが大切にすること */}
+        <section
+          className="fp-section"
+          aria-labelledby="values"
+          style={{ paddingTop: 64, paddingBottom: 56 }} // ← 上下をそろえて余白を拡張
+        >
           <h2 id="values" className="h2" style={{ marginBottom: 12 }}>
             私たちが大切にすること
           </h2>
+          <p className="lead" style={{ marginTop: 6, maxWidth: 760 }}>
+            ノイズを減らし、関係の構文を整え、断片を編む。小さく検証しながら、
+            再現可能な知を積層します。
+          </p>
 
-          <div className="grid">
+          <div className="grid" style={{ marginTop: 16 }}>
             <article className="card" style={{ gridColumn: "span 4" }}>
               <div className="title">注意</div>
               <p className="meta">Quiet Attention</p>
               <p style={{ marginTop: 6 }}>
-                情報を加える前に、まずノイズを減らす。観察・記録・間合いを
-                乱さないための最小フローを設計します。
+                情報を足す前に、まず余白をつくる。観察・記録・間合いを守る
+                最小フローを設計します。
               </p>
             </article>
 
@@ -65,8 +73,8 @@ export default function HomePage() {
               <div className="title">関係</div>
               <p className="meta">Relational Syntax</p>
               <p style={{ marginTop: 6 }}>
-                対話の構文（前提・タグ・応答）を整え、実務と表現の双方で
-                再現可能なやり取りを設計します。
+                前提・タグ・応答を揃え、実務と表現の双方で再現可能な
+                やり取りを設計します。
               </p>
             </article>
 
@@ -74,15 +82,19 @@ export default function HomePage() {
               <div className="title">編集</div>
               <p className="meta">Editing as Practice</p>
               <p style={{ marginTop: 6 }}>
-                断片を集めて編む。メモや試作、ZINE などの軽やかな成果物に落とし、
-                検証と共有を重ねていきます。
+                断片を集めて編み、小さな成果物へ落とす。ZINEやメモの形で
+                検証と共有を重ねます。
               </p>
             </article>
           </div>
         </section>
 
         {/* Explore: サイト内主要ページへの導線（静かに） */}
-        <section className="fp-section" aria-labelledby="explore" style={{ marginTop: 56 }}>
+        <section
+          className="fp-section"
+          aria-labelledby="explore"
+          style={{ paddingTop: 56, paddingBottom: 72 }}
+        >
           <h2 id="explore" className="h2" style={{ marginBottom: 16 }}>Explore</h2>
           <div className="linkcards">
             <Link className="linkcard" href="/company">

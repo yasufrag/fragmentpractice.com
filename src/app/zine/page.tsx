@@ -1,4 +1,4 @@
-// app/zine/page.tsx
+// app/zine/page.tsx (ZINE – 全体修正版)
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -6,13 +6,20 @@ export const metadata: Metadata = {
   title: "ZINE",
   description:
     "Fragment Practice の編集と小冊子（ZINE）の取り組み。断片を束ねる静かな編集のプロジェクトです。",
+  openGraph: {
+    title: "Fragment Practice — ZINE",
+    description:
+      "断片（Fragment）を束ね、静かな編集のリズムをかたちにする小冊子づくり。",
+    url: "https://fragmentpractice.com/zine",
+    type: "website",
+  },
 };
 
 export default function ZinePage() {
   return (
     <div className="fp-container">
       {/* Hero（最小） */}
-      <section className="hero" style={{ textAlign: "left" }}>
+      <section className="hero" style={{ textAlign: "left", paddingTop: 48 }}>
         <h1 className="h1" style={{ marginTop: 16 }}>ZINE</h1>
         <p className="lead" style={{ marginTop: 8, maxWidth: 720 }}>
           断片（Fragment）を束ね、静かな編集のリズムをかたちにする小冊子づくり。
@@ -22,7 +29,7 @@ export default function ZinePage() {
       </section>
 
       {/* Coming Soon（静かなカード） */}
-      <section className="fp-section" aria-labelledby="coming">
+      <section className="fp-section" aria-labelledby="coming" style={{ paddingTop: 24 }}>
         <div className="coming--quiet" role="status" aria-live="polite">
           <div className="coming-header">
             <span className="pill" aria-hidden>COMING&nbsp;SOON</span>
@@ -37,11 +44,11 @@ export default function ZinePage() {
             冊子とPDFの二形態での頒布を想定し、少部数・不定期で刊行します。
           </p>
 
-          <div className="coming-actions" aria-label="関連リンク">
-            <Link href="/news" className="chip" aria-label="News / Updates へ">
+          <div className="coming-actions" aria-label="関連リンク" style={{ marginTop: 10 }}>
+            <Link href="/news" className="cta" aria-label="News / Updates へ">
               News / Updates
             </Link>
-            <Link href="/contact" className="chip" aria-label="Contact へ">
+            <Link href="/contact" className="cta" aria-label="Contact へ">
               Contact
             </Link>
           </div>
@@ -53,7 +60,7 @@ export default function ZinePage() {
       </section>
 
       {/* 編集の姿勢（短く） */}
-      <section className="fp-section" aria-labelledby="ethos">
+      <section className="fp-section" aria-labelledby="ethos" style={{ paddingTop: 40 }}>
         <h2 id="ethos" className="h2" style={{ marginBottom: 12 }}>編集の姿勢</h2>
         <ul className="list-check" style={{ maxWidth: 840 }}>
           <li>技術を目的化せず、生活のリズムを損なわない編集。</li>
@@ -62,14 +69,41 @@ export default function ZinePage() {
         </ul>
       </section>
 
-      {/* 参加・入手（プレースホルダ） */}
-      <section className="fp-section" aria-labelledby="access">
+      {/* 入手と案内 */}
+      <section className="fp-section" aria-labelledby="access" style={{ paddingTop: 40 }}>
         <h2 id="access" className="h2" style={{ marginBottom: 12 }}>入手と案内</h2>
         <p style={{ maxWidth: 840, marginBottom: 8, color: "var(--muted)" }}>
           初回は少部数頒布のため、一般販売は行わない可能性があります。
           公開時は <Link href="/news">News / Updates</Link> にて静かにお知らせします。
           個別のご相談は <Link href="/contact">Contact</Link> からご連絡ください。
         </p>
+      </section>
+
+      {/* Related（回遊） */}
+      <section className="fp-section" aria-labelledby="related" style={{ paddingTop: 24 }}>
+        <h2 id="related" className="h2" style={{ marginBottom: 16 }}>関連ページ</h2>
+        <div className="linkcards">
+          <Link className="linkcard" href="/company">
+            <h3 className="h3">Company</h3>
+            <p>会社概要・公的情報</p>
+          </Link>
+          <Link className="linkcard" href="/about">
+            <h3 className="h3">About</h3>
+            <p>代表／理念／活動領域</p>
+          </Link>
+          <Link className="linkcard" href="/work">
+            <h3 className="h3">Work</h3>
+            <p>提供メニュー・進め方</p>
+          </Link>
+          <Link className="linkcard" href="/press">
+            <h3 className="h3">Press / Media</h3>
+            <p>取材・掲載のご案内</p>
+          </Link>
+          <Link className="linkcard" href="/trust">
+            <h3 className="h3">Trust</h3>
+            <p>信頼・セキュリティ運用</p>
+          </Link>
+        </div>
       </section>
     </div>
   );
