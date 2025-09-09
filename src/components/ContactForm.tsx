@@ -2,7 +2,23 @@
 
 import { useState } from "react";
 
-const FORMSPREE = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
+/** フォームスプリーのエンドポイントを環境変数から解決
+ * - NEXT_PUBLIC_FORMSPREE_ENDPOINT … 直接URL（推奨）
+ * - NEXT_PUBLIC_FORMSPREE_FORM_ID … フォームID or URL どちらでもOK
+ */
+function resolveFormspreeEndpoint(): string {
+  const ep =
+    process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ??
+    process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID ??
+    "";
+
+  if (!ep) return "";
+  // フォームIDのみ渡された場合にURL化
+  if (/^https?:\/\//i.test(ep)) return ep;
+  return `https://formspree.io/f/${ep}`;
+}
+
+const FORMSPREE = resolveFormspreeEndpoint();
 
 type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
 interface FsError { field?: string; message?: string }
@@ -11,12 +27,9 @@ interface FormspreeResponse { ok?: boolean; errors?: FsError[] }
 function isFsResponse(v: unknown): v is FormspreeResponse {
   if (typeof v !== "object" || v === null) return false;
   const o = v as Record<string, unknown>;
-  const okPart = o.ok === undefined || typeof o.ok === "boolean";
-  const errs = o.errors;
-  const errsPart =
-    errs === undefined ||
-    (Array.isArray(errs) && errs.every((e) => typeof e === "object" && e !== null));
-  return okPart && errsPart;
+  return (o.ok === undefined || typeof o.ok === "boolean") &&
+         (o.errors === undefined ||
+           (Array.isArray(o.errors) && o.errors.every(e => typeof e === "object" && e)));
 }
 
 export default function ContactForm() {
@@ -30,7 +43,7 @@ export default function ContactForm() {
     return typeof v === "string" ? v : "";
   };
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrors({});
     setFatal(null);
@@ -42,12 +55,11 @@ export default function ContactForm() {
     const email = safeGet(fd, "email").trim();
     const message = safeGet(fd, "message").trim();
 
-    // クライアント簡易バリデーション
     const nextErrors: FieldErrors = {};
     if (!name) nextErrors.name = "お名前は必須です。";
     if (!email) nextErrors.email = "メールアドレスは必須です。";
     if (!message) nextErrors.message = "内容は必須です。";
-    if (Object.keys(nextErrors).length > 0) {
+    if (Object.keys(nextErrors).length) {
       setErrors(nextErrors);
       setStatus("error");
       return;
@@ -77,7 +89,7 @@ export default function ContactForm() {
         return;
       }
 
-      // バリデーションエラーをフィールドごとに反映
+      // フィールド別のエラーを反映
       const fsErrors: FieldErrors = {};
       const arr = data.errors;
       if (Array.isArray(arr) && arr.length) {
@@ -117,11 +129,23 @@ export default function ContactForm() {
     <form
       className="cf-form"
       method="POST"
-      action={FORMSPREE || undefined}
+      action={FORMSPREE || undefined}  // JS無効時のフォールバック
       onSubmit={(e) => { void handleSubmit(e); }}
       aria-describedby="cf-note"
       noValidate
     >
+      {/* フォームのメタ（subject / 参照元 / ハニーポット） */}
+      <input type="hidden" name="_subject" value="【Contact】サイトからの新規お問い合わせ" />
+      <input type="hidden" name="source" value="fragmentpractice.com/contact" />
+      <input
+        type="text"
+        name="_gotcha"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1 }}
+      />
+
       <div className="cf-field">
         <label className="cf-label" htmlFor="name">
           お名前 <span className="cf-req">※</span>
@@ -185,7 +209,6 @@ export default function ContactForm() {
       </div>
 
       <div className="cf-submit-row">
-        {/* ← ここをCTAに統一 */}
         <button
           type="submit"
           className="cta primary"
@@ -200,7 +223,16 @@ export default function ContactForm() {
         </span>
       </div>
 
-      {fatal && (
+      {fatal === "endpoint" && (
+        <div className="cf-error" role="alert" aria-live="assertive" style={{ marginTop: "1rem" }}>
+          送信先の設定に問題があります。管理画面で<strong>フォームのエンドポイント</strong>か
+          <strong>フォームID</strong>の環境変数をご確認ください（
+          <code>NEXT_PUBLIC_FORMSPREE_ENDPOINT</code> か <code>NEXT_PUBLIC_FORMSPREE_FORM_ID</code>）。
+          また Formspree の <em>Allowed domains</em> に <code>fragmentpractice.com</code> と
+          <code>localhost:3000</code> を追加してください。
+        </div>
+      )}
+      {fatal === "network" && (
         <div className="cf-error" role="alert" aria-live="assertive" style={{ marginTop: "1rem" }}>
           送信に失敗しました。しばらく時間をおいて再度お試しください。至急のご連絡は
           <a href="/company">Company</a> 記載の電話番号をご利用ください。
